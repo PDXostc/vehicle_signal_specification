@@ -8,19 +8,19 @@
 
 - FrontWheelDiameter:
   type: Uint8
-  description: Diameter of wheels (without tires), in inches.
+  description: Diameter of wheels (without tires), in inches, as per ETRO / TRA standard.
 
 - RearWheelDiameter:
   type: Uint8
-  description: Diameter of rear wheels (without tires), in inches.
+  description: Diameter of rear wheels (without tires), in inches, as per ETRO / TRA standard.
 
 - FrontWheelWidth:
   type: Uint8
-  description: Diameter of rear wheels (without tires), in inches.
+  description: Diameter of rear wheels (without tires), in inches, as per ETRO / TRA standard.
 
 - RearWheelWidth:
   type: Uint8
-  description: Diameter of rear wheels (without tires), in inches.
+  description: Diameter of rear wheels (without tires), in inches, as per ETRO / TRA standard.
 
 # Tire size
 
@@ -67,3 +67,4 @@
 #
 # More attributes here
 #
+
