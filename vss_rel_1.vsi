@@ -104,7 +104,6 @@ Signal.Drivetrain.BatteryManagement.BatteryCapacity 1091
 Signal.Drivetrain.BatteryManagement.BatteryTemperature 1090
 Signal.OBD.TimingAdvance 997
 Signal.OBD.DistanceSinceDTCClear 1054
-Signal.OBD.AmbiantAirTemperature 1067
 Signal.OBD.IntakeTemp 998
 Signal.OBD.LongTermO2Trim1 1082
 Signal.OBD.WarmupsSinceDTCClear 1053
@@ -132,6 +131,7 @@ Signal.OBD.Status.MIL 983
 Signal.OBD.AirStatus 1001
 Signal.OBD.EVAPVaporPressure 1055
 Signal.OBD.FuelInjectionTiming 1089
+Signal.OBD.FuelRate 1090
 Signal.OBD.LongTermFuelTrim1 990
 Signal.OBD.AcceleratorPositionF 1072
 Signal.OBD.EthanolPercent 1078
@@ -153,12 +153,12 @@ Signal.OBD.CommandedEGR 1049
 Signal.OBD.FuelRailPressureAbsolute 1085
 Signal.OBD.FuelLevel 1052
 Signal.OBD.CommandedEquivalenceRatio 1065
-Signal.OBD.EVAPVaporPressureAbsolute 1079
+Signal.OBD.AmbientAirTemperature 1091
 Signal.OBD.ThrottlePositionB 1068
 Signal.OBD.ThrottlePositionC 1069
 Signal.OBD.ShortTermO2Trim1 1081
 Signal.OBD.DistanceWithMIL 1030
-Signal.OBD.ShortTermO2Trim2 1083
+Signal.OBD.EVAPVaporPressureAbsolute 1079
 Signal.OBD.ThrottleActuator 1073
 Signal.OBD.O2SensorsWR.Sensor8.Current 1048
 Signal.OBD.O2SensorsWR.Sensor8.Voltage 1047
@@ -198,7 +198,7 @@ Signal.OBD.O2Sensors.Bank1.Sensor2.Voltage 1005
 Signal.OBD.O2Sensors.Bank1.Sensor2.Present 1004
 Signal.OBD.O2Sensors.Bank1.Sensor4.Voltage 1009
 Signal.OBD.O2Sensors.Bank1.Sensor4.Present 1008
-Signal.OBD.FuelRate 1090
+Signal.OBD.ShortTermO2Trim2 1083
 Signal.OBD.PidsC 1060
 Signal.OBD.HybridBatteryRemaining 1087
 Signal.OBD.RelativeAcceleratorPosition 1086

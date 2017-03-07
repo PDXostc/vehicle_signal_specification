@@ -977,6 +977,7 @@ Signal.OBD.AcceleratorPositionE: 1071
 Signal.OBD.AcceleratorPositionF: 1072
 Signal.OBD.AirStatus: 1001
 Signal.OBD.AmbiantAirTemperature: 1067
+Signal.OBD.AmbientAirTemperature: 1091
 Signal.OBD.AuxInputStatus: 1027
 Signal.OBD.BarometricPressure: 1056
 Signal.OBD.Catalyst.Bank1.Temperature1: 1057

@@ -358,7 +358,7 @@
                 "type": "UInt8", 
                 "id": 35, 
                 "value": 0, 
-                "description": "Number of seats across row 3"
+                "description": "Number of seats across row 2"
               }, 
               "Row3PosCount": {
                 "description": "Number of seats across row 3", 
@@ -491,7 +491,7 @@
             "description": "Horn signals"
           }, 
           "Lights": {
-            "description": "All lgihts", 
+            "description": "All lights", 
             "type": "branch", 
             "children": {
               "IsLeftIndicatorOn": {
@@ -641,7 +641,7 @@
                 }
               }, 
               "Rear": {
-                "description": "Rear sindshield signals", 
+                "description": "Rear windshield signals", 
                 "type": "branch", 
                 "children": {
                   "Heater": {
@@ -767,7 +767,7 @@
             "type": "branch", 
             "children": {
               "Gear": {
-                "type": "UInt8", 
+                "type": "Int8", 
                 "description": "Current gear. 0=Neutral. -1=Reverse", 
                 "min": -1, 
                 "max": 16, 
@@ -921,12 +921,12 @@
               "BatteryCapacity": {
                 "description": "Remaining capacity of the batter pack", 
                 "type": "Int8", 
-                "id": 1092, 
+                "id": 1091, 
                 "unit": "percentage"
               }, 
               "BatteryTemperature": {
                 "type": "Float", 
-                "id": 1091, 
+                "id": 1090, 
                 "unit": "celsius", 
                 "description": "Temperature of the battery pack"
               }
@@ -949,12 +949,6 @@
             "type": "Float", 
             "id": 1054, 
             "unit": "km"
-          }, 
-          "AmbiantAirTemperature": {
-            "description": "PID 46 - Ambiant air temperature", 
-            "type": "Float", 
-            "id": 1067, 
-            "unit": "celsius"
           }, 
           "IntakeTemp": {
             "description": "PID 0F - Intake temperature", 
@@ -1185,6 +1179,12 @@
             "unit": "degree", 
             "description": "PID 5D - Fuel injection timing"
           }, 
+          "FuelRate": {
+            "description": "PID 5E - Engine fuel rate", 
+            "type": "Float", 
+            "id": 1090, 
+            "unit": "l/h"
+          }, 
           "LongTermFuelTrim1": {
             "description": "PID 07 - Long Term (learned) Fuel Trim - Bank 1 - negative percentage leaner, positive percentage richer", 
             "type": "Int8", 
@@ -1327,11 +1327,11 @@
             "id": 1065, 
             "unit": "ratio"
           }, 
-          "EVAPVaporPressureAbsolute": {
+          "AmbientAirTemperature": {
             "type": "Float", 
-            "id": 1079, 
-            "unit": "kpa", 
-            "description": "PID 53 - Absolute evaporative purge (EVAP) system pressure"
+            "id": 1092, 
+            "unit": "celsius", 
+            "description": "PID 46 - Ambient air temperature"
           }, 
           "ThrottlePositionB": {
             "description": "PID 47 - Absolute throttle position B", 
@@ -1357,11 +1357,11 @@
             "id": 1030, 
             "unit": "kilometer"
           }, 
-          "ShortTermO2Trim2": {
-            "description": "PID 57 - Short term secondary O2 trim - Bank 2", 
-            "type": "UInt8", 
-            "id": 1083, 
-            "unit": "percent"
+          "EVAPVaporPressureAbsolute": {
+            "type": "Float", 
+            "id": 1079, 
+            "unit": "kpa", 
+            "description": "PID 53 - Absolute evaporative purge (EVAP) system pressure"
           }, 
           "ThrottleActuator": {
             "type": "UInt8", 
@@ -1721,11 +1721,11 @@
               }
             }
           }, 
-          "FuelRate": {
-            "description": "PID 5E - Engine fuel rate", 
-            "type": "Float", 
-            "id": 1090, 
-            "unit": "l/h"
+          "ShortTermO2Trim2": {
+            "description": "PID 57 - Short term secondary O2 trim - Bank 2", 
+            "type": "UInt8", 
+            "id": 1083, 
+            "unit": "percent"
           }, 
           "PidsC": {
             "description": "PID 40 - Bitarry of the supported pids 41 to 60", 
@@ -1919,7 +1919,7 @@
             }
           }, 
           "ESC": {
-            "description": "Electronig Stability Control System signals", 
+            "description": "Electronic Stability Control System signals", 
             "type": "branch", 
             "children": {
               "IsEngaged": {
@@ -2027,7 +2027,7 @@
                                 "description": "Brake fluid level as percentage. 0 = Empty. 100 = Full."
                               }, 
                               "FluidLevelLow": {
-                                "description": "Brake fluid level status. True = Brake fluid level low. False = Brake fluid level ok.", 
+                                "description": "Brake fluid level status. True = Brake fluid level low. False = Brake fluid level OK.", 
                                 "type": "Boolean", 
                                 "id": 956
                               }, 
@@ -2084,7 +2084,7 @@
                                 "description": "Brake fluid level as percentage. 0 = Empty. 100 = Full."
                               }, 
                               "FluidLevelLow": {
-                                "description": "Brake fluid level status. True = Brake fluid level low. False = Brake fluid level ok.", 
+                                "description": "Brake fluid level status. True = Brake fluid level low. False = Brake fluid level OK.", 
                                 "type": "Boolean", 
                                 "id": 949
                               }, 
@@ -2151,7 +2151,7 @@
                                 "description": "Brake fluid level as percentage. 0 = Empty. 100 = Full."
                               }, 
                               "FluidLevelLow": {
-                                "description": "Brake fluid level status. True = Brake fluid level low. False = Brake fluid level ok.", 
+                                "description": "Brake fluid level status. True = Brake fluid level low. False = Brake fluid level OK.", 
                                 "type": "Boolean", 
                                 "id": 970
                               }, 
@@ -2207,7 +2207,7 @@
                                 "description": "Brake fluid level as percentage. 0 = Empty. 100 = Full."
                               }, 
                               "FluidLevelLow": {
-                                "description": "Brake fluid level status. True = Brake fluid level low. False = Brake fluid level ok.", 
+                                "description": "Brake fluid level status. True = Brake fluid level low. False = Brake fluid level OK.", 
                                 "type": "Boolean", 
                                 "id": 963
                               }, 
@@ -2301,7 +2301,7 @@
                 "unit": "cm/s2"
               }, 
               "Yaw": {
-                "description": "Vehicle rotatin rate along Z (vertical).", 
+                "description": "Vehicle rotation rate along Z (vertical).", 
                 "type": "Int16", 
                 "id": 53, 
                 "unit": "degrees/s"
@@ -2376,7 +2376,7 @@
                     "type": "branch", 
                     "children": {
                       "IsChildLockActive": {
-                        "description": "Is door child lock engaged. Trnue = Engaged. False = Disengaged.", 
+                        "description": "Is door child lock engaged. True = Engaged. False = Disengaged.", 
                         "type": "Boolean", 
                         "id": 182
                       }, 
@@ -2447,7 +2447,7 @@
                     "type": "branch", 
                     "children": {
                       "IsChildLockActive": {
-                        "description": "Is door child lock engaged. Trnue = Engaged. False = Disengaged.", 
+                        "description": "Is door child lock engaged. True = Engaged. False = Disengaged.", 
                         "type": "Boolean", 
                         "id": 175
                       }, 
@@ -2523,7 +2523,7 @@
                     "type": "branch", 
                     "children": {
                       "IsChildLockActive": {
-                        "description": "Is door child lock engaged. Trnue = Engaged. False = Disengaged.", 
+                        "description": "Is door child lock engaged. True = Engaged. False = Disengaged.", 
                         "type": "Boolean", 
                         "id": 196
                       }, 
@@ -2593,7 +2593,7 @@
                     "type": "branch", 
                     "children": {
                       "IsChildLockActive": {
-                        "description": "Is door child lock engaged. Trnue = Engaged. False = Disengaged.", 
+                        "description": "Is door child lock engaged. True = Engaged. False = Disengaged.", 
                         "type": "Boolean", 
                         "id": 189
                       }, 
@@ -2672,7 +2672,7 @@
                     "type": "branch", 
                     "children": {
                       "IsChildLockActive": {
-                        "description": "Is door child lock engaged. Trnue = Engaged. False = Disengaged.", 
+                        "description": "Is door child lock engaged. True = Engaged. False = Disengaged.", 
                         "type": "Boolean", 
                         "id": 210
                       }, 
@@ -2743,7 +2743,7 @@
                     "type": "branch", 
                     "children": {
                       "IsChildLockActive": {
-                        "description": "Is door child lock engaged. Trnue = Engaged. False = Disengaged.", 
+                        "description": "Is door child lock engaged. True = Engaged. False = Disengaged.", 
                         "type": "Boolean", 
                         "id": 203
                       }, 
@@ -2820,7 +2820,7 @@
                     "type": "branch", 
                     "children": {
                       "IsChildLockActive": {
-                        "description": "Is door child lock engaged. Trnue = Engaged. False = Disengaged.", 
+                        "description": "Is door child lock engaged. True = Engaged. False = Disengaged.", 
                         "type": "Boolean", 
                         "id": 224
                       }, 
@@ -2890,7 +2890,7 @@
                     "type": "branch", 
                     "children": {
                       "IsChildLockActive": {
-                        "description": "Is door child lock engaged. Trnue = Engaged. False = Disengaged.", 
+                        "description": "Is door child lock engaged. True = Engaged. False = Disengaged.", 
                         "type": "Boolean", 
                         "id": 217
                       }, 
@@ -3397,7 +3397,7 @@
                         "type": "branch", 
                         "children": {
                           "Height": {
-                            "description": "Height of heead restraing. 0 = Bottommost. 255 = Topmost.", 
+                            "description": "Height of head restraint. 0 = Bottommost. 255 = Topmost.", 
                             "min": 0, 
                             "max": 255, 
                             "type": "UInt8", 
@@ -3405,7 +3405,7 @@
                             "unit": "mm"
                           }
                         }, 
-                        "description": "Head restratint settings"
+                        "description": "Head restraint settings"
                       }, 
                       "Recline": {
                         "description": "Recline level. -90 = Max forward recline. 90 max backward recline", 
@@ -3452,7 +3452,7 @@
                         "type": "branch", 
                         "children": {
                           "IsDeployed": {
-                            "description": "Airbag deployement status. True = Airbag deployed. False = Airbag not deployed.", 
+                            "description": "Airbag deployment status. True = Airbag deployed. False = Airbag not deployed.", 
                             "type": "Boolean", 
                             "id": 344
                           }
@@ -3463,7 +3463,7 @@
                         "type": "branch", 
                         "children": {
                           "HeadRestraint": {
-                            "description": "Head restratint switches", 
+                            "description": "Head restraint switches", 
                             "type": "branch", 
                             "children": {
                               "Down": {
@@ -3675,7 +3675,7 @@
                         "type": "branch", 
                         "children": {
                           "Height": {
-                            "description": "Height of heead restraing. 0 = Bottommost. 255 = Topmost.", 
+                            "description": "Height of head restraint. 0 = Bottommost. 255 = Topmost.", 
                             "min": 0, 
                             "max": 255, 
                             "type": "UInt8", 
@@ -3683,7 +3683,7 @@
                             "unit": "mm"
                           }
                         }, 
-                        "description": "Head restratint settings"
+                        "description": "Head restraint settings"
                       }, 
                       "Recline": {
                         "description": "Recline level. -90 = Max forward recline. 90 max backward recline", 
@@ -3730,7 +3730,7 @@
                         "type": "branch", 
                         "children": {
                           "IsDeployed": {
-                            "description": "Airbag deployement status. True = Airbag deployed. False = Airbag not deployed.", 
+                            "description": "Airbag deployment status. True = Airbag deployed. False = Airbag not deployed.", 
                             "type": "Boolean", 
                             "id": 379
                           }
@@ -3741,7 +3741,7 @@
                         "type": "branch", 
                         "children": {
                           "HeadRestraint": {
-                            "description": "Head restratint switches", 
+                            "description": "Head restraint switches", 
                             "type": "branch", 
                             "children": {
                               "Down": {
@@ -3953,7 +3953,7 @@
                         "type": "branch", 
                         "children": {
                           "Height": {
-                            "description": "Height of heead restraing. 0 = Bottommost. 255 = Topmost.", 
+                            "description": "Height of head restraint. 0 = Bottommost. 255 = Topmost.", 
                             "min": 0, 
                             "max": 255, 
                             "type": "UInt8", 
@@ -3961,7 +3961,7 @@
                             "unit": "mm"
                           }
                         }, 
-                        "description": "Head restratint settings"
+                        "description": "Head restraint settings"
                       }, 
                       "Recline": {
                         "description": "Recline level. -90 = Max forward recline. 90 max backward recline", 
@@ -4008,7 +4008,7 @@
                         "type": "branch", 
                         "children": {
                           "IsDeployed": {
-                            "description": "Airbag deployement status. True = Airbag deployed. False = Airbag not deployed.", 
+                            "description": "Airbag deployment status. True = Airbag deployed. False = Airbag not deployed.", 
                             "type": "Boolean", 
                             "id": 274
                           }
@@ -4019,7 +4019,7 @@
                         "type": "branch", 
                         "children": {
                           "HeadRestraint": {
-                            "description": "Head restratint switches", 
+                            "description": "Head restraint switches", 
                             "type": "branch", 
                             "children": {
                               "Down": {
@@ -4230,7 +4230,7 @@
                         "type": "branch", 
                         "children": {
                           "Height": {
-                            "description": "Height of heead restraing. 0 = Bottommost. 255 = Topmost.", 
+                            "description": "Height of head restraint. 0 = Bottommost. 255 = Topmost.", 
                             "min": 0, 
                             "max": 255, 
                             "type": "UInt8", 
@@ -4238,7 +4238,7 @@
                             "unit": "mm"
                           }
                         }, 
-                        "description": "Head restratint settings"
+                        "description": "Head restraint settings"
                       }, 
                       "Recline": {
                         "description": "Recline level. -90 = Max forward recline. 90 max backward recline", 
@@ -4285,7 +4285,7 @@
                         "type": "branch", 
                         "children": {
                           "IsDeployed": {
-                            "description": "Airbag deployement status. True = Airbag deployed. False = Airbag not deployed.", 
+                            "description": "Airbag deployment status. True = Airbag deployed. False = Airbag not deployed.", 
                             "type": "Boolean", 
                             "id": 309
                           }
@@ -4296,7 +4296,7 @@
                         "type": "branch", 
                         "children": {
                           "HeadRestraint": {
-                            "description": "Head restratint switches", 
+                            "description": "Head restraint switches", 
                             "type": "branch", 
                             "children": {
                               "Down": {
@@ -4508,7 +4508,7 @@
                         "type": "branch", 
                         "children": {
                           "Height": {
-                            "description": "Height of heead restraing. 0 = Bottommost. 255 = Topmost.", 
+                            "description": "Height of head restraint. 0 = Bottommost. 255 = Topmost.", 
                             "min": 0, 
                             "max": 255, 
                             "type": "UInt8", 
@@ -4516,7 +4516,7 @@
                             "unit": "mm"
                           }
                         }, 
-                        "description": "Head restratint settings"
+                        "description": "Head restraint settings"
                       }, 
                       "Recline": {
                         "description": "Recline level. -90 = Max forward recline. 90 max backward recline", 
@@ -4563,7 +4563,7 @@
                         "type": "branch", 
                         "children": {
                           "IsDeployed": {
-                            "description": "Airbag deployement status. True = Airbag deployed. False = Airbag not deployed.", 
+                            "description": "Airbag deployment status. True = Airbag deployed. False = Airbag not deployed.", 
                             "type": "Boolean", 
                             "id": 239
                           }
@@ -4574,7 +4574,7 @@
                         "type": "branch", 
                         "children": {
                           "HeadRestraint": {
-                            "description": "Head restratint switches", 
+                            "description": "Head restraint switches", 
                             "type": "branch", 
                             "children": {
                               "Down": {
@@ -4792,7 +4792,7 @@
                         "type": "branch", 
                         "children": {
                           "Height": {
-                            "description": "Height of heead restraing. 0 = Bottommost. 255 = Topmost.", 
+                            "description": "Height of head restraint. 0 = Bottommost. 255 = Topmost.", 
                             "min": 0, 
                             "max": 255, 
                             "type": "UInt8", 
@@ -4800,7 +4800,7 @@
                             "unit": "mm"
                           }
                         }, 
-                        "description": "Head restratint settings"
+                        "description": "Head restraint settings"
                       }, 
                       "Recline": {
                         "description": "Recline level. -90 = Max forward recline. 90 max backward recline", 
@@ -4847,7 +4847,7 @@
                         "type": "branch", 
                         "children": {
                           "IsDeployed": {
-                            "description": "Airbag deployement status. True = Airbag deployed. False = Airbag not deployed.", 
+                            "description": "Airbag deployment status. True = Airbag deployed. False = Airbag not deployed.", 
                             "type": "Boolean", 
                             "id": 519
                           }
@@ -4858,7 +4858,7 @@
                         "type": "branch", 
                         "children": {
                           "HeadRestraint": {
-                            "description": "Head restratint switches", 
+                            "description": "Head restraint switches", 
                             "type": "branch", 
                             "children": {
                               "Down": {
@@ -5071,7 +5071,7 @@
                         "type": "branch", 
                         "children": {
                           "Height": {
-                            "description": "Height of heead restraing. 0 = Bottommost. 255 = Topmost.", 
+                            "description": "Height of head restraint. 0 = Bottommost. 255 = Topmost.", 
                             "min": 0, 
                             "max": 255, 
                             "type": "UInt8", 
@@ -5079,7 +5079,7 @@
                             "unit": "mm"
                           }
                         }, 
-                        "description": "Head restratint settings"
+                        "description": "Head restraint settings"
                       }, 
                       "Recline": {
                         "description": "Recline level. -90 = Max forward recline. 90 max backward recline", 
@@ -5126,7 +5126,7 @@
                         "type": "branch", 
                         "children": {
                           "IsDeployed": {
-                            "description": "Airbag deployement status. True = Airbag deployed. False = Airbag not deployed.", 
+                            "description": "Airbag deployment status. True = Airbag deployed. False = Airbag not deployed.", 
                             "type": "Boolean", 
                             "id": 554
                           }
@@ -5137,7 +5137,7 @@
                         "type": "branch", 
                         "children": {
                           "HeadRestraint": {
-                            "description": "Head restratint switches", 
+                            "description": "Head restraint switches", 
                             "type": "branch", 
                             "children": {
                               "Down": {
@@ -5349,7 +5349,7 @@
                         "type": "branch", 
                         "children": {
                           "Height": {
-                            "description": "Height of heead restraing. 0 = Bottommost. 255 = Topmost.", 
+                            "description": "Height of head restraint. 0 = Bottommost. 255 = Topmost.", 
                             "min": 0, 
                             "max": 255, 
                             "type": "UInt8", 
@@ -5357,7 +5357,7 @@
                             "unit": "mm"
                           }
                         }, 
-                        "description": "Head restratint settings"
+                        "description": "Head restraint settings"
                       }, 
                       "Recline": {
                         "description": "Recline level. -90 = Max forward recline. 90 max backward recline", 
@@ -5404,7 +5404,7 @@
                         "type": "branch", 
                         "children": {
                           "IsDeployed": {
-                            "description": "Airbag deployement status. True = Airbag deployed. False = Airbag not deployed.", 
+                            "description": "Airbag deployment status. True = Airbag deployed. False = Airbag not deployed.", 
                             "type": "Boolean", 
                             "id": 449
                           }
@@ -5415,7 +5415,7 @@
                         "type": "branch", 
                         "children": {
                           "HeadRestraint": {
-                            "description": "Head restratint switches", 
+                            "description": "Head restraint switches", 
                             "type": "branch", 
                             "children": {
                               "Down": {
@@ -5627,7 +5627,7 @@
                         "type": "branch", 
                         "children": {
                           "Height": {
-                            "description": "Height of heead restraing. 0 = Bottommost. 255 = Topmost.", 
+                            "description": "Height of head restraint. 0 = Bottommost. 255 = Topmost.", 
                             "min": 0, 
                             "max": 255, 
                             "type": "UInt8", 
@@ -5635,7 +5635,7 @@
                             "unit": "mm"
                           }
                         }, 
-                        "description": "Head restratint settings"
+                        "description": "Head restraint settings"
                       }, 
                       "Recline": {
                         "description": "Recline level. -90 = Max forward recline. 90 max backward recline", 
@@ -5682,7 +5682,7 @@
                         "type": "branch", 
                         "children": {
                           "IsDeployed": {
-                            "description": "Airbag deployement status. True = Airbag deployed. False = Airbag not deployed.", 
+                            "description": "Airbag deployment status. True = Airbag deployed. False = Airbag not deployed.", 
                             "type": "Boolean", 
                             "id": 484
                           }
@@ -5693,7 +5693,7 @@
                         "type": "branch", 
                         "children": {
                           "HeadRestraint": {
-                            "description": "Head restratint switches", 
+                            "description": "Head restraint switches", 
                             "type": "branch", 
                             "children": {
                               "Down": {
@@ -5905,7 +5905,7 @@
                         "type": "branch", 
                         "children": {
                           "Height": {
-                            "description": "Height of heead restraing. 0 = Bottommost. 255 = Topmost.", 
+                            "description": "Height of head restraint. 0 = Bottommost. 255 = Topmost.", 
                             "min": 0, 
                             "max": 255, 
                             "type": "UInt8", 
@@ -5913,7 +5913,7 @@
                             "unit": "mm"
                           }
                         }, 
-                        "description": "Head restratint settings"
+                        "description": "Head restraint settings"
                       }, 
                       "Recline": {
                         "description": "Recline level. -90 = Max forward recline. 90 max backward recline", 
@@ -5960,7 +5960,7 @@
                         "type": "branch", 
                         "children": {
                           "IsDeployed": {
-                            "description": "Airbag deployement status. True = Airbag deployed. False = Airbag not deployed.", 
+                            "description": "Airbag deployment status. True = Airbag deployed. False = Airbag not deployed.", 
                             "type": "Boolean", 
                             "id": 414
                           }
@@ -5971,7 +5971,7 @@
                         "type": "branch", 
                         "children": {
                           "HeadRestraint": {
-                            "description": "Head restratint switches", 
+                            "description": "Head restraint switches", 
                             "type": "branch", 
                             "children": {
                               "Down": {
@@ -6189,7 +6189,7 @@
                         "type": "branch", 
                         "children": {
                           "Height": {
-                            "description": "Height of heead restraing. 0 = Bottommost. 255 = Topmost.", 
+                            "description": "Height of head restraint. 0 = Bottommost. 255 = Topmost.", 
                             "min": 0, 
                             "max": 255, 
                             "type": "UInt8", 
@@ -6197,7 +6197,7 @@
                             "unit": "mm"
                           }
                         }, 
-                        "description": "Head restratint settings"
+                        "description": "Head restraint settings"
                       }, 
                       "Recline": {
                         "description": "Recline level. -90 = Max forward recline. 90 max backward recline", 
@@ -6244,7 +6244,7 @@
                         "type": "branch", 
                         "children": {
                           "IsDeployed": {
-                            "description": "Airbag deployement status. True = Airbag deployed. False = Airbag not deployed.", 
+                            "description": "Airbag deployment status. True = Airbag deployed. False = Airbag not deployed.", 
                             "type": "Boolean", 
                             "id": 694
                           }
@@ -6255,7 +6255,7 @@
                         "type": "branch", 
                         "children": {
                           "HeadRestraint": {
-                            "description": "Head restratint switches", 
+                            "description": "Head restraint switches", 
                             "type": "branch", 
                             "children": {
                               "Down": {
@@ -6467,7 +6467,7 @@
                         "type": "branch", 
                         "children": {
                           "Height": {
-                            "description": "Height of heead restraing. 0 = Bottommost. 255 = Topmost.", 
+                            "description": "Height of head restraint. 0 = Bottommost. 255 = Topmost.", 
                             "min": 0, 
                             "max": 255, 
                             "type": "UInt8", 
@@ -6475,7 +6475,7 @@
                             "unit": "mm"
                           }
                         }, 
-                        "description": "Head restratint settings"
+                        "description": "Head restraint settings"
                       }, 
                       "Recline": {
                         "description": "Recline level. -90 = Max forward recline. 90 max backward recline", 
@@ -6522,7 +6522,7 @@
                         "type": "branch", 
                         "children": {
                           "IsDeployed": {
-                            "description": "Airbag deployement status. True = Airbag deployed. False = Airbag not deployed.", 
+                            "description": "Airbag deployment status. True = Airbag deployed. False = Airbag not deployed.", 
                             "type": "Boolean", 
                             "id": 729
                           }
@@ -6533,7 +6533,7 @@
                         "type": "branch", 
                         "children": {
                           "HeadRestraint": {
-                            "description": "Head restratint switches", 
+                            "description": "Head restraint switches", 
                             "type": "branch", 
                             "children": {
                               "Down": {
@@ -6745,7 +6745,7 @@
                         "type": "branch", 
                         "children": {
                           "Height": {
-                            "description": "Height of heead restraing. 0 = Bottommost. 255 = Topmost.", 
+                            "description": "Height of head restraint. 0 = Bottommost. 255 = Topmost.", 
                             "min": 0, 
                             "max": 255, 
                             "type": "UInt8", 
@@ -6753,7 +6753,7 @@
                             "unit": "mm"
                           }
                         }, 
-                        "description": "Head restratint settings"
+                        "description": "Head restraint settings"
                       }, 
                       "Recline": {
                         "description": "Recline level. -90 = Max forward recline. 90 max backward recline", 
@@ -6800,7 +6800,7 @@
                         "type": "branch", 
                         "children": {
                           "IsDeployed": {
-                            "description": "Airbag deployement status. True = Airbag deployed. False = Airbag not deployed.", 
+                            "description": "Airbag deployment status. True = Airbag deployed. False = Airbag not deployed.", 
                             "type": "Boolean", 
                             "id": 624
                           }
@@ -6811,7 +6811,7 @@
                         "type": "branch", 
                         "children": {
                           "HeadRestraint": {
-                            "description": "Head restratint switches", 
+                            "description": "Head restraint switches", 
                             "type": "branch", 
                             "children": {
                               "Down": {
@@ -7022,7 +7022,7 @@
                         "type": "branch", 
                         "children": {
                           "Height": {
-                            "description": "Height of heead restraing. 0 = Bottommost. 255 = Topmost.", 
+                            "description": "Height of head restraint. 0 = Bottommost. 255 = Topmost.", 
                             "min": 0, 
                             "max": 255, 
                             "type": "UInt8", 
@@ -7030,7 +7030,7 @@
                             "unit": "mm"
                           }
                         }, 
-                        "description": "Head restratint settings"
+                        "description": "Head restraint settings"
                       }, 
                       "Recline": {
                         "description": "Recline level. -90 = Max forward recline. 90 max backward recline", 
@@ -7077,7 +7077,7 @@
                         "type": "branch", 
                         "children": {
                           "IsDeployed": {
-                            "description": "Airbag deployement status. True = Airbag deployed. False = Airbag not deployed.", 
+                            "description": "Airbag deployment status. True = Airbag deployed. False = Airbag not deployed.", 
                             "type": "Boolean", 
                             "id": 659
                           }
@@ -7088,7 +7088,7 @@
                         "type": "branch", 
                         "children": {
                           "HeadRestraint": {
-                            "description": "Head restratint switches", 
+                            "description": "Head restraint switches", 
                             "type": "branch", 
                             "children": {
                               "Down": {
@@ -7300,7 +7300,7 @@
                         "type": "branch", 
                         "children": {
                           "Height": {
-                            "description": "Height of heead restraing. 0 = Bottommost. 255 = Topmost.", 
+                            "description": "Height of head restraint. 0 = Bottommost. 255 = Topmost.", 
                             "min": 0, 
                             "max": 255, 
                             "type": "UInt8", 
@@ -7308,7 +7308,7 @@
                             "unit": "mm"
                           }
                         }, 
-                        "description": "Head restratint settings"
+                        "description": "Head restraint settings"
                       }, 
                       "Recline": {
                         "description": "Recline level. -90 = Max forward recline. 90 max backward recline", 
@@ -7355,7 +7355,7 @@
                         "type": "branch", 
                         "children": {
                           "IsDeployed": {
-                            "description": "Airbag deployement status. True = Airbag deployed. False = Airbag not deployed.", 
+                            "description": "Airbag deployment status. True = Airbag deployed. False = Airbag not deployed.", 
                             "type": "Boolean", 
                             "id": 589
                           }
@@ -7366,7 +7366,7 @@
                         "type": "branch", 
                         "children": {
                           "HeadRestraint": {
-                            "description": "Head restratint switches", 
+                            "description": "Head restraint switches", 
                             "type": "branch", 
                             "children": {
                               "Down": {
@@ -7584,7 +7584,7 @@
                         "type": "branch", 
                         "children": {
                           "Height": {
-                            "description": "Height of heead restraing. 0 = Bottommost. 255 = Topmost.", 
+                            "description": "Height of head restraint. 0 = Bottommost. 255 = Topmost.", 
                             "min": 0, 
                             "max": 255, 
                             "type": "UInt8", 
@@ -7592,7 +7592,7 @@
                             "unit": "mm"
                           }
                         }, 
-                        "description": "Head restratint settings"
+                        "description": "Head restraint settings"
                       }, 
                       "Recline": {
                         "description": "Recline level. -90 = Max forward recline. 90 max backward recline", 
@@ -7639,7 +7639,7 @@
                         "type": "branch", 
                         "children": {
                           "IsDeployed": {
-                            "description": "Airbag deployement status. True = Airbag deployed. False = Airbag not deployed.", 
+                            "description": "Airbag deployment status. True = Airbag deployed. False = Airbag not deployed.", 
                             "type": "Boolean", 
                             "id": 869
                           }
@@ -7650,7 +7650,7 @@
                         "type": "branch", 
                         "children": {
                           "HeadRestraint": {
-                            "description": "Head restratint switches", 
+                            "description": "Head restraint switches", 
                             "type": "branch", 
                             "children": {
                               "Down": {
@@ -7863,7 +7863,7 @@
                         "type": "branch", 
                         "children": {
                           "Height": {
-                            "description": "Height of heead restraing. 0 = Bottommost. 255 = Topmost.", 
+                            "description": "Height of head restraint. 0 = Bottommost. 255 = Topmost.", 
                             "min": 0, 
                             "max": 255, 
                             "type": "UInt8", 
@@ -7871,7 +7871,7 @@
                             "unit": "mm"
                           }
                         }, 
-                        "description": "Head restratint settings"
+                        "description": "Head restraint settings"
                       }, 
                       "Recline": {
                         "description": "Recline level. -90 = Max forward recline. 90 max backward recline", 
@@ -7918,7 +7918,7 @@
                         "type": "branch", 
                         "children": {
                           "IsDeployed": {
-                            "description": "Airbag deployement status. True = Airbag deployed. False = Airbag not deployed.", 
+                            "description": "Airbag deployment status. True = Airbag deployed. False = Airbag not deployed.", 
                             "type": "Boolean", 
                             "id": 904
                           }
@@ -7929,7 +7929,7 @@
                         "type": "branch", 
                         "children": {
                           "HeadRestraint": {
-                            "description": "Head restratint switches", 
+                            "description": "Head restraint switches", 
                             "type": "branch", 
                             "children": {
                               "Down": {
@@ -8141,7 +8141,7 @@
                         "type": "branch", 
                         "children": {
                           "Height": {
-                            "description": "Height of heead restraing. 0 = Bottommost. 255 = Topmost.", 
+                            "description": "Height of head restraint. 0 = Bottommost. 255 = Topmost.", 
                             "min": 0, 
                             "max": 255, 
                             "type": "UInt8", 
@@ -8149,7 +8149,7 @@
                             "unit": "mm"
                           }
                         }, 
-                        "description": "Head restratint settings"
+                        "description": "Head restraint settings"
                       }, 
                       "Recline": {
                         "description": "Recline level. -90 = Max forward recline. 90 max backward recline", 
@@ -8196,7 +8196,7 @@
                         "type": "branch", 
                         "children": {
                           "IsDeployed": {
-                            "description": "Airbag deployement status. True = Airbag deployed. False = Airbag not deployed.", 
+                            "description": "Airbag deployment status. True = Airbag deployed. False = Airbag not deployed.", 
                             "type": "Boolean", 
                             "id": 799
                           }
@@ -8207,7 +8207,7 @@
                         "type": "branch", 
                         "children": {
                           "HeadRestraint": {
-                            "description": "Head restratint switches", 
+                            "description": "Head restraint switches", 
                             "type": "branch", 
                             "children": {
                               "Down": {
@@ -8419,7 +8419,7 @@
                         "type": "branch", 
                         "children": {
                           "Height": {
-                            "description": "Height of heead restraing. 0 = Bottommost. 255 = Topmost.", 
+                            "description": "Height of head restraint. 0 = Bottommost. 255 = Topmost.", 
                             "min": 0, 
                             "max": 255, 
                             "type": "UInt8", 
@@ -8427,7 +8427,7 @@
                             "unit": "mm"
                           }
                         }, 
-                        "description": "Head restratint settings"
+                        "description": "Head restraint settings"
                       }, 
                       "Recline": {
                         "description": "Recline level. -90 = Max forward recline. 90 max backward recline", 
@@ -8474,7 +8474,7 @@
                         "type": "branch", 
                         "children": {
                           "IsDeployed": {
-                            "description": "Airbag deployement status. True = Airbag deployed. False = Airbag not deployed.", 
+                            "description": "Airbag deployment status. True = Airbag deployed. False = Airbag not deployed.", 
                             "type": "Boolean", 
                             "id": 834
                           }
@@ -8485,7 +8485,7 @@
                         "type": "branch", 
                         "children": {
                           "HeadRestraint": {
-                            "description": "Head restratint switches", 
+                            "description": "Head restraint switches", 
                             "type": "branch", 
                             "children": {
                               "Down": {
@@ -8697,7 +8697,7 @@
                         "type": "branch", 
                         "children": {
                           "Height": {
-                            "description": "Height of heead restraing. 0 = Bottommost. 255 = Topmost.", 
+                            "description": "Height of head restraint. 0 = Bottommost. 255 = Topmost.", 
                             "min": 0, 
                             "max": 255, 
                             "type": "UInt8", 
@@ -8705,7 +8705,7 @@
                             "unit": "mm"
                           }
                         }, 
-                        "description": "Head restratint settings"
+                        "description": "Head restraint settings"
                       }, 
                       "Recline": {
                         "description": "Recline level. -90 = Max forward recline. 90 max backward recline", 
@@ -8752,7 +8752,7 @@
                         "type": "branch", 
                         "children": {
                           "IsDeployed": {
-                            "description": "Airbag deployement status. True = Airbag deployed. False = Airbag not deployed.", 
+                            "description": "Airbag deployment status. True = Airbag deployed. False = Airbag not deployed.", 
                             "type": "Boolean", 
                             "id": 764
                           }
@@ -8763,7 +8763,7 @@
                         "type": "branch", 
                         "children": {
                           "HeadRestraint": {
-                            "description": "Head restratint switches", 
+                            "description": "Head restraint switches", 
                             "type": "branch", 
                             "children": {
                               "Down": {
