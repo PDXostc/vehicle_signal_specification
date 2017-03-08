@@ -71,6 +71,10 @@ where ```$VERSION``` is the contents of the ```VERSION``` file and ```xxx``` is
 the appropriate file extension for the type of output being produced.  For
 example, the JSON version of the output will have a ```.json``` extension.
 
+Changes to files under the spec/ directory results in changes to the generated
+files, namely ```.json```, ```.fidl```, ```.csv``` etc.
+Hence, it is recommended to run ```make```, post spec/ file changes.
+
 By default, the ```make``` processor will produce all of the currently
 installed output formats.  If only a single format is desired, specify it as
 an arguement.  For example, to generate only the json format, type:
@@ -198,7 +202,7 @@ a period (".") .
 
 For example, the dimming status of the rearview mirror in the cabin is named:
 
-	
+
     Cabin.RearviewMirror.Dimmed
 
 
@@ -530,9 +534,9 @@ The tools ```vspec2franca```, ```vspec2json``` and ```vspec2vsi``` can also auto
 To instruct any of the tools to create signal ID databases use the ```-i``` option:
 
     vspec2json -i <prefix>:<database_file>:<start_id> vspec_file json_file
-    
+
 The ```-i``` option can be specified any number of times to created different signal ID databases based on ```<prefix```. Signal IDs are positive integer values.
-    
+
 * **```<prefix>```**<br>
 Prefix that is matched against signal names. The longest match will be used to determine the signal ID database the signal is stored into. For example, two signal ID databases are specified with ```-i Attribute:vspec_attr.id:0 -i Attribute.Cabin:vspec_attr_cab.id:0```. A signal named ```Attribute.Chassis.Curbweight``` will be stored in ```vspec_attr.id``` while
 a signal named ```Attribute.Cabin.Seat.DriverPosition``` will be stored in the ```vspec_attr_cab.id``` database.
