@@ -6,7 +6,7 @@
 #
 
 #
-# Definition of a single door
+# Definition of a Window
 #
 - Open:
   type: Boolean
