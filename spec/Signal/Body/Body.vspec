@@ -89,9 +89,8 @@
   description: Front windshield heater signals
 
 - Windshield.Front.Heater.Status:
-  type: String
-  enum: ["off", "on"]
-  description: Front windshield heater status
+  type: Boolean
+  description: Front windshield heater status. 0 - off, 1 - on
 
 - Windshield.Front.WasherFluid:
   type: branch
@@ -127,9 +126,8 @@
   description: Rear windshield heater signals
 
 - Windshield.Rear.Heater.Status:
-  type: String
-  enum: ["off", "on"]
-  description: Rear windshield heater status
+  type: Boolean
+  description: Rear windshield heater status. 0 - off, 1 - on
 
 - Windshield.Rear.WasherFluid:
   type: branch

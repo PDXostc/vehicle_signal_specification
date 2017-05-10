@@ -70,6 +70,7 @@
   type: Double
   min: -90
   max: 90
+  unit: degrees
   description: Latitude of destination
 
 - Navigation.DestinatonSet.Longitude:
