@@ -37,7 +37,7 @@
   type: branch
   description: Seat configuration attributes
   
-- Seat.DriverPostion:
+- Seat.DriverPosition:
   type: Uint8
   value: 0
   description: The position of the driver seat in row 1. (1-5)

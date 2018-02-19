@@ -1,7 +1,7 @@
 Attribute.Body.BodyType: 28
 Attribute.Body.RefuelPosition: 29
 Attribute.Cabin.Door.Count: 30
-Attribute.Cabin.Seat.DriverPostion: 32
+Attribute.Cabin.Seat.DriverPosition: 32
 Attribute.Cabin.Seat.Row1PosCount: 34
 Attribute.Cabin.Seat.Row2PosCount: 35
 Attribute.Cabin.Seat.Row3PosCount: 36
