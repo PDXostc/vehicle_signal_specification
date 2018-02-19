@@ -131,8 +131,9 @@ the signal can be assigned, effectively turning it into an enumerator.  The
 values are of the same type as the signal itself.
 
 ### <a name="signal-unit-type"/>SIGNAL UNIT TYPE [OPTIONAL]
-A signal can optionally specify a unit of measurement from the following set:
-TO BE REPLACED BY SI REFERENCE.
+A signal can optionally specify a unit of measurement from the following set.
+This list intends to be according to International Units (SI): [Specification](https://www.iso.org/standard/30669.html), [Wikipedia](https://en.wikipedia.org/wiki/International_System_of_Units)
+
 
 Unit type  | Domain        | Description
 :----------|:--------------|:-------------
@@ -141,7 +142,7 @@ m/s        | Speed         | Meters per hour
 celsius    | Temperature   | Degrees Celsius
 mbar       | Pressure      | millibar
 pa         | Pressure      | Pascal
-kpa        | Pressure      | kilo-Pascal
+kpa        | Pressure      | Kilo-Pascal
 percent    | Relation      | Percent
 ratio      | Relation      | Ratio
 lat        | Position      | Decimal latitude
@@ -173,8 +174,8 @@ degree     | Angle         | Angle in degrees
 degrees/s  | Angluar Speed | Angular speed in degrees/s
 l/100km    | Consumption   | Liters per 100 km
 ml/100km   | Consumption   | Milliliters per 100 km
-V          | Electrical    | potential difference in volt
-A          | Electrical    | current in amperes
+V          | Electrical    | Potential difference in volt
+A          | Electrical    | Current in amperes
 ... | ... | ...
 
 
