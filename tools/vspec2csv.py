@@ -37,6 +37,9 @@ def format_data(json_data):
     Max = '""'
     Desc = '""'
     Enum = '""'
+    Sensor = '""'
+    Actuator = '""'
+
     if (json_data.has_key('id')):
         Id = '"' + str(json_data['id']) + '"'
     if (json_data.has_key('type')):

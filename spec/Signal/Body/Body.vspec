@@ -112,13 +112,13 @@
 - Windshield.Front.WasherFluid.LevelLow:
   type: Boolean
   description: Low level indication for washer fluid. True = Level Low. False = Level OK.
-  sensor: Washer Fuild Level Sensor
+  sensor: Washer Fluid Level Sensor
 
 - Windshield.Front.WasherFluid.Level:
   type: Uint8
   unit: percent
   description: Washer fluid level as a percent. 0 = Empty. 100 = Full.
-  sensor: Washer Fuild Level Sensor
+  sensor: Washer Fluid Level Sensor
 
 #
 # Rear Windshield
@@ -155,13 +155,13 @@
 - Windshield.Rear.WasherFluid.LevelLow:
   type: Boolean
   description: Low level indication for washer fluid. True = Level Low. False = Level OK.
-  sensor: Washer Fuild Level Sensor
+  sensor: Washer Fluid Level Sensor
 
 - Windshield.Rear.WasherFluid.Level:
   type: Uint8
   unit: percent
   description: Washer fluid level as a percent. 0 = Empty. 100 = Full.
-  sensor: Washer Fuild Level Sensor
+  sensor: Washer Fluid Level Sensor
 
 
 
