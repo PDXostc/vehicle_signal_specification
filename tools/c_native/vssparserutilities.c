@@ -17,55 +17,150 @@
 #include "nativeCnodeDef.h"
 #include "vssparserutilities.h"
 
+void readCommonPart(common_node_data_t* commonData, char** name, char** descr) {
+    fread(commonData, sizeof(common_node_data_t), 1, treeFp);
+    *name = (char*) malloc(sizeof(char)*commonData->nameLen);
+    *descr = (char*) malloc(sizeof(char)*commonData->descrLen);
+    fread(*name, sizeof(char)*commonData->nameLen, 1, treeFp);
+//(*name)[commonData->nameLen] = '\0';  //should not be needed
+printf("Name = %s\n", *name);
+    fread(*descr, sizeof(char)*commonData->descrLen, 1, treeFp);
+//(*descr)[commonData->descrLen] = '\0';  //should not be needed
+printf("Description length = %d\n", commonData->descrLen);
+printf("Description = %s\n", *descr);
+printf("Children = %d\n", commonData->children);
+}
+
+void copyData(node_t* node, common_node_data_t* commonData, char* name, char* descr) {
+    node->nameLen = commonData->nameLen;
+    node->name = (char*) malloc(sizeof(char)*node->nameLen);
+    strncpy(node->name, name, commonData->nameLen);
+    node->type = commonData->type;
+    node->descrLen = commonData->descrLen;
+    node->description = (char*) malloc(sizeof(char)*node->descrLen);
+    strncpy(node->description, descr, commonData->descrLen);
+    node->children = commonData->children;
+}
+
+int getObjectSize(objectTypes_t objectType) {
+    switch (objectType) {
+        case MEDIACOLLECTION:
+            return sizeof(mediaCollectionObject_t);
+        case MEDIAITEM:
+            return sizeof(mediaItemObject_t);
+    }
+    return -1;
+}
+
+void readUniqueObjectRefs(objectTypes_t objectType, void* uniqueObject) {
+    switch (objectType) {
+        case MEDIACOLLECTION:
+        {
+            mediaCollectionObject_t* mediaCollectionObject = (mediaCollectionObject_t*) uniqueObject;
+            mediaCollectionObject->items = (elementRef_t*) malloc(sizeof(elementRef_t)*mediaCollectionObject->numOfItems);
+            fread(mediaCollectionObject->items, sizeof(elementRef_t)*mediaCollectionObject->numOfItems, 1, treeFp);
+        }
+        break;
+        case MEDIAITEM:
+        {
+//            mediaItemObject_t* mediaItemObject = (mediaItemObject_t*) uniqueObject;
+//            mediaCollectionObject->items = (elementRef_t*) malloc(sizeof(elementRef_t)*mediaCollectionObject->numOfItems);
+//            fread(mediaCollectionObject->items, sizeof(elementRef_t)*mediaCollectionObject->numOfItems, 1, treeFp);
+        }
+        break;
+        default:
+            printf("readUniqueObjectRefs:unknown object type = %d\n", objectType);
+        break;
+    }
+}
+
+/*
+  Data order on file: 
+  - Common part
+  - Name
+  - Description
+  if (node_t)
+    - node_t specific
+	* min/max/unit/enum
+  if (rbranch_node_t)
+    - rbranch specific
+	* childType/numOfProperties/Properties
+  if (element_node_t)
+    - specific according to parent child type (mapped to struct def)
+*/
 struct node_t* traverseAndReadNode(struct node_t* parentPtr) {
-    int staticChunk = NODESTATICSIZE;
-    struct node_t* buf = (struct node_t*)malloc(staticChunk);
-    if (buf == NULL) {
+if (parentPtr != NULL)
+  printf("parent node name = %s\n", parentPtr->name);
+    common_node_data_t* common_data = (common_node_data_t*)malloc(sizeof(common_node_data_t));
+    if (common_data == NULL) {
         printf("traverseAndReadNode: 1st malloc failed\n");
         return NULL;
     }
-if (parentPtr != NULL) {
-  printf("parent node name = %s, ", parentPtr->name);
-}
-    int read = fread(buf, staticChunk, 1, treeFp);
-    struct node_t* node = (struct node_t*)malloc(sizeof(node_t)-(MAXCHILDREN-buf->children)*sizeof(node_t*));
-    if (node == NULL) {
-        printf("traverseAndReadNode: 2nd malloc failed\n");
-        free(buf);
-        return NULL;
-    }
-    strcpy(node->name, buf->name);
-    node->type = buf->type;
-    node->children = buf->children; 
-    node->descrLen = buf->descrLen; 
-    node->numOfEnumElements = buf->numOfEnumElements; 
-    node->id = buf->id; 
-    node->min = buf->min; 
-    node->max = buf->max; 
-    strcpy(node->unit, buf->unit);
-    free(buf);
-    node->parent = parentPtr;
-    node->description = (char*) malloc(sizeof(char)*node->descrLen);
-    if (node->description == NULL) {
-        printf("traverseAndReadNode: 3rd malloc failed\n");
-        free(node);
-        return NULL;
-    }
-    fread(node->description, sizeof(char)*node->descrLen, 1, treeFp);
-printf("Description = %s\n", node->description);
-    if (node->numOfEnumElements > 0) {
-        node->enumeration = (enum_t*) malloc(sizeof(enum_t)*node->numOfEnumElements);
-        if (node->enumeration == NULL) {
-            printf("traverseAndReadNode: 4th malloc failed\n");
-            free(node->description);
-            free(node);
-            return NULL;
+    char* name;
+    char* descr;
+    readCommonPart(common_data, &name, &descr);
+    node_t* node = NULL;
+printf("Type=%d\n",common_data->type);
+    switch (common_data->type) {
+        case RBRANCH:
+        {
+            rbranch_node_t* node2 = (rbranch_node_t*) malloc(sizeof(rbranch_node_t));
+            node2->parent = parentPtr;
+            copyData((node_t*)node2, common_data, name, descr);
+            if (common_data->children > 0)
+                node2->child = (element_node_t**) malloc(sizeof(element_node_t**)*common_data->children);
+            fread(&(node2->childTypeLen), sizeof(int), 1, treeFp);
+            fread(&(node2->numOfProperties), sizeof(int), 1, treeFp);
+            if (node2->numOfProperties > 0) {
+                node2->propertyDefinition = (propertyDefinition_t*) malloc(sizeof(propertyDefinition_t*)*node2->numOfProperties);
+                fread(node2->propertyDefinition, sizeof(propertyDefinition_t)*node2->numOfProperties, 1, treeFp);
+            }
+            node = (node_t*)node2;
         }
-        fread(node->enumeration, sizeof(enum_t)*node->numOfEnumElements, 1, treeFp);
-for (int i = 0 ; i < node->numOfEnumElements ; i++)
-  printf("Enum[%d]=%s\n", i, (char*)node->enumeration[i]);
-    }
+        break;
+        case ELEMENT:
+        {
+            element_node_t* node2 = (element_node_t*) malloc(sizeof(element_node_t));
+            node2->parent = parentPtr;
+            copyData((node_t*)node2, common_data, name, descr);
+            objectTypes_t objectType;
+            fread(&objectType, sizeof(int), 1, treeFp);
+            int objectSize = getObjectSize(objectType);
+            if (objectSize > 0) {
+                node2->uniqueObject = (void*) malloc(objectSize);
+                *((int*)node2->uniqueObject) = objectType;
+                fread(node2->uniqueObject+sizeof(int), objectSize-sizeof(int), 1, treeFp);
+                readUniqueObjectRefs(objectType, node2->uniqueObject);
+            }
+            node = (node_t*)node2;
+        }
+        break;
+        default:
+        {
+            node_t* node2 = (node_t*) malloc(sizeof(node_t));
+            node2->parent = parentPtr;
+            copyData((node_t*)node2, common_data, name, descr);
+            if (node2->children > 0)
+                node2->child = (node_t**) malloc(sizeof(node_t**)*node2->children);
+            fread(&(node2->min), sizeof(int), 1, treeFp);
+            fread(&(node2->max), sizeof(int), 1, treeFp);
+            fread(node2->unit, sizeof(char)*MAXUNITLEN, 1, treeFp);
+            fread(&(node2->numOfEnumElements), sizeof(int), 1, treeFp);
+            if (node2->numOfEnumElements > 0) {
+                node2->enumeration = (enum_t*) malloc(sizeof(enum_t)*node2->numOfEnumElements);
+                fread(node2->enumeration, sizeof(enum_t)*node2->numOfEnumElements, 1, treeFp);
+            }
+for (int i = 0 ; i < node2->numOfEnumElements ; i++)
+  printf("Enum[%d]=%s\n", i, (char*)node2->enumeration[i]);
+            node = (node_t*)node2;
+        }
+        break;
+    } //switch
+    free(common_data);
+    free(name);
+    free(descr);
     int childNo = 0;
+printf("node->children = %d\n", node->children);
     while(childNo < node->children) {
         node->child[childNo++] = traverseAndReadNode(node);
     }
@@ -137,14 +232,15 @@ void copySteps(char* newPath, char* oldPath, int stepNo) {
     }
 }
 
-struct node_t* stepToNextNode(struct node_t* ptr, int stepNo, char* searchPath, int maxFound, int* foundResponses, path_t* responsePaths, struct node_t** foundNodePtrs) {
+struct node_t* stepToNextNode(struct node_t* ptr, int stepNo, char* searchPath, int maxFound, int* foundResponses, path_t* responsePaths, struct NodeHandle_t* foundNodePtrs) {
 printf("ptr->name=%s, stepNo=%d, responsePaths[%d]=%s\n",ptr->name, stepNo, *foundResponses, responsePaths[*foundResponses]);
     if (*foundResponses >= maxFound-1)
         return NULL; // found buffers full
     char pathNodeName[MAXNAMELEN];
     strcpy(pathNodeName, getNodeName(stepNo, searchPath));
     if (stepNo == getNumOfPathSteps(searchPath)-1) { // at leave node, so save ptr and return success
-        foundNodePtrs[*foundResponses] = ptr;
+        foundNodePtrs[*foundResponses].nodePtr = (void*)ptr;
+        foundNodePtrs[*foundResponses].nodeType = ptr->type;
         return ptr;
     }
     strcpy(pathNodeName, getNodeName(stepNo+1, searchPath));  // get name of next step in path
@@ -169,7 +265,7 @@ printf("Wildcard:ptr->child[%d]->name=%s\n", i, ptr->child[i]->name);
             if (ptr2 == NULL) {
                 copySteps(responsePaths[*foundResponses], responsePaths[*foundResponses], stepNo+1);
             } else {
-                if (i < ptr->children && foundNodePtrs[*foundResponses] != NULL) {
+                if (i < ptr->children && foundNodePtrs[*foundResponses].nodePtr != NULL) {
                     (*foundResponses)++;
                     copySteps(responsePaths[*foundResponses], responsePaths[*foundResponses-1], stepNo+1);
                 } else
@@ -182,8 +278,8 @@ printf("Wildcard:ptr->child[%d]->name=%s\n", i, ptr->child[i]->name);
 }
 
 
-int VSSGetNodes(char* searchPath, struct node_t* rootNode, int maxFound, path_t* responsePaths, struct node_t** foundNodePtrs) {
-    struct node_t* ptr = rootNode;
+int VSSGetNodes(char* searchPath, struct NodeHandle_t* rootNode, int maxFound, path_t* responsePaths, struct NodeHandle_t* foundNodePtrs) {
+    struct node_t* ptr = (node_t*)rootNode->nodePtr;
     int stepNo = 0;
     int foundResponses = 0;
     /* 
@@ -193,7 +289,7 @@ int VSSGetNodes(char* searchPath, struct node_t* rootNode, int maxFound, path_t*
      * See NULL check in wildcard code in stepToNextNode. 
      */
     for (int i = 0 ; i < maxFound ; i++)
-        foundNodePtrs[i] = NULL;
+        foundNodePtrs[i].nodePtr = NULL;
 
     strcpy(responsePaths[0], ptr->name); // root node name needs to be written initially
     stepToNextNode(ptr, stepNo, searchPath, maxFound, &foundResponses, responsePaths, foundNodePtrs);

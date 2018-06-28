@@ -12,10 +12,16 @@
 
 typedef char path_t[MAXCHARSPATH];
 
+struct NodeHandle_t {
+    nodeTypes_t nodeType;
+    void* nodePtr;
+} NodeHandle_t;
+
 FILE* treeFp;
 
 struct node_t* VSSReadTree();
 
-int VSSGetNodes(char* searchPath, struct node_t* rootNode, int maxFound, path_t* responsePaths, struct node_t** foundNodePtrs);
+//int VSSGetNodes(char* searchPath, struct node_t* rootNode, int maxFound, path_t* responsePaths, struct node_t** foundNodePtrs);
+int VSSGetNodes(char* searchPath, struct NodeHandle_t* rootNode, int maxFound, path_t* responsePaths, struct NodeHandle_t* foundNodePtrs);
 
 
