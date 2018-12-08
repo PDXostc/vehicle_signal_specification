@@ -33,6 +33,7 @@ def format_data(json_data):
     Id = '""'
     Type = '""'
     Unit = '""'
+    DataType = '""'
     Min = '""'
     Max = '""'
     Desc = '""'
@@ -44,6 +45,8 @@ def format_data(json_data):
         Id = '"' + str(json_data['id']) + '"'
     if (json_data.has_key('type')):
         Type = '"' + json_data['type'] + '"'
+    if (json_data.has_key('datatype')):
+        DataType = '"' + json_data['datatype'] + '"'
     if (json_data.has_key('unit')):
         Unit = '"' + json_data['unit'] + '"'
     if (json_data.has_key('min')):
@@ -58,7 +61,7 @@ def format_data(json_data):
         Sensor = '"' + str(json_data['sensor']) + '"'
     if (json_data.has_key('actuator')):
         Actuator = '"' + str(json_data['actuator']) + '"'
-    return Id + ","+ Type + ","+ Unit + ","+ Min + ","+ Max + ","+ Desc + ","+ Enum + ","+ Sensor + ","+ Actuator
+    return Id + ","+ Type + ","+ DataType + ","+ Unit + ","+ Min + ","+ Max + ","+ Desc + ","+ Enum + ","+ Sensor + ","+ Actuator
 
 def json2csv(json_data, file_out, parent_signal):
     for k in json_data.keys():
@@ -74,7 +77,7 @@ def json2csv(json_data, file_out, parent_signal):
             file_out.write(signal + ',' + format_data(json_data[k]) + '\n')
 
 if __name__ == "__main__":
-    # 
+    #
     # Check that we have the correct arguments
     #
     opts, args= getopt.getopt(sys.argv[1:], "I:i:")

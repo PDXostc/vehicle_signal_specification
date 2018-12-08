@@ -54,7 +54,7 @@
   description: Tire Pressure Status. True = Low tire pressure. False = Good tire pressure.
 
 - Tire.Temperature:
-  datatype: Float
+  datatype: float
   type: sensor
   unit: celsius
   description: Tire temperature in Celsius.

@@ -54,7 +54,7 @@
 # Current odometer reading
 #
 - TravelledDistance:
-  datatype: Float
+  datatype: float
   type: sensor
   unit: km
   description: Odometer reading

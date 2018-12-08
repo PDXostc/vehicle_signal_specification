@@ -46,21 +46,21 @@
   description: Range in meters.
 
 - InstantConsumption:
-  datatype: Float
+  datatype: float
   type: sensor
   unit: l/100km
   min: 0
   description: Current consumption in liters per 100 km.
 
 - AverageConsumption:
-  datatype: Float
+  datatype: float
   type: sensor
   unit: l/100km
   min: 0
   description: Average consumption in liters per 100 km.
 
 - ConsumptionSinceStart:
-  datatype: Float
+  datatype: float
   type: sensor
   unit: l
   description: Fuel amount consumed since start in liters.

@@ -6,9 +6,9 @@
 # All files and artifacts in this repository are licensed under the
 # provisions of the license provided by the LICENSE file in this repository.
 #
-# 
+#
 # Convert vspec file to FrancaIDL spec.
-#  
+#
 
 import sys
 import vspec
@@ -23,14 +23,14 @@ def usage():
     print "  -i prefix:id_file:start_id  Add include directory to search for included vspec"
     print "                              files. Can be used multiple timees."
     print
-    print " vspec_file                   The vehicle specification file to parse."     
-    print " franca_file                  The file to output the Franca IDL spec to."     
+    print " vspec_file                   The vehicle specification file to parse."
+    print " franca_file                  The file to output the Franca IDL spec to."
     sys.exit(255)
 
 
 def traverse_tree(tree, outf, prefix_arr, is_first_element):
     # Convert a prefix array of path elements to a string
-    def prefix_to_string(prefix_arr): 
+    def prefix_to_string(prefix_arr):
         if len(prefix_arr) == 0:
             return ""
 
@@ -48,11 +48,11 @@ def traverse_tree(tree, outf, prefix_arr, is_first_element):
             # Yes. Recurse
             traverse_tree(val['children'], outf, prefix_arr + [ key ], is_first_element)
             continue
-        
+
         # Drop a comma in before the next element.
         if not is_first_element:
             outf.write(",\n")
-            
+
         outf.write("""{{
     name: "{}"
     type: "{}"
@@ -60,6 +60,9 @@ def traverse_tree(tree, outf, prefix_arr, is_first_element):
 """.format(prefix_to_string(prefix_arr + [ key ]),
            val['type'],
            val['description']))
+
+        if val.has_key("datatype"):
+            outf.write("    datatype: {}\n".format(val["datatype"]))
 
         if val.has_key("id"):
             outf.write("    id: {}\n".format(val["id"]))
@@ -87,7 +90,7 @@ def traverse_tree(tree, outf, prefix_arr, is_first_element):
 
 
 if __name__ == "__main__":
-    # 
+    #
     # Check that we have the correct arguments
     #
     opts, args= getopt.getopt(sys.argv[1:], "I:i:v:")
@@ -137,9 +140,9 @@ struct SignalSpec {{
     String description
 }}
 
-const SignalSpec[] signal_spec = [ 
+const SignalSpec[] signal_spec = [
 """.format(vss_version))
-    
+
     traverse_tree(tree, franca_out, [], True)
 
     franca_out.write(
