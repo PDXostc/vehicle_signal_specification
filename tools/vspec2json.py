@@ -16,15 +16,15 @@ import json
 import getopt
 
 def usage():
-    print "Usage:", sys.argv[0], "[-I include_dir] ... [-i prefix:id_file:start_id] vspec_file json_file"
-    print "  -I include_dir              Add include directory to search for included vspec"
-    print "                              files. Can be used multiple timees."
-    print
-    print "  -i prefix:id_file:start_id  Add include directory to search for included vspec"
-    print "                              files. Can be used multiple timees."
-    print
-    print " vspec_file                   The vehicle specification file to parse."     
-    print " json_file                    The file to output the JSON objects to."     
+    print("Usage:", sys.argv[0], "[-I include_dir] ... [-i prefix:id_file:start_id] vspec_file json_file")
+    print("  -I include_dir              Add include directory to search for included vspec")
+    print("                              files. Can be used multiple timees.")
+    print()
+    print("  -i prefix:id_file:start_id  Add include directory to search for included vspec")
+    print("                              files. Can be used multiple timees.")
+    print()
+    print(" vspec_file                   The vehicle specification file to parse.")     
+    print(" json_file                    The file to output the JSON objects to.")     
     sys.exit(255)
 
 if __name__ == "__main__":
@@ -41,7 +41,7 @@ if __name__ == "__main__":
         elif o == "-i":
             id_spec = a.split(":")
             if len(id_spec) != 3:
-                print "ERROR: -i needs a 'prefix:id_file:start_id' argument."
+                print("ERROR: -i needs a 'prefix:id_file:start_id' argument.")
                 usage()
 
             [prefix, file_name, start_id] = id_spec
@@ -57,7 +57,7 @@ if __name__ == "__main__":
     try:
         tree = vspec.load(args[0], include_dirs)
     except vspec.VSpecError as e:
-        print "Error: {}".format(e)
+        print("Error: {}".format(e))
         exit(255)
 
     json.dump(tree, json_out, indent=2)

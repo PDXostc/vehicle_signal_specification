@@ -77,7 +77,7 @@ class SignalDBManager:
         match_len = 0
 
         # Find the longest matching prefix
-        for key, signal_db in self.signal_id_db_set.iteritems():
+        for key, signal_db in self.signal_id_db_set.items():
             key_len = len(key)
             if signal_name.find(key, 0, key_len) == -1:
                 continue
@@ -97,7 +97,7 @@ class SignalDBManager:
 
     # Go through all SignalDB instances and save them to disk.
     def save_all_signal_db(self):
-        for key, signal_db in self.signal_id_db_set.iteritems():
+        for key, signal_db in self.signal_id_db_set.items():
             signal_db.save()
 
 #
@@ -223,7 +223,7 @@ def load_flat_model(file_name, prefix, include_paths):
         mapping = yaml.constructor.Constructor.construct_mapping(loader, node, deep=deep)
         # Find the name of the branch / signal and convert
         # it to a dictionary element '$name$'
-        for key, val in mapping.items():
+        for key, val in list(mapping.items()):
             if key[0]=='$':
                 continue
 
@@ -287,7 +287,7 @@ def cleanup_flat_entries(flat_model):
     # Traverse the flat list of the parsed specification
     for elem in flat_model:
         # Is this an include element?
-        if not elem.has_key("type"):
+        if "type" not in elem:
             elem["type"] = "branch"
 
         # Check, without case sensitivity that we do have
@@ -298,7 +298,7 @@ def cleanup_flat_entries(flat_model):
         # Get the correct casing for the type.
         elem["type"] = available_types[available_downcase_types.index(elem["type"].lower())]
 
-        if elem.has_key("enum") and not isinstance(elem["enum"], list):
+        if "enum" in elem and not isinstance(elem["enum"], list):
             raise VSpecError(elem["$file_name$"], elem["$line$"], "Enum is not an array.")
 
 
@@ -310,16 +310,16 @@ def cleanup_flat_entries(flat_model):
 def cleanup_deep_model(deep_model):
     # Traverse the flat list of the parsed specification
     # Is this an include element?
-    if deep_model.has_key("$file_name$"):
+    if "$file_name$" in deep_model:
         del deep_model["$file_name$"]
 
-    if deep_model.has_key("$line$"):
+    if "$line$" in deep_model:
         del deep_model["$line$"]
 
-    if deep_model.has_key("$prefix$"):
+    if "$prefix$" in deep_model:
         del deep_model["$prefix$"]
 
-    if deep_model.has_key("$name$"):
+    if "$name$" in deep_model:
         del deep_model['$name$']
 
     if (deep_model["type"] == "branch") or (deep_model["type"] == "rbranch"):
@@ -356,7 +356,7 @@ def expand_includes(flat_model, prefix, include_paths):
     # Traverse the flat list of the parsed specification
     for elem in flat_model:
         # Is this an include element?
-        if elem.has_key("$include$"):
+        if "$include$" in elem:
             include_elem = elem["$include$"]
             include_prefix = include_elem.get("prefix", "")
             # Append include prefix to our current prefix.
@@ -485,7 +485,7 @@ def find_branch(branch, name_list, index):
 
     children = branch["children"]
 
-    if not children.has_key(name_list[index]):
+    if name_list[index] not in children:
         raise VSpecError(branch.get("$file_name$","??"),
                          branch.get("$line$", "??"),
                          "Missing branch: {} in {}.".format(name_list[index],

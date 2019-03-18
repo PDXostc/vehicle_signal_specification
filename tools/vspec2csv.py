@@ -18,15 +18,15 @@ import getopt
 import csv
 
 def usage():
-    print "Usage:", sys.argv[0], "[-I include_dir] ... [-i prefix:id_file:start_id] vspec_file csv_file"
-    print "  -I include_dir              Add include directory to search for included vspec"
-    print "                              files. Can be used multiple timees."
-    print
-    print "  -i prefix:id_file:start_id  Add include directory to search for included vspec"
-    print "                              files. Can be used multiple timees."
-    print
-    print " vspec_file                   The vehicle specification file to parse."
-    print " csv_file                    The file to output the CSV data to."
+    print("Usage:", sys.argv[0], "[-I include_dir] ... [-i prefix:id_file:start_id] vspec_file csv_file")
+    print("  -I include_dir              Add include directory to search for included vspec")
+    print("                              files. Can be used multiple timees.")
+    print()
+    print("  -i prefix:id_file:start_id  Add include directory to search for included vspec")
+    print("                              files. Can be used multiple timees.")
+    print()
+    print(" vspec_file                   The vehicle specification file to parse.")
+    print(" csv_file                    The file to output the CSV data to.")
     sys.exit(255)
 
 def format_data(json_data):
@@ -41,30 +41,30 @@ def format_data(json_data):
     Sensor = '""'
     Actuator = '""'
 
-    if (json_data.has_key('id')):
+    if ('id' in json_data):
         Id = '"' + str(json_data['id']) + '"'
-    if (json_data.has_key('type')):
+    if ('type' in json_data):
         Type = '"' + json_data['type'] + '"'
-    if (json_data.has_key('datatype')):
+    if ('datatype' in json_data):
         DataType = '"' + json_data['datatype'] + '"'
-    if (json_data.has_key('unit')):
+    if ('unit' in json_data):
         Unit = '"' + json_data['unit'] + '"'
-    if (json_data.has_key('min')):
+    if ('min' in json_data):
         Min = '"' + str(json_data['min']) + '"'
-    if (json_data.has_key('max')):
+    if ('max' in json_data):
         Max = '"' + str(json_data['max']) + '"'
-    if (json_data.has_key('description')):
+    if ('description' in json_data):
         Desc = '"' + json_data['description'] + '"'
-    if (json_data.has_key('enum')):
+    if ('enum' in json_data):
         Enum = '"' + ' / '.join(json_data['enum']) + '"'
-    if (json_data.has_key('sensor')):
+    if ('sensor' in json_data):
         Sensor = '"' + str(json_data['sensor']) + '"'
-    if (json_data.has_key('actuator')):
+    if ('actuator' in json_data):
         Actuator = '"' + str(json_data['actuator']) + '"'
     return Id + ","+ Type + ","+ DataType + ","+ Unit + ","+ Min + ","+ Max + ","+ Desc + ","+ Enum + ","+ Sensor + ","+ Actuator
 
 def json2csv(json_data, file_out, parent_signal):
-    for k in json_data.keys():
+    for k in list(json_data.keys()):
         if (len(parent_signal) > 0):
             signal = parent_signal + "." + k
         else:
@@ -90,7 +90,7 @@ if __name__ == "__main__":
         elif o == "-i":
             id_spec = a.split(":")
             if len(id_spec) != 3:
-                print "ERROR: -i needs a 'prefix:id_file:start_id' argument."
+                print("ERROR: -i needs a 'prefix:id_file:start_id' argument.")
                 usage()
 
             [prefix, file_name, start_id] = id_spec
@@ -106,7 +106,7 @@ if __name__ == "__main__":
     try:
         tree = vspec.load(args[0], include_dirs)
     except vspec.VSpecError as e:
-        print "Error: {}".format(e)
+        print("Error: {}".format(e))
         exit(255)
 
     json2csv(tree, csv_out, "")
