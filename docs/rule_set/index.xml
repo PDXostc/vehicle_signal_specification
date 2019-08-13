@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Rule Set on Vehicle Signal Specification</title>
-    <link>https://genivi.github.io/vehicle_signal_specification/rule_set/</link>
+    <link>https://danielwilms.github.io/vehicle_signal_specification/rule_set/</link>
     <description>Recent content in Rule Set on Vehicle Signal Specification</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 04 Aug 2019 13:10:15 +0200</lastBuildDate>
     
-	<atom:link href="https://genivi.github.io/vehicle_signal_specification/rule_set/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://danielwilms.github.io/vehicle_signal_specification/rule_set/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Basic Rules</title>
-      <link>https://genivi.github.io/vehicle_signal_specification/rule_set/basics/</link>
+      <link>https://danielwilms.github.io/vehicle_signal_specification/rule_set/basics/</link>
       <pubDate>Sun, 04 Aug 2019 13:05:11 +0200</pubDate>
       
-      <guid>https://genivi.github.io/vehicle_signal_specification/rule_set/basics/</guid>
+      <guid>https://danielwilms.github.io/vehicle_signal_specification/rule_set/basics/</guid>
       <description>Specification format A domain specification is written as a flat YAML list, where each signal and branch is a self-contained YAML list element.
 The YAML list is a single file, called a vspec file.
 A vspec can, in addition to a YAML list, also contain include directives.
@@ -25,10 +25,10 @@ An include directive refers to another vspec file that is to replace the directi
     
     <item>
       <title>Branch Entry</title>
-      <link>https://genivi.github.io/vehicle_signal_specification/rule_set/branches/</link>
+      <link>https://danielwilms.github.io/vehicle_signal_specification/rule_set/branches/</link>
       <pubDate>Wed, 31 Jul 2019 15:27:36 +0200</pubDate>
       
-      <guid>https://genivi.github.io/vehicle_signal_specification/rule_set/branches/</guid>
+      <guid>https://danielwilms.github.io/vehicle_signal_specification/rule_set/branches/</guid>
       <description>A branch entry describes a tree branch (or node) containing other branches and signals.
 A branch entry example is given below:
 - Trunk: type: branch aggregate: true description: All signals related to the rear trunk  The following elements are defined:
@@ -38,10 +38,10 @@ The list element name defines the dot-notated signal name to the signal. Please 
     
     <item>
       <title>Resource Branch</title>
-      <link>https://genivi.github.io/vehicle_signal_specification/rule_set/resource_branch/</link>
+      <link>https://danielwilms.github.io/vehicle_signal_specification/rule_set/resource_branch/</link>
       <pubDate>Sun, 04 Aug 2019 13:10:15 +0200</pubDate>
       
-      <guid>https://genivi.github.io/vehicle_signal_specification/rule_set/resource_branch/</guid>
+      <guid>https://danielwilms.github.io/vehicle_signal_specification/rule_set/resource_branch/</guid>
       <description>A resource branch is an entity that can host only element nodes. A resorce branch is identified as an entry with its node type set to rbranch. It can host zero or more element nodes, and it contains the format definition of its element nodes. Besides the required fields type and description, are also the following.
  child-type
 An rbranch child must be of the generic type element, but it also has a uniquely specified part that can be referred to by the child type.</description>
@@ -49,10 +49,10 @@ An rbranch child must be of the generic type element, but it also has a uniquely
     
     <item>
       <title>Includes</title>
-      <link>https://genivi.github.io/vehicle_signal_specification/rule_set/includes/</link>
+      <link>https://danielwilms.github.io/vehicle_signal_specification/rule_set/includes/</link>
       <pubDate>Sun, 04 Aug 2019 12:59:44 +0200</pubDate>
       
-      <guid>https://genivi.github.io/vehicle_signal_specification/rule_set/includes/</guid>
+      <guid>https://danielwilms.github.io/vehicle_signal_specification/rule_set/includes/</guid>
       <description>An include directive in a vspec file will read the file it refers to and the contents of that file will be inserted into the current buffer in place of the include directive. The included file will, in its turn, be scanned for include directives to be replaced, effectively forming a tree of included files.
 See Fig 6 for an example of such a tree.
 Fig 6. Include directives</description>
@@ -60,10 +60,10 @@ Fig 6. Include directives</description>
     
     <item>
       <title>Private Branch</title>
-      <link>https://genivi.github.io/vehicle_signal_specification/rule_set/private_branch/</link>
+      <link>https://danielwilms.github.io/vehicle_signal_specification/rule_set/private_branch/</link>
       <pubDate>Sun, 04 Aug 2019 12:46:30 +0200</pubDate>
       
-      <guid>https://genivi.github.io/vehicle_signal_specification/rule_set/private_branch/</guid>
+      <guid>https://danielwilms.github.io/vehicle_signal_specification/rule_set/private_branch/</guid>
       <description>The private branch offers a way to clearly separate OEM specific definitions and the specification. It helps adapting the specification to the needs of the organisation.
 Extending and overriding Data Entries The core signal specification can be extended with additional signals through the use of private branches, as is shown in Fig 3.
 Fig 3. Extended signals

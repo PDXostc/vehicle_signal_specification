@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tools on Vehicle Signal Specification</title>
-    <link>https://genivi.github.io/vehicle_signal_specification/tools/</link>
+    <link>https://danielwilms.github.io/vehicle_signal_specification/tools/</link>
     <description>Recent content in Tools on Vehicle Signal Specification</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 04 Aug 2019 13:12:25 +0200</lastBuildDate>
     
-	<atom:link href="https://genivi.github.io/vehicle_signal_specification/tools/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://danielwilms.github.io/vehicle_signal_specification/tools/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Requirements</title>
-      <link>https://genivi.github.io/vehicle_signal_specification/tools/requirements/</link>
+      <link>https://danielwilms.github.io/vehicle_signal_specification/tools/requirements/</link>
       <pubDate>Sun, 04 Aug 2019 13:18:17 +0200</pubDate>
       
-      <guid>https://genivi.github.io/vehicle_signal_specification/tools/requirements/</guid>
+      <guid>https://danielwilms.github.io/vehicle_signal_specification/tools/requirements/</guid>
       <description> The tools for generating custom serialization from the specification are written in Python. Make sure that you have the python YAML parser, PyYAML, installed.
 INSTALL PYTHON YAML PARSER On ubuntu:
 sudo apt-get install python-yaml  On non-ubuntu systems, install from:
@@ -25,10 +25,10 @@ http://pyyaml.org/wiki/PyYAML  </description>
     
     <item>
       <title>Usage</title>
-      <link>https://genivi.github.io/vehicle_signal_specification/tools/usage/</link>
+      <link>https://danielwilms.github.io/vehicle_signal_specification/tools/usage/</link>
       <pubDate>Sun, 04 Aug 2019 13:21:34 +0200</pubDate>
       
-      <guid>https://genivi.github.io/vehicle_signal_specification/tools/usage/</guid>
+      <guid>https://danielwilms.github.io/vehicle_signal_specification/tools/usage/</guid>
       <description>After installing the dependencies, as described in the requirements, you can simply run:
 make  The results will be stored in vss_$VERSION.[xxx], where $VERSION is the contents of the VERSION file and xxx is the appropriate file extension for the type of output being produced. For example, the JSON version of the output will have a .json extension.
 Changes to files under the spec/ directory results in changes to the generated files, namely .</description>
@@ -36,10 +36,10 @@ Changes to files under the spec/ directory results in changes to the generated f
     
     <item>
       <title>VSS Documentation</title>
-      <link>https://genivi.github.io/vehicle_signal_specification/tools/vss_documentation/</link>
+      <link>https://danielwilms.github.io/vehicle_signal_specification/tools/vss_documentation/</link>
       <pubDate>Sun, 04 Aug 2019 13:21:34 +0200</pubDate>
       
-      <guid>https://genivi.github.io/vehicle_signal_specification/tools/vss_documentation/</guid>
+      <guid>https://danielwilms.github.io/vehicle_signal_specification/tools/vss_documentation/</guid>
       <description>The VSS documentation is realized with GitHub Pages. It is generated from the markdown files in the /documentation directory of this repositories. The static webpage is generated into the /docs directory so that it can be deployed straight from the repository.
 Dependencies The static page is generated with:
  HUGO Learn Theme  Please follow the documentation for installation and further questions around the framework.

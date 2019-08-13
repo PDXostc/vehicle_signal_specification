@@ -2,41 +2,41 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Introduction on Vehicle Signal Specification</title>
-    <link>https://genivi.github.io/vehicle_signal_specification/introduction/</link>
+    <link>https://danielwilms.github.io/vehicle_signal_specification/introduction/</link>
     <description>Recent content in Introduction on Vehicle Signal Specification</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 31 Jul 2019 15:22:34 +0200</lastBuildDate>
     
-	<atom:link href="https://genivi.github.io/vehicle_signal_specification/introduction/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://danielwilms.github.io/vehicle_signal_specification/introduction/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Overview</title>
-      <link>https://genivi.github.io/vehicle_signal_specification/introduction/overview/</link>
+      <link>https://danielwilms.github.io/vehicle_signal_specification/introduction/overview/</link>
       <pubDate>Tue, 30 Jul 2019 14:46:01 +0200</pubDate>
       
-      <guid>https://genivi.github.io/vehicle_signal_specification/introduction/overview/</guid>
+      <guid>https://danielwilms.github.io/vehicle_signal_specification/introduction/overview/</guid>
       <description>What is VSS? The Vehicle Signal Specification introduces a domain taxonomy for vehicle signals. It can be used as standard in automotive applications to communicate information around the vehicle, which is semantically well defined. It focuses on vehicle signals, in the sense of classical sensors and actuators with the raw data communicated over vehicle buses and data which is more commonly associated with the infotainment system alike.
 A standardized vehicle data specification allows an industry actor to use a common naming space for communication and, ultimately, abstracts underlying vehicle implementation details.</description>
     </item>
     
     <item>
       <title>Taxonomies</title>
-      <link>https://genivi.github.io/vehicle_signal_specification/introduction/taxonomy/</link>
+      <link>https://danielwilms.github.io/vehicle_signal_specification/introduction/taxonomy/</link>
       <pubDate>Wed, 31 Jul 2019 12:11:31 +0200</pubDate>
       
-      <guid>https://genivi.github.io/vehicle_signal_specification/introduction/taxonomy/</guid>
+      <guid>https://danielwilms.github.io/vehicle_signal_specification/introduction/taxonomy/</guid>
       <description>The figure below explains the idea of a taxonomy as bridge between human and machine understanding of data. It is important to focus on a specific domain to get common understanding and acceptance. The link between two or more domain taxonomies can be seen as second step.
 Components of a domain taxonomy A domain taxonomy, like VSS, consists of three important components, which will be discussed in detail in this documentation:</description>
     </item>
     
     <item>
       <title>Quickstart</title>
-      <link>https://genivi.github.io/vehicle_signal_specification/introduction/quickstart/</link>
+      <link>https://danielwilms.github.io/vehicle_signal_specification/introduction/quickstart/</link>
       <pubDate>Wed, 31 Jul 2019 15:22:34 +0200</pubDate>
       
-      <guid>https://genivi.github.io/vehicle_signal_specification/introduction/quickstart/</guid>
+      <guid>https://danielwilms.github.io/vehicle_signal_specification/introduction/quickstart/</guid>
       <description>A serialization of the data definition of the vehicle signal specification is checked in as vss_$VERSION.json, where $VERSION is the content of the VERSION file.
 A web-based JSON viewer can be used to view the current version.
 Click here</description>
