@@ -28,8 +28,12 @@ class VSpecError(Exception):
 # Manager of all SignalUUID instances.
 #
 class SignalUUIDManager:
+    NAMESPACE = "vehicle_signal_specification"
+    
     def __init__(self):
         self.signal_uuid_db_set = {}
+        self.namespace_uuid = uuid.uuid5(uuid.NAMESPACE_OID, self.NAMESPACE)
+
 
     # Process a command line option with the format
     #  [prefix]:filename
@@ -86,6 +90,17 @@ class SignalUUIDManager:
 
         return signal_name[0:last_period]
 
+    # Return the namespace UUID
+    #
+    # Returns the namespace UUID5 computed on instantiaton of the class.
+    # If hex = True the UUID is returned as hex number rather than the UUID
+    # string.
+    #
+    def get_namespace_uuid(self, hex=False):
+        if hex:
+            return self.namespace_uuid.hex
+        else:
+            return self.namespace_uuid
 
     # Locate and return an existing signal ID, or create and return a new one.
     #
@@ -105,24 +120,11 @@ class SignalUUIDManager:
             print("Could not find UUID DB for signal {}".format(signal_name))
             sys.exit(255)
 
-        parent = self.parent_signal(signal_name)
-
         try:
             return uuid_db.db[signal_name]
         except:
-            # Nohting in the DB
-
-            # If we have no parent, then we need to generate a new root UUID.
-            if parent == "":
-                print("Generating new root UUID")
-                uuid_val = uuid.uuid1().hex
-                uuid_db.db[signal_name] = uuid_val
-                return uuid_val
-
-            # Generate a new UUID, using our parent's UUID as namespace for UUID v5.
-            parent_uuid = self.get_or_assign_signal_uuid(parent)
-            uuid_val = uuid.uuid5(uuid.UUID(hex=parent_uuid), signal_name).hex
-
+            # Generate a new UUID, using the class namespace for UUID v5.
+            uuid_val = uuid.uuid5(self.namespace_uuid, signal_name).hex
             uuid_db.db[signal_name] = uuid_val
             return uuid_val
 
