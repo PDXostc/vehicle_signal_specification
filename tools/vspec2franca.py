@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 #
 # (C) 2016 Jaguar Land Rover

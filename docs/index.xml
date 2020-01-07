@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vehicle Signal Specification</title>
+    <link>https://genivi.github.io/vehicle_signal_specification/</link>
+    <description>Recent content on Vehicle Signal Specification</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 04 Aug 2019 13:21:34 +0200</lastBuildDate>
+    
+	<atom:link href="https://genivi.github.io/vehicle_signal_specification/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Requirements</title>
+      <link>https://genivi.github.io/vehicle_signal_specification/tools/requirements/</link>
+      <pubDate>Sun, 04 Aug 2019 13:18:17 +0200</pubDate>
+      
+      <guid>https://genivi.github.io/vehicle_signal_specification/tools/requirements/</guid>
+      <description> The tools for generating custom serialization from the specification are written in Python. Make sure that you have the python YAML parser, PyYAML, installed.
+INSTALL PYTHON YAML PARSER On ubuntu:
+sudo apt-get install python-yaml  On non-ubuntu systems, install from:
+http://pyyaml.org/wiki/PyYAML  </description>
+    </item>
+    
+    <item>
+      <title>Basic Rules</title>
+      <link>https://genivi.github.io/vehicle_signal_specification/rule_set/basics/</link>
+      <pubDate>Sun, 04 Aug 2019 13:05:11 +0200</pubDate>
+      
+      <guid>https://genivi.github.io/vehicle_signal_specification/rule_set/basics/</guid>
+      <description>Specification format A domain specification is written as a flat YAML list, where each signal and branch is a self-contained YAML list element.
+The YAML list is a single file, called a vspec file.
+A vspec can, in addition to a YAML list, also contain include directives.
+An include directive refers to another vspec file that is to replace the directive, much like #include in C/C++. Please note that, from a YAML perspective, the include directive is just another comment.</description>
+    </item>
+    
+    <item>
+      <title>Data Types</title>
+      <link>https://genivi.github.io/vehicle_signal_specification/rule_set/data_entry/data_types/</link>
+      <pubDate>Sun, 04 Aug 2019 11:11:48 +0200</pubDate>
+      
+      <guid>https://genivi.github.io/vehicle_signal_specification/rule_set/data_entry/data_types/</guid>
+      <description>Each data entry specifies a datatype from the following set (from FrancaIDL):
+   Name Type Min Max     UInt8 unsigned 8-bit integer 0 255   Int8 signed 8-bit integer -128 127   UInt16 unsigned 16-bit integer 0 65535   Int16 signed 16-bit integer -32768 32767   UInt32 unsigned 32-bit integer 0 4294967295   Int32 signed 32-bit integer -2147483648 2147483647   UInt64 unsigned 64-bit integer 0 2^64   Int64 signed 64-bit integer -2^63 2^63 - 1   Boolean boolean value 0/false 1/true   Float floating point number -3.</description>
+    </item>
+    
+    <item>
+      <title>Branch Entry</title>
+      <link>https://genivi.github.io/vehicle_signal_specification/rule_set/branches/</link>
+      <pubDate>Wed, 31 Jul 2019 15:27:36 +0200</pubDate>
+      
+      <guid>https://genivi.github.io/vehicle_signal_specification/rule_set/branches/</guid>
+      <description>A branch entry describes a tree branch (or node) containing other branches and signals.
+A branch entry example is given below:
+- Trunk: type: branch aggregate: true description: All signals related to the rear trunk  The following elements are defined:
+ Body.Trunk
+The list element name defines the dot-notated signal name to the signal. Please note that all parental branches included in the name must be defined as well.</description>
+    </item>
+    
+    <item>
+      <title>Overview</title>
+      <link>https://genivi.github.io/vehicle_signal_specification/introduction/overview/</link>
+      <pubDate>Tue, 30 Jul 2019 14:46:01 +0200</pubDate>
+      
+      <guid>https://genivi.github.io/vehicle_signal_specification/introduction/overview/</guid>
+      <description>What is VSS? The Vehicle Signal Specification introduces a domain taxonomy for vehicle signals. It can be used as standard in automotive applications to communicate information around the vehicle, which is semantically well defined. It focuses on vehicle signals, in the sense of classical sensors and actuators with the raw data communicated over vehicle buses and data which is more commonly associated with the infotainment system alike.
+A standardized vehicle data specification allows an industry actor to use a common naming space for communication and, ultimately, abstracts underlying vehicle implementation details.</description>
+    </item>
+    
+    <item>
+      <title>Usage</title>
+      <link>https://genivi.github.io/vehicle_signal_specification/tools/usage/</link>
+      <pubDate>Sun, 04 Aug 2019 13:21:34 +0200</pubDate>
+      
+      <guid>https://genivi.github.io/vehicle_signal_specification/tools/usage/</guid>
+      <description>After installing the dependencies, as described in the requirements, you can simply run:
+make  The results will be stored in vss_$VERSION.[xxx], where $VERSION is the contents of the VERSION file and xxx is the appropriate file extension for the type of output being produced. For example, the JSON version of the output will have a .json extension.
+Changes to files under the spec/ directory results in changes to the generated files, namely .</description>
+    </item>
+    
+    <item>
+      <title>Data Unit Types</title>
+      <link>https://genivi.github.io/vehicle_signal_specification/rule_set/data_entry/data_unit_types/</link>
+      <pubDate>Sun, 04 Aug 2019 12:36:12 +0200</pubDate>
+      
+      <guid>https://genivi.github.io/vehicle_signal_specification/rule_set/data_entry/data_unit_types/</guid>
+      <description>A signal can optionally specify a unit of measurement from the following set. This list composed with definition according to International Units (SI) and few automotive specific units: Specification, Wikipedia
+   Unit type Domain Description     km/h Speed Kilometers per hour   m/s Speed Meters per second   celsius Temperature Degrees Celsius   mbar Pressure millibar   pa Pressure Pascal   kpa Pressure Kilo-Pascal   percent Relation Percent   ratio Relation Ratio   lat Position Decimal latitude   lon Position Decimal longitude   inch Distance Inch   mm Distance Millimeter   m Distance Meter   km Distance Kilometer   rpm Frequency Rotations per minute   Hz Frequency Frequency   W Power Watt   kW Power Kilowatt   kWh Power Kilowatt hours   ms Time Milliseconds   s Time Seconds   min Time Minutes   h Time Hours   g Weight Grams   kg Weight Kilograms   g/s Flow Grams per second   l/h Flow Liters per hour   m/s2 Acceleration Acceleration in meters per second squared   cm/s2 Acceleration Acceleration in centimeters per second squared   N Force Newton   Nm Force Torque   l Volume Liter   ml Volume Milliliter   degree Angle Angle in degrees   degrees/s Angular Speed Angular speed in degrees/s   l/100km Consumption Liters per 100 km   ml/100km Consumption Milliliters per 100 km   V Electrical Potential difference in volt   A Electrical Current in amperes   &amp;hellip; &amp;hellip; &amp;hellip;    </description>
+    </item>
+    
+    <item>
+      <title>News</title>
+      <link>https://genivi.github.io/vehicle_signal_specification/news/</link>
+      <pubDate>Wed, 31 Jul 2019 12:11:31 +0200</pubDate>
+      
+      <guid>https://genivi.github.io/vehicle_signal_specification/news/</guid>
+      <description>Updated Documentation Up to now the documentation was realized as readme within the repository. Now it has moved to GitHub Pages. If you find an issue feel free raise an issue or contribute.</description>
+    </item>
+    
+    <item>
+      <title>Taxonomies</title>
+      <link>https://genivi.github.io/vehicle_signal_specification/introduction/taxonomy/</link>
+      <pubDate>Wed, 31 Jul 2019 12:11:31 +0200</pubDate>
+      
+      <guid>https://genivi.github.io/vehicle_signal_specification/introduction/taxonomy/</guid>
+      <description>The figure below explains the idea of a taxonomy as bridge between human and machine understanding of data. It is important to focus on a specific domain to get common understanding and acceptance. The link between two or more domain taxonomies can be seen as second step.
+Components of a domain taxonomy A domain taxonomy, like VSS, consists of three important components, which will be discussed in detail in this documentation:</description>
+    </item>
+    
+    <item>
+      <title>VSS Documentation</title>
+      <link>https://genivi.github.io/vehicle_signal_specification/tools/vss_documentation/</link>
+      <pubDate>Sun, 04 Aug 2019 13:21:34 +0200</pubDate>
+      
+      <guid>https://genivi.github.io/vehicle_signal_specification/tools/vss_documentation/</guid>
+      <description>The VSS documentation is realized with GitHub Pages. It is generated from the markdown files in the /documentation directory of this repositories. The static webpage is generated into the /docs directory so that it can be deployed straight from the repository.
+Dependencies The static page is generated with:
+ HUGO Learn Theme  Please follow the documentation for installation and further questions around the framework.
+Run the documentation server locally Once hugo is installed please follow the following steps:</description>
+    </item>
+    
+    <item>
+      <title>Sensors &amp; Actuators</title>
+      <link>https://genivi.github.io/vehicle_signal_specification/rule_set/data_entry/sensor_actuator/</link>
+      <pubDate>Sun, 04 Aug 2019 12:37:03 +0200</pubDate>
+      
+      <guid>https://genivi.github.io/vehicle_signal_specification/rule_set/data_entry/sensor_actuator/</guid>
+      <description>A data entry defines a single sensor/actuator and its members. A data entry example is given below:
+- Speed: type: sensor datatype: uint16 unit: km/h min: 0 max: 300 description: The vehicle speed, as measured by the drivetrain.   Drivetrain.Transmission.Speed
+Defines the dot-notated name of the data entry. Please note that all parental branches included in the name must be defined as well.
+ type
+Defines the type of the node.</description>
+    </item>
+    
+    <item>
+      <title>Quickstart</title>
+      <link>https://genivi.github.io/vehicle_signal_specification/introduction/quickstart/</link>
+      <pubDate>Wed, 31 Jul 2019 15:22:34 +0200</pubDate>
+      
+      <guid>https://genivi.github.io/vehicle_signal_specification/introduction/quickstart/</guid>
+      <description>A serialization of the data definition of the vehicle signal specification is checked in as vss_$VERSION.json, where $VERSION is the content of the VERSION file.
+A web-based JSON viewer can be used to view the current version.
+Click here</description>
+    </item>
+    
+    <item>
+      <title>Enumerated Sensors &amp; Actuators</title>
+      <link>https://genivi.github.io/vehicle_signal_specification/rule_set/data_entry/enum_sensor_actuator/</link>
+      <pubDate>Sun, 04 Aug 2019 12:37:12 +0200</pubDate>
+      
+      <guid>https://genivi.github.io/vehicle_signal_specification/rule_set/data_entry/enum_sensor_actuator/</guid>
+      <description>A data entry can optionally be enumerated, allowing it to be assigned a value from a specified set of values. An example of an enumerated sensor is given below:
+- Chassis.Transmission.Gear: type: sensor datatype: uint16 enum: [ -1, 1, 2, 3, 4, 5, 6, 7, 8 ] description: The selected gear. -1 is reverse.  An enumerated signal entry has no min, max, or unit element.
+The enum element is an array of values, all of which must be specified in the emum list.</description>
+    </item>
+    
+    <item>
+      <title>Attributes</title>
+      <link>https://genivi.github.io/vehicle_signal_specification/rule_set/data_entry/attributes/</link>
+      <pubDate>Sun, 04 Aug 2019 12:37:31 +0200</pubDate>
+      
+      <guid>https://genivi.github.io/vehicle_signal_specification/rule_set/data_entry/attributes/</guid>
+      <description>An attribute is a signal with a default value, specified by its value member.
+The value set for an attribute by a vspec file can be read by a consumer without the need of having the value sent out by a publisher. The attribute, in effect, is configuration data that can be specified when the vspec file is installed.
+Below is an example of a complete attribute describing engine power</description>
+    </item>
+    
+    <item>
+      <title>Resource Branch</title>
+      <link>https://genivi.github.io/vehicle_signal_specification/rule_set/resource_branch/</link>
+      <pubDate>Sun, 04 Aug 2019 13:10:15 +0200</pubDate>
+      
+      <guid>https://genivi.github.io/vehicle_signal_specification/rule_set/resource_branch/</guid>
+      <description>A resource branch is an entity that can host only element nodes. A resorce branch is identified as an entry with its node type set to rbranch. It can host zero or more element nodes, and it contains the format definition of its element nodes. Besides the required fields type and description, are also the following.
+ child-type
+An rbranch child must be of the generic type element, but it also has a uniquely specified part that can be referred to by the child type.</description>
+    </item>
+    
+    <item>
+      <title>Includes</title>
+      <link>https://genivi.github.io/vehicle_signal_specification/rule_set/includes/</link>
+      <pubDate>Sun, 04 Aug 2019 12:59:44 +0200</pubDate>
+      
+      <guid>https://genivi.github.io/vehicle_signal_specification/rule_set/includes/</guid>
+      <description>An include directive in a vspec file will read the file it refers to and the contents of that file will be inserted into the current buffer in place of the include directive. The included file will, in its turn, be scanned for include directives to be replaced, effectively forming a tree of included files.
+See Fig 6 for an example of such a tree.
+Fig 6. Include directives</description>
+    </item>
+    
+    <item>
+      <title>Private Branch</title>
+      <link>https://genivi.github.io/vehicle_signal_specification/rule_set/private_branch/</link>
+      <pubDate>Sun, 04 Aug 2019 12:46:30 +0200</pubDate>
+      
+      <guid>https://genivi.github.io/vehicle_signal_specification/rule_set/private_branch/</guid>
+      <description>The private branch offers a way to clearly separate OEM specific definitions and the specification. It helps adapting the specification to the needs of the organisation.
+Extending and overriding Data Entries The core signal specification can be extended with additional signals through the use of private branches, as is shown in Fig 3.
+Fig 3. Extended signals
+In this case the core signal specification, vss_23.vspec is included by a OEM-specific master vspec file that adds the two proprietary signals Private.</description>
+    </item>
+    
+  </channel>
+</rss>

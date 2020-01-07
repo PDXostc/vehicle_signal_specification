@@ -1,0 +1,1597 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.58.3" />
+    <meta name="description" content="">
+
+
+    <link rel="shortcut icon" href="/vehicle_signal_specification/images/fav.png" type="image/x-icon" />
+
+    <title>Private Branch :: Vehicle Signal Specification</title>
+
+    
+    <link href="/vehicle_signal_specification/css/nucleus.css?1569582635" rel="stylesheet">
+    <link href="/vehicle_signal_specification/css/fontawesome-all.min.css?1569582635" rel="stylesheet">
+    <link href="/vehicle_signal_specification/css/hybrid.css?1569582635" rel="stylesheet">
+    <link href="/vehicle_signal_specification/css/featherlight.min.css?1569582635" rel="stylesheet">
+    <link href="/vehicle_signal_specification/css/perfect-scrollbar.min.css?1569582635" rel="stylesheet">
+    <link href="/vehicle_signal_specification/css/auto-complete.css?1569582635" rel="stylesheet">
+    <link href="/vehicle_signal_specification/css/atom-one-dark-reasonable.css?1569582635" rel="stylesheet">
+    <link href="/vehicle_signal_specification/css/theme.css?1569582635" rel="stylesheet">
+    <link href="/vehicle_signal_specification/css/hugo-theme.css?1569582635" rel="stylesheet">
+    
+      <link href="/vehicle_signal_specification/css/theme-green.css?1569582635" rel="stylesheet">
+    
+
+    <script src="/vehicle_signal_specification/js/jquery-3.3.1.min.js?1569582635"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+        :not(pre) > code + span.copy-to-clipboard {
+            display: none;
+        }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/vehicle_signal_specification/rule_set/private_branch/">
+    <nav id="sidebar" class="">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="https://genivi.github.io/vehicle_signal_specification/">
+  <img src="/vehicle_signal_specification/images/vss.png">
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/vehicle_signal_specification/js/lunr.min.js?1569582635"></script>
+<script type="text/javascript" src="/vehicle_signal_specification/js/auto-complete.js?1569582635"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/genivi.github.io\/vehicle_signal_specification\/";
+    
+</script>
+<script type="text/javascript" src="/vehicle_signal_specification/js/search.js?1569582635"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/vehicle_signal_specification/introduction/" title="Introduction" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vehicle_signal_specification/introduction/">
+          Introduction
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/vehicle_signal_specification/introduction/overview/" title="Overview" class="dd-item ">
+        <a href="/vehicle_signal_specification/introduction/overview/">
+        Overview
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/vehicle_signal_specification/introduction/taxonomy/" title="Taxonomies" class="dd-item ">
+        <a href="/vehicle_signal_specification/introduction/taxonomy/">
+        Taxonomies
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/vehicle_signal_specification/introduction/quickstart/" title="Quickstart" class="dd-item ">
+        <a href="/vehicle_signal_specification/introduction/quickstart/">
+        Quickstart
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/vehicle_signal_specification/rule_set/" title="Rule Set" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/vehicle_signal_specification/rule_set/">
+          Rule Set
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/vehicle_signal_specification/rule_set/basics/" title="Basic Rules" class="dd-item ">
+        <a href="/vehicle_signal_specification/rule_set/basics/">
+        Basic Rules
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/vehicle_signal_specification/rule_set/branches/" title="Branch Entry" class="dd-item ">
+        <a href="/vehicle_signal_specification/rule_set/branches/">
+        Branch Entry
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+    <li data-nav-id="/vehicle_signal_specification/rule_set/data_entry/" title="Data Entry" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vehicle_signal_specification/rule_set/data_entry/">
+          Data Entry
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/vehicle_signal_specification/rule_set/data_entry/data_types/" title="Data Types" class="dd-item ">
+        <a href="/vehicle_signal_specification/rule_set/data_entry/data_types/">
+        Data Types
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/vehicle_signal_specification/rule_set/data_entry/data_unit_types/" title="Data Unit Types" class="dd-item ">
+        <a href="/vehicle_signal_specification/rule_set/data_entry/data_unit_types/">
+        Data Unit Types
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/vehicle_signal_specification/rule_set/data_entry/sensor_actuator/" title="Sensors &amp; Actuators" class="dd-item ">
+        <a href="/vehicle_signal_specification/rule_set/data_entry/sensor_actuator/">
+        Sensors &amp; Actuators
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/vehicle_signal_specification/rule_set/data_entry/enum_sensor_actuator/" title="Enumerated Sensors &amp; Actuators" class="dd-item ">
+        <a href="/vehicle_signal_specification/rule_set/data_entry/enum_sensor_actuator/">
+        Enumerated Sensors &amp; Actuators
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/vehicle_signal_specification/rule_set/data_entry/attributes/" title="Attributes" class="dd-item ">
+        <a href="/vehicle_signal_specification/rule_set/data_entry/attributes/">
+        Attributes
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/vehicle_signal_specification/rule_set/resource_branch/" title="Resource Branch" class="dd-item ">
+        <a href="/vehicle_signal_specification/rule_set/resource_branch/">
+        Resource Branch
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/vehicle_signal_specification/rule_set/includes/" title="Includes" class="dd-item ">
+        <a href="/vehicle_signal_specification/rule_set/includes/">
+        Includes
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/vehicle_signal_specification/rule_set/private_branch/" title="Private Branch" class="dd-item active">
+        <a href="/vehicle_signal_specification/rule_set/private_branch/">
+        Private Branch
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/vehicle_signal_specification/tools/" title="Tools" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vehicle_signal_specification/tools/">
+          Tools
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/vehicle_signal_specification/tools/requirements/" title="Requirements" class="dd-item ">
+        <a href="/vehicle_signal_specification/tools/requirements/">
+        Requirements
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/vehicle_signal_specification/tools/usage/" title="Usage" class="dd-item ">
+        <a href="/vehicle_signal_specification/tools/usage/">
+        Usage
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/vehicle_signal_specification/tools/vss_documentation/" title="VSS Documentation" class="dd-item ">
+        <a href="/vehicle_signal_specification/tools/vss_documentation/">
+        VSS Documentation
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://github.com/genivi/vehicle_signal_specification"><i class='fab fa-github'></i> Github repo</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://genivi.github.io/vehicle_signal_specification/news"><i class='fas fa-newspaper'></i> News</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="footer">
+      <center>
+    
+    <a class="github-button" href="https://github.com/GENIVI/vehicle_signal_specification/archive/master.zip" data-icon="octicon-cloud-download" aria-label="Download genivi/vehicle_signal_specification on GitHub">Download</a>
+
+    
+    <a class="github-button" href="https://github.com/GENIVI/vehicle_signal_specification" data-icon="octicon-star" data-show-count="true" aria-label="Star genivi/vehicle_signal_specification on GitHub">Star</a>
+
+    
+    <a class="github-button" href="https://github.com/GENIVI/vehicle_signal_specification/fork" data-icon="octicon-repo-forked" data-show-count="true" aria-label="Fork matcornic/hugo-theme-learn on GitHub">Fork</a>
+
+    Latest Released Version: 1.0
+</center>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                  
+                  
+                  
+                  <div id="top-github-link">
+                    <a class="github-link" title='Edit this page' href="https://github.com/genivi/vehicle_signal_specification/edit/master/tools/documentation/content/rule_set/private_branch.md" target="blank">
+                      <i class="fas fa-code-branch"></i>
+                      <span id="top-github-link-text">Edit this page</span>
+                    </a>
+                  </div>
+                  
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/vehicle_signal_specification/'>Vehicle Signal Specification</a> > <a href='/vehicle_signal_specification/rule_set/'>Rule Set</a> > Private Branch
+          
+         
+          
+         
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#extending-and-overriding-data-entries">Extending and overriding Data Entries</a></li>
+<li><a href="#declaring-vs-defining-attributes">DECLARING VS. DEFINING ATTRIBUTES</a></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Private Branch
+            </h1>
+          
+
+        
+
+
+
+
+
+<p>The private branch offers a way to clearly separate OEM specific definitions
+and the specification. It helps adapting the specification to the needs of the
+organisation.</p>
+
+<h2 id="extending-and-overriding-data-entries">Extending and overriding Data Entries</h2>
+
+<p>The core signal specification can be extended with additional signals through the
+use of private branches, as is shown in Fig 3.</p>
+
+<p><img src="/vehicle_signal_specification/images/private_extensions.png" alt="Signal Extension" /><br>
+<em>Fig 3. Extended signals</em></p>
+
+<p>In this case the core signal specification, <code>vss_23.vspec</code> is
+included by a OEM-specific master vspec file that adds the two
+proprietary signals <code>Private.OEM_X.AntiGravity.Power</code>
+and <code>Private.OEM_X.Teleport.TargetLoc</code>.</p>
+
+<p>Signals can, in a similar manner, be overridden and replaced with a new definition,
+as is shown in Fig 4.</p>
+
+<p><img src="/vehicle_signal_specification/images/signal_override.png" alt="Signal Extension" /><br>
+<em>Fig 4. Overridden signals</em></p>
+
+<p>In this case, the <code>GearChangeMode</code> signal provided by the core
+specification lacks an additional semi-automatic mode featured by an
+OEM-specific vehicle.</p>
+
+<p>By having an OEM master spec file, <code>oem_x_proprietary.vspec</code>
+include the core spec file, <code>vss_23.vspec</code> and then overriding
+the original <code>GearChangeMode</code> signal and add the <code>semi-auto</code>
+element as an enumerated value</p>
+
+<h2 id="declaring-vs-defining-attributes">DECLARING VS. DEFINING ATTRIBUTES</h2>
+
+<p>The signal extension mechanism described above is also used to declare
+an attribute in one vspec file and define it in another.  This is used
+to setup a attribute structure standard in the core specification that
+is to be defined on a per-deployment (vehicle) basis.</p>
+
+<p>An example is given in Fig 5.</p>
+
+<p><img src="/vehicle_signal_specification/images/attributes.png" alt="Attributes" /><br>
+<em>Fig 5. Declaring and defining attributes</em></p>
+
+<p>The <code>Attributes.Engine.Displacement</code> and <code>Attributes.Chassis.Weight</code> attributes
+are declare in the <code>vss_23.vspec</code> file with a default value of zero.</p>
+
+<p>A project/vehicle specific vspec file, <code>oem_x_proprietary.vspec</code>
+then overrides the attributes with the correct values.</p>
+
+
+<footer class=" footline" >
+	
+</footer>
+
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/vehicle_signal_specification/rule_set/data_entry/attributes/" title="Attributes"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/vehicle_signal_specification/rule_set/data_entry/" title="Data Entry" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/vehicle_signal_specification/js/clipboard.min.js?1569582635"></script>
+    <script src="/vehicle_signal_specification/js/perfect-scrollbar.min.js?1569582635"></script>
+    <script src="/vehicle_signal_specification/js/perfect-scrollbar.jquery.min.js?1569582635"></script>
+    <script src="/vehicle_signal_specification/js/jquery.sticky.js?1569582635"></script>
+    <script src="/vehicle_signal_specification/js/featherlight.min.js?1569582635"></script>
+    <script src="/vehicle_signal_specification/js/html5shiv-printshiv.min.js?1569582635"></script>
+    <script src="/vehicle_signal_specification/js/highlight.pack.js?1569582635"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/vehicle_signal_specification/js/modernizr.custom-3.6.0.js?1569582635"></script>
+    <script src="/vehicle_signal_specification/js/learn.js?1569582635"></script>
+    <script src="/vehicle_signal_specification/js/hugo-learn.js?1569582635"></script>
+
+    <link href="/vehicle_signal_specification/mermaid/mermaid.css?1569582635" rel="stylesheet" />
+    <script src="/vehicle_signal_specification/mermaid/mermaid.js?1569582635"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    
+
+  </body>
+</html>
+

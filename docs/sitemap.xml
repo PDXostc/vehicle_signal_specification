@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://genivi.github.io/vehicle_signal_specification/tools/requirements/</loc>
+    <lastmod>2019-08-04T13:18:17+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://genivi.github.io/vehicle_signal_specification/rule_set/basics/</loc>
+    <lastmod>2019-08-04T13:05:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://genivi.github.io/vehicle_signal_specification/rule_set/data_entry/data_types/</loc>
+    <lastmod>2019-08-04T11:11:48+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://genivi.github.io/vehicle_signal_specification/rule_set/branches/</loc>
+    <lastmod>2019-07-31T15:27:36+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://genivi.github.io/vehicle_signal_specification/introduction/</loc>
+    <lastmod>2019-07-31T15:22:34+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://genivi.github.io/vehicle_signal_specification/introduction/overview/</loc>
+    <lastmod>2019-07-30T14:46:01+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://genivi.github.io/vehicle_signal_specification/tools/usage/</loc>
+    <lastmod>2019-08-04T13:21:34+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://genivi.github.io/vehicle_signal_specification/rule_set/</loc>
+    <lastmod>2019-08-04T13:10:15+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://genivi.github.io/vehicle_signal_specification/rule_set/data_entry/data_unit_types/</loc>
+    <lastmod>2019-08-04T12:36:12+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://genivi.github.io/vehicle_signal_specification/rule_set/data_entry/</loc>
+    <lastmod>2019-08-04T11:11:30+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://genivi.github.io/vehicle_signal_specification/news/</loc>
+    <lastmod>2019-07-31T12:11:31+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://genivi.github.io/vehicle_signal_specification/introduction/taxonomy/</loc>
+    <lastmod>2019-07-31T12:11:31+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://genivi.github.io/vehicle_signal_specification/tools/vss_documentation/</loc>
+    <lastmod>2019-08-04T13:21:34+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://genivi.github.io/vehicle_signal_specification/rule_set/data_entry/sensor_actuator/</loc>
+    <lastmod>2019-08-04T12:37:03+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://genivi.github.io/vehicle_signal_specification/introduction/quickstart/</loc>
+    <lastmod>2019-07-31T15:22:34+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://genivi.github.io/vehicle_signal_specification/rule_set/data_entry/enum_sensor_actuator/</loc>
+    <lastmod>2019-08-04T12:37:12+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://genivi.github.io/vehicle_signal_specification/rule_set/data_entry/attributes/</loc>
+    <lastmod>2019-08-04T12:37:31+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://genivi.github.io/vehicle_signal_specification/rule_set/resource_branch/</loc>
+    <lastmod>2019-08-04T13:10:15+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://genivi.github.io/vehicle_signal_specification/rule_set/includes/</loc>
+    <lastmod>2019-08-04T12:59:44+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://genivi.github.io/vehicle_signal_specification/rule_set/private_branch/</loc>
+    <lastmod>2019-08-04T12:46:30+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://genivi.github.io/vehicle_signal_specification/</loc>
+    <lastmod>2019-08-04T13:21:34+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://genivi.github.io/vehicle_signal_specification/tools/</loc>
+    <lastmod>2019-08-04T13:12:25+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://genivi.github.io/vehicle_signal_specification/categories/</loc>
+  </url>
+  
+  <url>
+    <loc>https://genivi.github.io/vehicle_signal_specification/tags/</loc>
+  </url>
+  
+</urlset>
