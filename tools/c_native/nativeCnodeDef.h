@@ -1,4 +1,5 @@
 /**
+* (C) 2020 Geotab Inc
 * (C) 2018 Volvo Cars
 *
 * All files and artifacts in this repository are licensed under the
@@ -60,71 +61,10 @@ typedef struct node_t {
 } node_t;
 
 typedef struct {
-    char propName[MAXNAMELEN];
-    char propDescr[MAXPROPDESCRLEN];
-    nodeTypes_t propType;  // branch, rbranch, resource not allowed
-    char propFormat[MAXPROPFORMATLEN];
-    char propUnit[MAXPROPUNITLEN];
-    char propValue[MAXPROPVALUELEN];
-} propertyDefinition_t;
-
-typedef struct element_node_t { // only fixed part defined here
-    int nameLen;
-    char* name;
-    nodeTypes_t type;   // must be element
-    int uuidLen;
-    char* uuid;
-    int descrLen;
-    char* description;
-    int children;      // must be zero
-    struct node_t* parent;
-    struct node_t** child;  // not used, so set to NULL
-    void* uniqueObject;
-} element_node_t;
-
-typedef struct rbranch_node_t {
-    int nameLen;
-    char* name;
-    nodeTypes_t type;   // must be rbranch
-    int uuidLen;
-    char* uuid;
-    int descrLen;
-    char* description;
-    int children;
-    struct node_t* parent;
-    struct element_node_t** child;
-    int childTypeLen;
-    char* childType;
-    int numOfProperties;
-    propertyDefinition_t* propertyDefinition;
-} rbranch_node_t;
-
-typedef struct {
     int nameLen;
     nodeTypes_t type;
     int uuidLen;
     int descrLen;
     int children;
 } common_node_data_t;
-
-typedef struct {
-    int objectType;
-} resourceObject_t;  // generic type only used for generic access to the object type
-
-typedef struct {
-    int objectType;  // this must be first element in any object struct declaration
-    char id[ELEMENT_STRING_MAXLEN];
-    char name[ELEMENT_STRING_MAXLEN];
-    char uri[ELEMENT_STRING_MAXLEN];
-    int numOfItems;
-    elementRef_t* items;
-} mediaCollectionObject_t;
-
-typedef struct {
-    int objectType;  // this must be first element in any object struct declaration
-    char id[ELEMENT_STRING_MAXLEN];
-    char name[ELEMENT_STRING_MAXLEN];
-    char uri[ELEMENT_STRING_MAXLEN];
-} mediaItemObject_t;
-
 

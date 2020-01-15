@@ -22,4 +22,4 @@ Double     | double precision floating point number | -1.7e -300 | 1.7e 300
 String     | character string           | n/a  | n/a
 ByteBuffer | buffer of bytes (aka BLOB) | n/a | n/a
 
-Datatypes are not specified for ```branch```or ```rbranch```
+Datatypes are not specified for ```branch```

@@ -1,4 +1,5 @@
 /**
+* (C) 2020 Geotab Inc
 * (C) 2018 Volvo Cars
 *
 * All files and artifacts in this repository are licensed under the
@@ -9,10 +10,9 @@
 **/
 
 #define MAXENUMELEMENTLEN 20
-typedef enum { INT8, UINT8, INT16, UINT16, INT32, UINT32, DOUBLE, FLOAT, BOOLEAN, STRING, SENSOR, ACTUATOR, STREAM, ATTRIBUTE, BRANCH, RBRANCH, ELEMENT } nodeTypes_t;
+typedef enum { INT8, UINT8, INT16, UINT16, INT32, UINT32, DOUBLE, FLOAT, BOOLEAN, STRING, SENSOR, ACTUATOR, STREAM, ATTRIBUTE, BRANCH } nodeTypes_t;
 typedef char enum_t[MAXENUMELEMENTLEN];
 
-typedef enum { MEDIACOLLECTION, MEDIAITEM } objectTypes_t;
 #define ELEMENT_STRING_MAXLEN 125
 typedef char elementRef_t[ELEMENT_STRING_MAXLEN];
 
@@ -40,10 +40,6 @@ int getNumOfEnumElements(long nodeHandle);
 char* getEnumElement(long nodeHandle, int index);
 char* getUnit(long nodeHandle);
 char* getFunction(long nodeHandle);
-long getResource(long nodeHandle);
-int getObjectType(long resourceHandle);
-int getMediaCollectionNumOfItems(long resourceHandle);
-char* getMediaCollectionItemRef(long resourceHandle, int i);
 
 int VSSSearchNodes(char* searchPath, long rootNode, int maxFound, searchData_t* searchData, bool wildcardAllDepths);
 

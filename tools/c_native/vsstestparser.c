@@ -1,4 +1,5 @@
 /**
+* (C) 2020 Geotab Inc
 * (C) 2018 Volvo Cars
 *
 * All files and artifacts in this repository are licensed under the
@@ -52,10 +53,6 @@ char* getTypeName(nodeTypes_t type) {
             return "ATTRIBUTE";
         case BRANCH:
             return "BRANCH";
-        case RBRANCH:
-            return "RBRANCH";
-        case ELEMENT:
-            return "ELEMENT";
         default:
             printf("getTypeName: unknown type\n");
             return "unknown";
@@ -78,16 +75,6 @@ void showNodeData(long currentNode, int currentChild) {
         tmp = getFunction(currentNode);
         if (tmp != NULL)
             printf("Function = %s\n", tmp);
-        if (getType(currentNode) == ELEMENT) {
-            // as all objectdefinitions start with objectType, this is ok. But only for reading the objectType
-            uint32_t resourceHandle = getResource(currentNode); 
-            printf("Node object type=%d\n", getObjectType(resourceHandle));
-            if (getObjectType(resourceHandle) == MEDIACOLLECTION) {
-                for (int i = 0 ; i < getMediaCollectionNumOfItems(resourceHandle) ; i++) {
-                    printf("Items ref[%d]=%s\n", i, getMediaCollectionItemRef(resourceHandle, i));
-                }
-            }
-        }
 }
 
 int main(int argc, char** argv) {

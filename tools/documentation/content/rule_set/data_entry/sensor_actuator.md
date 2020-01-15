@@ -21,8 +21,8 @@ Defines the dot-notated name of the data entry. Please note that
 all parental branches included in the name must be defined as well.
 
 * **```type```**<br>
-Defines the type of the node. This can be ```branch```, ```rbranch```
-,```sensor```, ```actuator```, ```stream``` or attribute.
+Defines the type of the node. This can be ```branch```,
+```sensor```, ```actuator```, ```stream``` or attribute.
 
 
 * **```datatype```**<br>

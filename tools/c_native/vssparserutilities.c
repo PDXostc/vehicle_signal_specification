@@ -1,4 +1,5 @@
 /**
+* (C) 2020 Geotab Inc
 * (C) 2018 Volvo Cars
 *
 * All files and artifacts in this repository are licensed under the
@@ -77,38 +78,6 @@ void copyData(node_t* node, common_node_data_t* commonData, char* name, char* uu
     node->children = commonData->children;
 }
 
-int getObjectSize(objectTypes_t objectType) {
-    switch (objectType) {
-        case MEDIACOLLECTION:
-            return sizeof(mediaCollectionObject_t);
-        case MEDIAITEM:
-            return sizeof(mediaItemObject_t);
-    }
-    return -1;
-}
-
-void readUniqueObjectRefs(objectTypes_t objectType, void* uniqueObject) {
-    switch (objectType) {
-        case MEDIACOLLECTION:
-        {
-            mediaCollectionObject_t* mediaCollectionObject = (mediaCollectionObject_t*) uniqueObject;
-            mediaCollectionObject->items = (elementRef_t*) malloc(sizeof(elementRef_t)*mediaCollectionObject->numOfItems);
-            fread(mediaCollectionObject->items, sizeof(elementRef_t)*mediaCollectionObject->numOfItems, 1, treeFp);
-        }
-        break;
-        case MEDIAITEM:
-        {
-//            mediaItemObject_t* mediaItemObject = (mediaItemObject_t*) uniqueObject;
-//            mediaItemObject->items = (elementRef_t*) malloc(sizeof(elementRef_t)*mediaItemObject->numOfItems);
-//            fread(mediaItemObject->items, sizeof(elementRef_t)*mediaItemObject->numOfItems, 1, treeFp);
-        }
-        break;
-        default:
-            printf("readUniqueObjectRefs:unknown object type = %d\n", objectType);
-        break;
-    }
-}
-
 /*
   Data order on file: 
   - Common part
@@ -117,11 +86,6 @@ void readUniqueObjectRefs(objectTypes_t objectType, void* uniqueObject) {
   if (node_t)
     - node_t specific
 	* min/max/unit/enum
-  if (rbranch_node_t)
-    - rbranch specific
-	* childType/numOfProperties/Properties
-  if (element_node_t)
-    - specific according to parent child type (mapped to struct def)
 */
 struct node_t* traverseAndReadNode(struct node_t* parentPtr) {
 if (parentPtr != NULL)
@@ -138,79 +102,44 @@ if (parentPtr != NULL)
     readCommonPart(common_data, &name, &uuid, &descr);
     node_t* node = NULL;
 printf("Type=%d\n",common_data->type);
-    switch (common_data->type) {
-        case RBRANCH:
-        {
-            rbranch_node_t* node2 = (rbranch_node_t*) malloc(sizeof(rbranch_node_t));
-            node2->parent = parentPtr;
-            copyData((node_t*)node2, common_data, name, uuid, descr);
-            if (common_data->children > 0)
-                node2->child = (element_node_t**) malloc(sizeof(element_node_t**)*common_data->children);
-            fread(&(node2->childTypeLen), sizeof(int), 1, treeFp);
-            fread(&(node2->numOfProperties), sizeof(int), 1, treeFp);
-            if (node2->numOfProperties > 0) {
-                node2->propertyDefinition = (propertyDefinition_t*) malloc(sizeof(propertyDefinition_t)*node2->numOfProperties);
-                fread(node2->propertyDefinition, sizeof(propertyDefinition_t)*node2->numOfProperties, 1, treeFp);
-            }
-            node = (node_t*)node2;
-        }
-        break;
-        case ELEMENT:
-        {
-            element_node_t* node2 = (element_node_t*) malloc(sizeof(element_node_t));
-            node2->parent = parentPtr;
-            copyData((node_t*)node2, common_data, name, uuid, descr);
-            objectTypes_t objectType;
-            fread(&objectType, sizeof(int), 1, treeFp);
-            int objectSize = getObjectSize(objectType);
-            if (objectSize > 0) {
-                node2->uniqueObject = (void*) malloc(objectSize);
-                *((int*)node2->uniqueObject) = objectType;
-                fread(node2->uniqueObject+sizeof(int), objectSize-sizeof(int), 1, treeFp);
-                readUniqueObjectRefs(objectType, node2->uniqueObject);
-            }
-            node = (node_t*)node2;
-        }
-        break;
-        default:
-        {
-            node_t* node2 = (node_t*) malloc(sizeof(node_t));
-            node2->parent = parentPtr;
-            copyData((node_t*)node2, common_data, name, uuid, descr);
-            if (node2->children > 0)
-                node2->child = (node_t**) malloc(sizeof(node_t**)*node2->children);
-            fread(&(node2->datatype), sizeof(int), 1, treeFp);
-            fread(&(node2->min), sizeof(int), 1, treeFp);
-            fread(&(node2->max), sizeof(int), 1, treeFp);
-            fread(&(node2->unitLen), sizeof(int), 1, treeFp);
-            node2->unit = NULL;
-            if (node2->unitLen > 0) {
-                node2->unit = (char*) malloc(sizeof(char)*(node2->unitLen+1));
-                fread(node2->unit, sizeof(char)*node2->unitLen, 1, treeFp);
-                node2->unit[node2->unitLen] = '\0';
-            }
+
+    node_t* node2 = (node_t*) malloc(sizeof(node_t));
+    node2->parent = parentPtr;
+    copyData((node_t*)node2, common_data, name, uuid, descr);
+    if (node2->children > 0)
+        node2->child = (node_t**) malloc(sizeof(node_t**)*node2->children);
+    fread(&(node2->datatype), sizeof(int), 1, treeFp);
+    fread(&(node2->min), sizeof(int), 1, treeFp);
+    fread(&(node2->max), sizeof(int), 1, treeFp);
+    fread(&(node2->unitLen), sizeof(int), 1, treeFp);
+    node2->unit = NULL;
+    if (node2->unitLen > 0) {
+        node2->unit = (char*) malloc(sizeof(char)*(node2->unitLen+1));
+        fread(node2->unit, sizeof(char)*node2->unitLen, 1, treeFp);
+        node2->unit[node2->unitLen] = '\0';
+    }
 if (node2->unitLen > 0)
     printf("Unit = %s\n", node2->unit);
-            fread(&(node2->numOfEnumElements), sizeof(int), 1, treeFp);
-            if (node2->numOfEnumElements > 0) {
-                node2->enumeration = (enum_t*) malloc(sizeof(enum_t)*node2->numOfEnumElements);
-                fread(node2->enumeration, sizeof(enum_t)*node2->numOfEnumElements, 1, treeFp);
-            }
+
+    fread(&(node2->numOfEnumElements), sizeof(int), 1, treeFp);
+    if (node2->numOfEnumElements > 0) {
+        node2->enumeration = (enum_t*) malloc(sizeof(enum_t)*node2->numOfEnumElements);
+        fread(node2->enumeration, sizeof(enum_t)*node2->numOfEnumElements, 1, treeFp);
+    }
 for (int i = 0 ; i < node2->numOfEnumElements ; i++)
   printf("Enum[%d]=%s\n", i, (char*)node2->enumeration[i]);
-            fread(&(node2->functionLen), sizeof(int), 1, treeFp);
-            node2->function = NULL;
-            if (node2->functionLen > 0) {
-                node2->function = (char*) malloc(sizeof(char)*(node2->functionLen+1));
-                fread(node2->function, sizeof(char)*node2->functionLen, 1, treeFp);
-                node2->function[node2->functionLen] = '\0';
-            }
+
+    fread(&(node2->functionLen), sizeof(int), 1, treeFp);
+    node2->function = NULL;
+    if (node2->functionLen > 0) {
+        node2->function = (char*) malloc(sizeof(char)*(node2->functionLen+1));
+        fread(node2->function, sizeof(char)*node2->functionLen, 1, treeFp);
+        node2->function[node2->functionLen] = '\0';
+    }
 if (node2->functionLen > 0)
     printf("Function = %s\n", node2->function);
             node = (node_t*)node2;
-        }
-        break;
-    } //switch
+
     free(common_data);
     free(name);
     free(uuid);
@@ -439,7 +368,7 @@ printf("After stepToNextNode(jobPath=%s, jobRoot->name=%s) in trailingWildCardSe
         for (int i = 0 ; i < matches ; i++) {
             if (*foundResponses == maxFound)
                 break;
-            if (getType((&(matchingData[i]))->foundNodeHandles) == BRANCH || getType((&(matchingData[i]))->foundNodeHandles) == RBRANCH) {
+            if (getType((&(matchingData[i]))->foundNodeHandles) == BRANCH) {
 printf("Non-leaf node=%s\n", getName((&(matchingData[i]))->foundNodeHandles));
                 strcpy(jobPath, getName((&(matchingData[i]))->foundNodeHandles));
                 strcat(jobPath, ".*");
@@ -482,74 +411,28 @@ void writeCommonPart(struct node_t* node) {
     fwrite(node->description, sizeof(char)*node->descrLen, 1, treeFp);
 }
 
-void writeUniqueObjectRefs(objectTypes_t objectType, void* uniqueObject) {
-    switch (objectType) {
-        case MEDIACOLLECTION:
-        {
-            mediaCollectionObject_t* mediaCollectionObject = (mediaCollectionObject_t*) uniqueObject;
-            fwrite(mediaCollectionObject->items, sizeof(elementRef_t)*mediaCollectionObject->numOfItems, 1, treeFp);
-        }
-        break;
-        case MEDIAITEM:
-        {
-//            mediaItemObject_t* mediaItemObject = (mediaItemObject_t*) uniqueObject;
-//            fwrite(mediaItemObject->items, sizeof(elementRef_t)*mediaItemObject->numOfItems, 1, treeFp);
-        }
-        break;
-        default:
-            printf("writeUniqueObjectRefs:unknown object type = %d\n", objectType);
-        break;
-    }
-}
-
 void traverseAndWriteNode(struct node_t* node) {
     if (node == NULL) //not needed?
         return;
     printf("Node name = %s, type=%d\n", node->name, node->type);
     writeCommonPart(node);
-    switch (node->type) {
-        case RBRANCH:
-        {
-            rbranch_node_t* node2 = (rbranch_node_t*)node;
-            fwrite(&(node2->childTypeLen), sizeof(int), 1, treeFp);
-            fwrite(&(node2->numOfProperties), sizeof(int), 1, treeFp);
-            if (node2->numOfProperties > 0) {
-                fwrite(node2->propertyDefinition, sizeof(propertyDefinition_t)*node2->numOfProperties, 1, treeFp);
-            }
-        }
-        break;
-        case ELEMENT:
-        {
-            element_node_t* node2 = (element_node_t*)node;
-            int objectType = ((resourceObject_t*)node2->uniqueObject)->objectType;
-            int objectSize = getObjectSize(objectType);
-            if (objectSize > 0) {
-                fwrite(node2->uniqueObject, objectSize, 1, treeFp);
-                writeUniqueObjectRefs(objectType, node2->uniqueObject);
-            }
-        }
-        break;
-        default:
-        {
-            fwrite(&(node->datatype), sizeof(int), 1, treeFp);
-            fwrite(&(node->min), sizeof(int), 1, treeFp);
-            fwrite(&(node->max), sizeof(int), 1, treeFp);
-            fwrite(&(node->unitLen), sizeof(int), 1, treeFp);
-            if (node->unitLen > 0)
-                fwrite(node->unit, sizeof(char)*node->unitLen, 1, treeFp);
-            fwrite(&(node->numOfEnumElements), sizeof(int), 1, treeFp);
-            if (node->numOfEnumElements > 0) {
-                fwrite(node->enumeration, sizeof(enum_t)*node->numOfEnumElements, 1, treeFp);
-            }
-            fwrite(&(node->functionLen), sizeof(int), 1, treeFp);
-            if (node->functionLen > 0)
-                fwrite(node->function, sizeof(char)*node->functionLen, 1, treeFp);
+    fwrite(&(node->datatype), sizeof(int), 1, treeFp);
+    fwrite(&(node->min), sizeof(int), 1, treeFp);
+    fwrite(&(node->max), sizeof(int), 1, treeFp);
+    fwrite(&(node->unitLen), sizeof(int), 1, treeFp);
+    if (node->unitLen > 0)
+        fwrite(node->unit, sizeof(char)*node->unitLen, 1, treeFp);
+    fwrite(&(node->numOfEnumElements), sizeof(int), 1, treeFp);
+    if (node->numOfEnumElements > 0) {
+        fwrite(node->enumeration, sizeof(enum_t)*node->numOfEnumElements, 1, treeFp);
+    }
+    fwrite(&(node->functionLen), sizeof(int), 1, treeFp);
+    if (node->functionLen > 0)
+        fwrite(node->function, sizeof(char)*node->functionLen, 1, treeFp);
+
 //printf("numOfEnumElements=%d, unitlen=%d, functionLen=%d\n", node->numOfEnumElements, node->unitLen, node->functionLen);
 for (int i = 0 ; i < node->numOfEnumElements ; i++)
   printf("Enum[%d]=%s\n", i, (char*)node->enumeration[i]);
-        }
-        break;
-    } //switch
     int childNo = 0;
 printf("node->children = %d\n", node->children);
     while(childNo < node->children) {
@@ -590,7 +473,7 @@ nodeTypes_t getType(long nodeHandle) {
 
 nodeTypes_t getDatatype(long nodeHandle) {
     nodeTypes_t type = getType(nodeHandle);
-    if (type != BRANCH && type != RBRANCH && type != ELEMENT)
+    if (type != BRANCH)
         return ((node_t*)((intptr_t)nodeHandle))->datatype;
     return -1;
 }
@@ -609,7 +492,7 @@ char* getDescr(long nodeHandle) {
 
 int getNumOfEnumElements(long nodeHandle) {
     nodeTypes_t type = getType(nodeHandle);
-    if (type != BRANCH && type != RBRANCH && type != ELEMENT)
+    if (type != BRANCH)
         return ((node_t*)((intptr_t)nodeHandle))->numOfEnumElements;
     return 0;
 }
@@ -620,37 +503,15 @@ char* getEnumElement(long nodeHandle, int index) {
 
 char* getUnit(long nodeHandle) {
     nodeTypes_t type = getType(nodeHandle);
-    if (type != BRANCH && type != RBRANCH && type != ELEMENT)
+    if (type != BRANCH)
         return ((node_t*)((intptr_t)nodeHandle))->unit;
     return NULL;
 }
 
 char* getFunction(long nodeHandle) {
     nodeTypes_t type = getType(nodeHandle);
-    if (type != BRANCH && type != RBRANCH && type != ELEMENT)
+    if (type != BRANCH)
         return ((node_t*)((intptr_t)nodeHandle))->function;
-    return NULL;
-}
-
-long getResource(long nodeHandle) {
-    if (getType(nodeHandle) == ELEMENT)
-        return (long)((intptr_t)((element_node_t*)((intptr_t)nodeHandle))->uniqueObject);
-    return -1;
-}
-
-int getObjectType(long resourceHandle) {
-    return ((resourceObject_t*)((intptr_t)resourceHandle))->objectType;
-}
-
-int getMediaCollectionNumOfItems(long resourceHandle) {
-    if (getObjectType(resourceHandle) == MEDIACOLLECTION)
-        return ((mediaCollectionObject_t*)((intptr_t)resourceHandle))->numOfItems;
-    return -1;
-}
-
-char* getMediaCollectionItemRef(long resourceHandle, int i) {
-    if (getObjectType(resourceHandle) == MEDIACOLLECTION)
-        return ((mediaCollectionObject_t*)((intptr_t)resourceHandle))->items[i];
     return NULL;
 }
 

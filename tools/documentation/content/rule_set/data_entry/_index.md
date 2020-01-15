@@ -11,7 +11,7 @@ This specification makes a distinction between signals - in the following as ```
 The difference between a signal and an attribute is that the signal has
 a publisher (or producer) that continuously updates the signal value while an
 attribute has a set value, defined in the specification, that never changes.
-As summary, besides [```branch```](/rule_set/branches) and ```rbranch``` type can be:
+As summary, besides [```branch```](/rule_set/branches) type can be:
 
 * **```attribute```**, which describes static read-only value.
 * **```sensor```**, which describes non-static read-only signal.
