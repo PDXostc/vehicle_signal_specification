@@ -167,17 +167,6 @@ Below is an example of a complete attribute describing engine power</description
     </item>
     
     <item>
-      <title>Resource Branch</title>
-      <link>https://genivi.github.io/vehicle_signal_specification/rule_set/resource_branch/</link>
-      <pubDate>Sun, 04 Aug 2019 13:10:15 +0200</pubDate>
-      
-      <guid>https://genivi.github.io/vehicle_signal_specification/rule_set/resource_branch/</guid>
-      <description>A resource branch is an entity that can host only element nodes. A resorce branch is identified as an entry with its node type set to rbranch. It can host zero or more element nodes, and it contains the format definition of its element nodes. Besides the required fields type and description, are also the following.
- child-type
-An rbranch child must be of the generic type element, but it also has a uniquely specified part that can be referred to by the child type.</description>
-    </item>
-    
-    <item>
       <title>Includes</title>
       <link>https://genivi.github.io/vehicle_signal_specification/rule_set/includes/</link>
       <pubDate>Sun, 04 Aug 2019 12:59:44 +0200</pubDate>
