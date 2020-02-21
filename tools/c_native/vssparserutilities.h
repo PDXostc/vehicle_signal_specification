@@ -35,11 +35,12 @@ nodeTypes_t getType(long nodeHandle);
 nodeTypes_t getDatatype(long nodeHandle);
 char* getName(long nodeHandle);
 char* getUUID(long nodeHandle);
+int getValidation(long nodeHandle);
 char* getDescr(long nodeHandle);
 int getNumOfEnumElements(long nodeHandle);
 char* getEnumElement(long nodeHandle, int index);
 char* getUnit(long nodeHandle);
 char* getFunction(long nodeHandle);
 
-int VSSSearchNodes(char* searchPath, long rootNode, int maxFound, searchData_t* searchData, bool wildcardAllDepths);
+int VSSSearchNodes(char* searchPath, long rootNode, int maxFound, searchData_t* searchData, bool anyDepth, bool leafNodesOnly, int* validation);
 

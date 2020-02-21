@@ -83,12 +83,13 @@ char* extractEnumElement(char* enums, int index, char* buf) {
     return buf;
 }
 
-void writeCommonPart(char* name, char* type, char* uuid, char* descr, int children) {
+void writeCommonPart(char* name, char* type, char* uuid, int validate, char* descr, int children) {
     common_node_data_t commonData;
 
     commonData.nameLen  = strlen(name);
     commonData.type = stringToTypeDef(type);
     commonData.uuidLen  = strlen(uuid);
+    commonData.validate  = validate;
     commonData.descrLen = strlen(descr);
     commonData.children = children;
 
@@ -98,9 +99,9 @@ void writeCommonPart(char* name, char* type, char* uuid, char* descr, int childr
     fwrite(descr, sizeof(char)*commonData.descrLen, 1, treeFp);
 }
 
-void writeNodeData(char* name, char* type, char* uuid, char* descr, int children, char* datatype, char* min, char* max, char* unit, char* enums, char* function) {
-printf("Name=%s, Type=%s, uuid=%s, children=%d, Descr=%s, datatype=%s, min=%s, max=%s Unit=%s, Enums=%s, function=%s\n", name, type, uuid, children, descr, datatype, min, max, unit, enums, function);
-    writeCommonPart(name, type, uuid, descr, children);
+void writeNodeData(char* name, char* type, char* uuid, int validate, char* descr, int children, char* datatype, char* min, char* max, char* unit, char* enums, char* function) {
+printf("Name=%s, Type=%s, uuid=%s, validate=%d, children=%d, Descr=%s, datatype=%s, min=%s, max=%s Unit=%s, Enums=%s, function=%s\n", name, type, uuid, validate, children, descr, datatype, min, max, unit, enums, function);
+    writeCommonPart(name, type, uuid, validate, descr, children);
     int dtype = -1;
     if (strlen(datatype) != 0)
         dtype = stringToTypeDef(datatype);
@@ -141,13 +142,14 @@ printf("Name=%s, Type=%s, uuid=%s, children=%d, Descr=%s, datatype=%s, min=%s, m
         fwrite(function, sizeof(char)*functionLen, 1, treeFp);
 }
 
-void createNativeCnode(char*fname, char* name, char* type, char* uuid, char* descr, int children, char* datatype, char* min, char* max, char* unit, char* enums, char* function) {
+void createNativeCnode(char*fname, char* name, char* type, char* uuid, int validate, char* descr, int children, char* datatype, char* min, char* max, char* unit, char* enums, char* function) {
     treeFp = fopen(fname, "a");
     if (treeFp == NULL) {
         printf("Could not open file for writing of tree.\n");
         return;
     }
-    writeNodeData(name, type, uuid, descr, children, datatype, min, max, unit, enums, function);
+    writeNodeData(name, type, uuid, validate, descr, children, datatype, min, max, unit, enums, function);
     fclose(treeFp);
 }
+
 

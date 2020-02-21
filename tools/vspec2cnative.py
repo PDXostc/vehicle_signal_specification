@@ -37,12 +37,12 @@ dllName = "c_native/cnativenodelib.so"
 dllAbsPath = os.path.dirname(os.path.abspath(__file__)) + os.path.sep + dllName
 _cnative = ctypes.CDLL(dllAbsPath)
 
-#void createNativeCnode(char* fname, char* name, char* type, char* uuid, char* descr, int children, char* datatype, char* min, char* max, char* unit, char* enums, char* function);
-_cnative.createNativeCnode.argtypes = (ctypes.c_char_p,ctypes.c_char_p,ctypes.c_char_p,ctypes.c_char_p,ctypes.c_char_p,ctypes.c_int,ctypes.c_char_p,ctypes.c_char_p,ctypes.c_char_p,ctypes.c_char_p,ctypes.c_char_p,ctypes.c_char_p)
+#void createNativeCnode(char* fname, char* name, char* type, char* uuid, int validate, char* descr, int children, char* datatype, char* min, char* max, char* unit, char* enums, char* function);
+_cnative.createNativeCnode.argtypes = (ctypes.c_char_p,ctypes.c_char_p,ctypes.c_char_p,ctypes.c_char_p,ctypes.c_int,ctypes.c_char_p,ctypes.c_int,ctypes.c_char_p,ctypes.c_char_p,ctypes.c_char_p,ctypes.c_char_p,ctypes.c_char_p,ctypes.c_char_p)
 
-def createNativeCnode(fname, nodename, nodetype, uuid, description, children, nodedatatype, nodemin, nodemax, unit, enums, function):
+def createNativeCnode(fname, nodename, nodetype, uuid, validate, description, children, nodedatatype, nodemin, nodemax, unit, enums, function):
     global _cnative
-    _cnative.createNativeCnode(fname, nodename, nodetype, uuid, description, children, nodedatatype, nodemin, nodemax, unit, enums, function)
+    _cnative.createNativeCnode(fname, nodename, nodetype, uuid, validate, description, children, nodedatatype, nodemin, nodemax, unit, enums, function)
 
 
 def enumString(enumList):
@@ -51,7 +51,7 @@ def enumString(enumList):
         enumStr += elem + "/"
     return enumStr
 
-def create_node_legacy(key, val, b_nodename, b_nodetype, b_nodeuuid, b_nodedescription, children):
+def create_node_legacy(key, val, b_nodename, b_nodetype, b_nodeuuid, validate, b_nodedescription, children):
     nodedatatype = ""
     nodemin = ""
     nodemax = ""
@@ -86,7 +86,7 @@ def create_node_legacy(key, val, b_nodename, b_nodetype, b_nodeuuid, b_nodedescr
 
     b_fname = args[1].encode('utf-8')
 
-    createNativeCnode(b_fname, b_nodename, b_nodetype, b_nodeuuid, b_nodedescription, children, b_nodedatatype, b_nodemin, b_nodemax, b_nodeunit, b_nodeenum, b_nodefunction)
+    createNativeCnode(b_fname, b_nodename, b_nodetype, b_nodeuuid, validate, b_nodedescription, children, b_nodedatatype, b_nodemin, b_nodemax, b_nodeunit, b_nodeenum, b_nodefunction)
 
 
 def create_node(key, val):
@@ -96,13 +96,26 @@ def create_node(key, val):
     b_nodetype = nodetype.encode('utf-8')
     nodeuuid = val['uuid']
     b_nodeuuid = nodeuuid.encode('utf-8')
+    validate = 0
+    if "validate" in val:
+        if val["validate"] == "write-only":
+            validate = 1
+        else:
+            validate = 2
     nodedescription = val['description']
     b_nodedescription = nodedescription.encode('utf-8')
+    validate = 0
+    if "validate" in val:
+	nodevalidate = val["validate"]
+	if (nodevalidate == "write-only"):
+		validate = 1
+	elif (nodevalidate == "read-write"):
+		validate = 2
     children = 0
     if "children" in val:
         children = len(list(val["children"].keys()))
 
-    create_node_legacy(key, val, b_nodename, b_nodetype, b_nodeuuid, b_nodedescription, children)
+    create_node_legacy(key, val, b_nodename, b_nodetype, b_nodeuuid, validate, b_nodedescription, children)
 
 
 def traverse_tree(tree):

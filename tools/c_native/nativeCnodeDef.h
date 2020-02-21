@@ -44,6 +44,7 @@ typedef struct node_t {
     nodeTypes_t type;
     int uuidLen;
     char* uuid;
+    int validate;
     int descrLen;
     char* description;
     int children;
@@ -64,6 +65,7 @@ typedef struct {
     int nameLen;
     nodeTypes_t type;
     int uuidLen;
+    int validate;
     int descrLen;
     int children;
 } common_node_data_t;

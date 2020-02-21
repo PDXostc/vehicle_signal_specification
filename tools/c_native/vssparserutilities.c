@@ -22,9 +22,6 @@ FILE* treeFp;
 int currentDepth;
 int maxTreeDepth;
 
-int stepsInPath;
-int stepOffset;
-
 void initTreeDepth() {
     currentDepth = 0;
     maxTreeDepth = 0;
@@ -53,7 +50,7 @@ void readCommonPart(common_node_data_t* commonData, char** name, char**uuid, cha
     (*name)[commonData->nameLen] = '\0';
 printf("Name = %s\n", *name);
     fread(*uuid, sizeof(char)*commonData->uuidLen, 1, treeFp);
-    (*name)[commonData->uuidLen] = '\0';
+    (*uuid)[commonData->uuidLen] = '\0';
 printf("UUID = %s\n", *uuid);
     fread(*descr, sizeof(char)*commonData->descrLen, 1, treeFp);
     *((*descr)+commonData->descrLen) = '\0';
@@ -70,7 +67,8 @@ void copyData(node_t* node, common_node_data_t* commonData, char* name, char* uu
     node->uuidLen = commonData->uuidLen;
     node->uuid = (char*) malloc(sizeof(char)*(node->uuidLen+1));
     strncpy(node->uuid, uuid, commonData->uuidLen);
-    node->uuid[commonData->uuidLen] = '\0';
+    node->uuid[commonData->uuidLen] = '\0'; 
+    node->validate = commonData->validate;
     node->descrLen = commonData->descrLen;
     node->description = (char*) malloc(sizeof(char)*(node->descrLen+1));
     strncpy(node->description, descr, commonData->descrLen);
@@ -166,235 +164,193 @@ long VSSReadTree(char* filePath) {
     return (long)root;
 }
 
-char tmpNodeName[MAXNAMELEN];
-char* getNodeName(int stepNo, char* path) {
-    tmpNodeName[0] = '\0';
-    char* ptr = strchr(path, '.');
-    if (ptr != NULL) {
-        if (stepNo == 0) {
-            strncpy(tmpNodeName, path, (int)(ptr-path));
-            tmpNodeName[(int)(ptr-path)] = '\0';
-            return tmpNodeName;
-        }
-        char* front;
-        for (int i = 0 ; i < stepNo ; i++) {
-            front = ptr+1;
-            ptr = strchr(ptr+1, '.');
-            if (ptr == NULL) {
-                if (i == stepNo-1) {
-                    ptr =&path[strlen(path)];
-                    break;
-                } else
-                    return tmpNodeName;
-            }
-        }
-        strncpy(tmpNodeName, front, (int)(ptr-front));
-        tmpNodeName[(int)(ptr-front)] = '\0';
-    } else {
-        if (stepNo == 0)
-            strncpy(tmpNodeName, path, MAXNAMELEN);
+typedef struct SearchContext_t {
+    long rootNode;
+    int maxFound;
+    bool leafNodesOnly;
+    int maxDepth;
+    char* searchPath;
+    path_t matchPath;
+    int currentDepth;  // depth in tree from rootNode, and also depth (in segments) in searchPath
+    int speculationIndex;  // inc/dec when pathsegment in focus is wildcard
+    int speculativeMatches[20];  // inc when matching node is saved
+    int maxValidation;
+    int numOfMatches;
+    searchData_t* searchData;
+} SearchContext_t;
+
+void pushPathSegment(char* name, SearchContext_t* context) {
+    if (context->currentDepth > 0) {
+        strcat(context->matchPath, ".");
     }
-printf("getNodeName:step=%d, name=%s\n", stepNo, tmpNodeName);
-    return tmpNodeName;
+    strcat(context->matchPath, name);
 }
 
-int getNumOfPathSteps(char* path) {
-    int numofelements = 0;
-    char* ptr= strchr(path, '.');
-    if (ptr == NULL) {
+void popPathSegment(SearchContext_t* context) {
+    char* delim = strrchr(context->matchPath, '.');
+    if (delim == NULL) {
+        context->matchPath[0] = 0;
+    } else {
+        *delim = 0;
+    }
+}
+
+void incDepth(long thisNode, SearchContext_t* context) {
+//printf("incDepth()\n");
+    pushPathSegment(getName(thisNode), context);
+    context->currentDepth++;
+}
+
+char getPathSegmentBuf[100];  // modified by getPathSegment() only
+char* getPathSegment(int offset, SearchContext_t* context) {
+    char* frontDelimiter = &(context->searchPath[0]);
+    char* endDelimiter;
+    for (int i = 1 ; i < context->currentDepth + offset ; i++) {
+        frontDelimiter = strchr(frontDelimiter+1, '.');
+        if (frontDelimiter == NULL) {
+            if (context->searchPath[strlen(context->searchPath)-1] == '*' && context->currentDepth < context->maxDepth) {
+                return "*";
+            } else {
+                return "";
+            }
+        }
+    }
+    endDelimiter = strchr(frontDelimiter+1, '.');
+    if (endDelimiter == NULL) {
+        endDelimiter = &(context->searchPath[strlen(context->searchPath)]);
+    }
+    if (frontDelimiter[0] == '.') {
+        frontDelimiter++;
+    }
+    strncpy(getPathSegmentBuf, frontDelimiter, (int)(endDelimiter-frontDelimiter));
+    getPathSegmentBuf[(int)(endDelimiter-frontDelimiter)] = 0;
+    return getPathSegmentBuf;
+}
+
+int countSegments(char* path) {
+    int i;
+    if (strlen(path) == 0) {
+        return 0;
+    }
+    char* delim = strchr(path, '.');
+    for (i = 0 ; i < 100 ; i++) {
+        if (delim == NULL) {
+            break;
+        }
+        delim = strchr(delim+1, '.');
+    }
+    return i+1;
+}
+
+bool compareNodeName(char* nodeName, char* pathName) {
+//printf("compareNodeName(): nodeName=%s, pathName=%s\n", nodeName, pathName);
+    if (strcmp(nodeName, pathName) == 0 || strcmp(pathName, "*") == 0) {
+        return true;
+    }
+    return false;
+}
+
+int saveMatchingNode(long thisNode, SearchContext_t* context, bool* done) {
+    if (strcmp(getPathSegment(0, context), "*") == 0) {
+        context->speculationIndex++;
+    }
+    if (getValidation(thisNode) > context->maxValidation) {
+        context->maxValidation = getValidation(thisNode);  // TODO handle speculative setting
+    }
+    if (getType(thisNode) != BRANCH || context->leafNodesOnly == false) {
+        strcpy(context->searchData[context->numOfMatches].responsePaths, context->matchPath);
+        context->searchData[context->numOfMatches].foundNodeHandles = thisNode;
+        context->numOfMatches++;
+        if (context->speculationIndex >= 0) {
+            context->speculativeMatches[context->speculationIndex]++;
+        }
+    }
+    if (getNumOfChildren(thisNode) == 0 || context->currentDepth == context->maxDepth) {
+        *done = true;
+    } else {
+        *done = false;
+    }
+    if (context->speculationIndex >= 0 && ((getNumOfChildren(thisNode) == 0 && context->currentDepth >= countSegments(context->searchPath)) || context->currentDepth == context->maxDepth)) {
         return 1;
-    } else {
-        numofelements++;
-        while (ptr != NULL) {
-            numofelements++;
-            ptr= strchr(ptr+1, '.');
-        }
-printf("getNumOfPathSteps=%d\n", numofelements);
-        return numofelements;
     }
-}
-
-void copySteps(char* newPath, char* oldPath, int stepNo) {
-    char* ptr = strchr(oldPath, '.');
-    for (int i = 0 ; i < stepOffset+stepNo-1 ; i++) {
-        if (ptr != NULL)
-            ptr = strchr(ptr+1, '.');
-    }
-    if (ptr != NULL) {
-        strncpy(newPath, oldPath, (int)(ptr - oldPath));
-        newPath[(int)(ptr - oldPath)] = '\0';
-    }
+    return 0;
 }
 
 /**
-* !!! First call to stepToNextNode() must be preceeeded by a call to initStepToNextNode() !!!
+* decDepth() shall reverse speculative wildcard matches that have failed, and also decrement currentDepth.
 **/
-struct node_t* stepToNextNode(struct node_t* ptr, int stepNo, char* searchPath, int maxFound, int* foundResponses, searchData_t* searchData) {
-printf("ptr->name=%s, stepNo=%d, responsePaths[%d]=%s\n",ptr->name, stepNo, *foundResponses, (char*)(&(searchData[*foundResponses]))->responsePaths);
-    if (*foundResponses >= maxFound-1)
-        return NULL; // response buffers are full
-    char pathNodeName[MAXNAMELEN];
-    strncpy(pathNodeName, getNodeName(stepNo, searchPath), MAXNAMELEN);
-    if (stepNo == stepsInPath) {
-        if (strcmp(pathNodeName, ptr->name) == 0 || strcmp(pathNodeName, "*") == 0) {
-            // at matching node, so save ptr and return success
-            (&(searchData[*foundResponses]))->foundNodeHandles = (long)ptr;
-            (*foundResponses)++;
-            return ptr;
+void decDepth(int speculationSucceded, SearchContext_t* context) {
+//printf("decDepth():speculationSucceded=%d\n", speculationSucceded);
+    if (context->speculationIndex >= 0 && context->speculativeMatches[context->speculationIndex] > 0) {
+        if (speculationSucceded == 0) {  // it failed so remove a saved match
+            context->numOfMatches--;
+            context->speculativeMatches[context->speculationIndex]--;
         }
     }
-    strncpy(pathNodeName, getNodeName(stepNo+1, searchPath), MAXNAMELEN);  // get name of next step in path
-    if (strcmp(pathNodeName, "*") != 0) {  // try to match with one of the children
-        for (int i = 0 ; i < ptr->children ; i++) {
-printf("ptr->child[i]->name=%s\n", ptr->child[i]->name);
-            if (strcmp(pathNodeName, ptr->child[i]->name) == 0) {
-                if (strlen((char*)(&(searchData[*foundResponses]))->responsePaths) > 0) // always true?
-                    strcat((char*)(&(searchData[*foundResponses]))->responsePaths, ".");
-                strcat((char*)(&(searchData[*foundResponses]))->responsePaths, pathNodeName);
-                return stepToNextNode(ptr->child[i], stepNo+1, searchPath, maxFound, foundResponses, searchData);
-            }
-        }
-        return NULL;
-    } else {  // wildcard, try to match with all children
-        struct node_t* responsePtr = NULL;
-        for (int i = 0 ; (i < ptr->children) && (*foundResponses < maxFound) ; i++) {
-printf("Wildcard:ptr->child[%d]->name=%s\n", i, ptr->child[i]->name);
-            strcat((&(searchData[*foundResponses]))->responsePaths, ".");
-            strcat((&(searchData[*foundResponses]))->responsePaths, ptr->child[i]->name);
-            struct node_t* ptr2 = stepToNextNode(ptr->child[i], stepNo+1, searchPath, maxFound, foundResponses, searchData);
-            if (ptr2 == NULL) {
-                copySteps((&(searchData[*foundResponses]))->responsePaths, (&(searchData[*foundResponses]))->responsePaths, stepNo+1);
-            } else {
-                if (i < ptr->children && (&(searchData[*foundResponses-1]))->foundNodeHandles != 0) {
-                    copySteps((&(searchData[*foundResponses]))->responsePaths, (&(searchData[*foundResponses-1]))->responsePaths, stepNo+1);
-                } else
-                    copySteps((&(searchData[*foundResponses]))->responsePaths, (&(searchData[*foundResponses]))->responsePaths, stepNo+1);
-                responsePtr = ptr2;
-            }
-        }
-        return responsePtr;
+    if (strcmp(getPathSegment(0, context), "*") == 0) {
+        context->speculationIndex--;
     }
+    popPathSegment(context);
+    context->currentDepth--;
 }
 
-void initStepToNextNode(struct node_t* originalRoot, struct node_t* currentRoot, char* searchPath, searchData_t* searchData, int maxFound) {
-    /* 
-     * This is a workaround to the fact that with X multiple wildcards, 
-     * there are "(X-1)*numberofrealresults" bogus results added.
-     * It seems stepToNextNode returns non-NULL when it should not in those cases?
-     * See NULL check in wildcard code in stepToNextNode. 
-     */
-    for (int i = 0 ; i < maxFound ; i++)
-        (&(searchData[i]))->foundNodeHandles = 0;
+int traverseNode(long thisNode, SearchContext_t* context) {
+    int speculationSucceded = 0;
 
-    (&(searchData[0]))->responsePaths[0] = '\0';
-    do {
-        path_t tmp;
-        int initialLen = strlen((&(searchData[0]))->responsePaths);
-        strcpy(tmp, (&(searchData[0]))->responsePaths);
-        strcpy((&(searchData[0]))->responsePaths, currentRoot->name);
-        if (initialLen != 0)
-            strcat((&(searchData[0]))->responsePaths, ".");
-        strcat((&(searchData[0]))->responsePaths, tmp);
-        currentRoot = currentRoot->parent;
-    } while (currentRoot != NULL);
-
-    for (int i = 1 ; i < maxFound ; i++)
-        strcpy((&(searchData[i]))->responsePaths, (&(searchData[0]))->responsePaths);
-
-    stepOffset = getNumOfPathSteps((&(searchData[0]))->responsePaths)-1;
-
-    stepsInPath = getNumOfPathSteps(searchPath)-1;
-}
-
-typedef struct trailingWildCardQue_t {
-    char path[MAXCHARSPATH];
-    struct node_t* rootNode;
-    int maxFoundLeft;
-    struct trailingWildCardQue_t* next;
-} trailingWildCardQue_t;
-
-trailingWildCardQue_t* trailingWildCardQue = NULL;
-int trailingWildCardQueLen = 0;
-
-void addToWildCardQue(char* path, struct node_t* rootPtr, int maxFoundLeft) {
-    trailingWildCardQue_t** lastInQue;
-
-    if (trailingWildCardQueLen == 0)
-        lastInQue = &trailingWildCardQue;
-    else {
-        trailingWildCardQue_t* tmp = trailingWildCardQue;
-        for (int i = 0 ;  i < trailingWildCardQueLen-1 ; i++)
-            tmp = tmp->next;
-        lastInQue = &(tmp->next);
-    }
-    *lastInQue = (trailingWildCardQue_t*)malloc(sizeof(trailingWildCardQue_t));
-    strcpy((*lastInQue)->path, path);
-    (*lastInQue)->rootNode = rootPtr;
-    (*lastInQue)->maxFoundLeft = maxFoundLeft;
-    (*lastInQue)->next = NULL;
-    trailingWildCardQueLen++;
-}
-
-void removeFromWildCardQue(char* path, struct node_t** rootPtr, int* maxFoundLeft) {
-    trailingWildCardQue_t* quePtr = trailingWildCardQue->next;
-
-    strcpy(path, trailingWildCardQue->path);
-    *rootPtr = trailingWildCardQue->rootNode;
-    *maxFoundLeft = trailingWildCardQue->maxFoundLeft;
-    free(trailingWildCardQue);
-    trailingWildCardQue = quePtr;
-    trailingWildCardQueLen--;
-}
-
-/**
-* Returns handle (and path) to all leaf nodes that are found under the node before the wildcard in the path.
-**/
-void trailingWildCardSearch(struct node_t* rootPtr, char* searchPath, int maxFound, int* foundResponses, searchData_t* searchData) {
-    int matches = 0;
-    searchData_t matchingData[MAXFOUNDNODES];
-    char jobPath[MAXCHARSPATH];
-    struct node_t* jobRoot;
-    int jobMaxFound;
-    int maxFoundLeft = maxFound;
-
-    addToWildCardQue(searchPath, rootPtr, maxFoundLeft);
-    while (trailingWildCardQueLen > 0 && *foundResponses < maxFound) {
-        removeFromWildCardQue(jobPath, &jobRoot, &jobMaxFound);
-        matches = 0;
-        initStepToNextNode(rootPtr, jobRoot, jobPath, matchingData, maxFound);
-        stepToNextNode(jobRoot, 0, jobPath, jobMaxFound, &matches, matchingData);
-printf("After stepToNextNode(jobPath=%s, jobRoot->name=%s) in trailingWildCardSearch(): matches=%d\n", jobPath, jobRoot->name, matches);
-        maxFoundLeft -= matches;
-        for (int i = 0 ; i < matches ; i++) {
-            if (*foundResponses == maxFound)
-                break;
-            if (getType((&(matchingData[i]))->foundNodeHandles) == BRANCH) {
-printf("Non-leaf node=%s\n", getName((&(matchingData[i]))->foundNodeHandles));
-                strcpy(jobPath, getName((&(matchingData[i]))->foundNodeHandles));
-                strcat(jobPath, ".*");
-                addToWildCardQue(jobPath, (struct node_t*)((intptr_t)(&(matchingData[i]))->foundNodeHandles), maxFoundLeft);
-            } else {
-printf("Leaf node=%s, matchingPaths[%d]=%s, *foundResponses=%d\n", getName((&(matchingData[i]))->foundNodeHandles), i, (&(matchingData[i]))->responsePaths, *foundResponses);
-                strncpy((&(searchData[*foundResponses]))->responsePaths, (&(matchingData[i]))->responsePaths, MAXCHARSPATH-1);
-                (&(searchData[*foundResponses]))->foundNodeHandles = (&(matchingData[i]))->foundNodeHandles;
-                (*foundResponses)++;
+    incDepth(thisNode, context);
+    if (compareNodeName(getName(thisNode), getPathSegment(0, context)) == true) {
+//printf("after compareNodeName()\n");
+        bool done;
+        speculationSucceded = saveMatchingNode(thisNode, context, &done);
+        if (done == false) {
+            int numOfChildren = getNumOfChildren(thisNode);
+            char* childPathName = getPathSegment(1, context);
+            for (int i = 0 ; i < numOfChildren ; i++) {
+                if (compareNodeName(getName(getChild(thisNode, i)), childPathName) == true) {
+                    speculationSucceded += traverseNode(getChild(thisNode, i), context);
+                }
             }
         }
     }
+    decDepth(speculationSucceded, context);
+    return speculationSucceded;
 }
 
-int VSSSearchNodes(char* searchPath, long rootNode, int maxFound, searchData_t* searchData, bool wildcardAllDepths) {
-    intptr_t ptr = (intptr_t)rootNode;
-    int foundResponses = 0;
-
-    if ((searchPath[strlen(searchPath)-1] == '*') && (wildcardAllDepths)) {
-        trailingWildCardSearch((struct node_t*)ptr, searchPath, maxFound, &foundResponses, searchData);
+void initContext(SearchContext_t* context, char* searchPath, long rootNode, int maxFound, searchData_t* searchData, bool anyDepth, bool leafNodesOnly, int* validation) {
+    context->searchPath = searchPath;
+/*    if (anyDepth == true && context->searchPath[strlen(context->searchPath)-1] != '*') {
+        strcat(context->searchPath, ".*");
+    } */
+    context->rootNode = rootNode;
+    context->maxFound = maxFound;
+    context->searchData = searchData;
+    if (anyDepth == true) {
+        context->maxDepth = 100;  //jan 2020 max tree depth = 8
     } else {
-        initStepToNextNode((struct node_t*)ptr,(struct node_t*)ptr, searchPath, searchData, maxFound);
-        stepToNextNode((struct node_t*)ptr, 0, searchPath, maxFound, &foundResponses, searchData);
+        context->maxDepth = countSegments(context->searchPath);
     }
+    context->leafNodesOnly = leafNodesOnly;
+    context->maxValidation = 0;
+    context->currentDepth = 0;
+    context->matchPath[0] = 0;
+    context->numOfMatches = 0;
+    context->speculationIndex = -1;
+    for (int i = 0 ; i < 20 ; i++) {
+        context->speculativeMatches[i] = 0;
+    }
+}
 
-    return foundResponses;
+int VSSSearchNodes(char* searchPath, long rootNode, int maxFound, searchData_t* searchData, bool anyDepth, bool leafNodesOnly, int* validation) {
+//    intptr_t root = (intptr_t)rootNode;
+    struct SearchContext_t searchContext;
+    struct SearchContext_t* context = &searchContext;
+
+    initContext(context, searchPath, rootNode, maxFound, searchData, anyDepth, leafNodesOnly, validation);
+    traverseNode(rootNode, context);
+    if (validation != NULL) {
+        *validation = context->maxValidation;
+    }
+    return context->numOfMatches;
 }
 
 void writeCommonPart(struct node_t* node) {
@@ -402,6 +358,7 @@ void writeCommonPart(struct node_t* node) {
     commonData->nameLen = node->nameLen;
     commonData->type = node->type;
     commonData->uuidLen = node->uuidLen;
+    commonData->validate = node->validate;
     commonData->descrLen = node->descrLen;
     commonData->children = node->children;
     fwrite(commonData, sizeof(common_node_data_t), 1, treeFp);
@@ -484,6 +441,10 @@ char* getName(long nodeHandle) {
 
 char* getUUID(long nodeHandle) {
     return ((node_t*)((intptr_t)nodeHandle))->uuid;
+}
+
+int getValidation(long nodeHandle) {
+    return (int)((intptr_t)((node_t*)((intptr_t)nodeHandle))->validate);
 }
 
 char* getDescr(long nodeHandle) {
