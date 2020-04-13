@@ -311,7 +311,7 @@
 - DistanceWithMIL:
   datatype: uint32
   type: sensor
-  unit: kilometer
+  unit: km
   description: PID 21 - Distance traveled with MIL on
 
 - FuelRailPressureVac:

@@ -274,13 +274,13 @@
 - accelerationTime:
   datatype: int16
   type: attribute
-  unit: sec
+  unit: s
   description: The time needed to accelerate the vehicle from a given start velocity to a given target velocity.
 
 - cargoVolume:
   datatype: int16
   type: attribute
-  unit: litres
+  unit: l
   description: The available volume for cargo or luggage. For automobiles, this is usually the trunk volume.
   min: 0
   max: 100
