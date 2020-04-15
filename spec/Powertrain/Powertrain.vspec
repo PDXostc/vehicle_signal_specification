@@ -1,0 +1,22 @@
+# All files and artifacts in this repository are licensed under the
+# provisions of the license provided by the LICENSE file in this repository.
+#
+
+
+- AccumulatedBrakingEnergy:
+  datatype: float
+  type: sensor
+  unit: kWh
+  description: The accumulated energy from regenerative braking over lifetime.
+
+#
+# Attributes, Signals and Actuators around the electric powertrain
+#
+- Electric:
+  type: branch
+  description: Battery Management data.
+
+# Include the battery management vspec file and attach all its signals and attributes under the
+# battery management branch created above.
+
+#include Electric.vspec Electric

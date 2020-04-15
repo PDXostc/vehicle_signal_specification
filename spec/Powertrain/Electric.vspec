@@ -1,0 +1,95 @@
+#
+# (C) 2018 Volvo Cars
+# (C) 2016 Jaguar Land Rover
+#
+# All files and artifacts in this repository are licensed under the
+# provisions of the license provided by the LICENSE file in this repository.
+#
+
+#
+# Signals, attributes and actuators around the electric powertrain.
+#
+
+- Battery:
+  type: branch
+  description: Battery status
+
+- Battery.Temperature:
+  datatype: float
+  type: sensor
+  unit: celsius
+  description: Temperature of the battery pack
+
+- Battery.StateOfCharge:
+  type: branch
+  description: Information on the state of charge of the vehicle's high voltage battery.
+
+- Battery.StateOfCharge.Current:
+  unit: percent
+  datatype: Float
+  min: 0
+  max: 100.00
+  description: Physical state of charge of the high voltage battery. This is not necessarily the state of charge being displayed to the customer.
+
+- Battery.StateOfCharge.Displayed:
+  type: sensor
+  datatype: Float
+  unit: percent
+  min: 0
+  max: 100.00
+  description: State of charge displayed to the customer.
+
+- Battery.StateOfCharge.Target:
+  type: actuator
+  datatype: UInt8
+  min: 0
+  max: 100
+  unit: percent
+  description: Target state of charge set (eg. by customer).
+
+- Battery.GrossCapacity:
+  datatype: uint16
+  type: attribute
+  unit: kWh
+  description: Gross capacity of the battery
+
+- Battery.NetCapacity:
+  datatype: uint16
+  type: attribute
+  unit: kWh
+  description: Net capacity of the battery
+
+- Battery.NominalVoltage:
+  datatype: uint16
+  type: attribute
+  unit: V
+  description: Nominal Voltage of the battery
+
+- Battery.ReferentVoltage:
+  datatype: uint16
+  type: attribute
+  unit: V
+  description: Referent Voltage of the battery
+
+- Battery.AccumulatedChargedEnergy:
+  datatype: float
+  type: sensor
+  unit: kWh
+  description: The accumulated energy delivered to the battery during charging over lifetime.
+
+- Battery.AccumulatedConsumedEnergy:
+  datatype: float
+  type: sensor
+  unit: kWh
+  description: The accumulated energy leaving HV battery for propulsion and auxiliary loads over lifetime.
+
+- ChargingInlet:
+  type: branch
+  description: Collects Information about the charging inlet
+
+- ChargingInlet.Type:
+  datatype: string
+  type: attribute
+  enum: [ "unknown", "Not_Fitted", "AC_Type_1", "AC_Type_2", "AC_GBT", "AC_DC_Type_1_Combo", "AC_DC_Type_2_Combo", "DC_GBT", "DC_Chademo" ]
+  default: "unknown"
+  description: Indicates the primary charging inlet type fitted to the vehicle

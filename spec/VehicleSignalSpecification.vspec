@@ -105,19 +105,6 @@
 #include Drivetrain/ElectricMotor.vspec Vehicle.Drivetrain.ElectricMotor
 
 #
-# The battery management signals and attributes used to host the signals in BatteryManagement.vspec.
-#
-- Vehicle.Drivetrain.BatteryManagement:
-  type: branch
-  description: Battery Management data.
-
-# Include the battery management vspec file and attach all its signals and attributes under the
-# battery management branch created above.
-
-#include Drivetrain/BatteryManagement.vspec Vehicle.Drivetrain.BatteryManagement
-
-
-#
 # The fuels system signals and attributes used to host the signals in FuelSystem.vspec.
 #
 - Vehicle.Drivetrain.FuelSystem:
@@ -136,10 +123,19 @@
   type: branch
   description: Fuel Cell data.
 
-# Include the battery management vspec file and attach all its signals and attributes under the
-# battery management branch created above.
+# Include the fuel cell vspec file and attach all its signals and attributes under the
+# fuel cell branch created above.
 
 #include Drivetrain/FuelCell.vspec Vehicle.Drivetrain.FuelCell
+
+#
+# The power train branch used to host the signals and attributes.
+#
+- Vehicle.Powertrain:
+  type: branch
+  description: Powertrain data for battery management, etc.
+#include Powertrain/Powertrain.vspec Vehicle.Powertrain
+
 
 #
 # The Body branch used to host the signals and attributes Body/Body.vspec.
