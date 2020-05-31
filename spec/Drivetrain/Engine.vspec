@@ -34,7 +34,7 @@
   datatype:  uint16
   type: attribute
   default: 0
-  unit: kw
+  unit: kW
   description: Peak power, in kilowatts, that engine can generate.
 
 - MaxTorque:
