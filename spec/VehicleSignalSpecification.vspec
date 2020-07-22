@@ -63,70 +63,10 @@
 #
 # The engine branch used to host the signals and attributes in engine.vspec.
 #
-- Vehicle.Drivetrain:
+- Vehicle.Powertrain:
   type: branch
-  description: Drivetrain data for internal combustion engines, transmissions, electric motors, etc.
+  description: Powertrain data for engines, energy storage, transmissions, etc.
 
-#
-# Internal combustion engine signals and attributes.
-#
-- Vehicle.Drivetrain.InternalCombustionEngine:
-  type: branch
-  description: Engine-specific data, stopping at the bell housing.
-
-# Include the engine.vspec file and attach all its signals and attributes under the engine
-# branch created above.
-#
-#include Drivetrain/Engine.vspec Vehicle.Drivetrain.InternalCombustionEngine
-
-#
-# The transmission branch used to host the signals and attributes in transmission.vspec.
-#
-- Vehicle.Drivetrain.Transmission:
-  type: branch
-  description: Transmission-specific data, stopping at the drive shafts.
-
-# Include the transmission.vspec file and attach all its signals and attributes under the
-# transmission branch created above.
-#
-#include Drivetrain/Transmission.vspec Vehicle.Drivetrain.Transmission
-
-
-#
-# The electric motor branch used to host the signals and attributes in ElectricMotor.vspec.
-#
-- Vehicle.Drivetrain.ElectricMotor:
-  type: branch
-  description: Electric Motor specific data.
-
-# Include the electric motor vspec file and attach all its signals and attributes under the
-# electric motor branch created above.
-
-#include Drivetrain/ElectricMotor.vspec Vehicle.Drivetrain.ElectricMotor
-
-#
-# The fuels system signals and attributes used to host the signals in FuelSystem.vspec.
-#
-- Vehicle.Drivetrain.FuelSystem:
-  type: branch
-  description: Fuel system data.
-
-# Include the fuel system vspec file and attach all its signals and attributes under the
-# fuels system branch created above.
-
-#include Drivetrain/FuelSystem.vspec Vehicle.Drivetrain.FuelSystem
-
-#
-# The fuel cell signals and attributes used to host the signals in FuelCell.vspec.
-#
-- Vehicle.Drivetrain.FuelCell:
-  type: branch
-  description: Fuel Cell data.
-
-# Include the fuel cell vspec file and attach all its signals and attributes under the
-# fuel cell branch created above.
-
-#include Drivetrain/FuelCell.vspec Vehicle.Drivetrain.FuelCell
 
 #
 # The power train branch used to host the signals and attributes.
@@ -135,6 +75,99 @@
   type: branch
   description: Powertrain data for battery management, etc.
 #include Powertrain/Powertrain.vspec Vehicle.Powertrain
+
+
+#
+# The engine branch used to host the signals and attributes for power sources.
+#
+- Vehicle.Powertrain.PowerSource:
+  type: branch
+  description: Powertrain data for power sources (combustion engines, electric motors, etc.)
+
+
+#
+# The engine branch used to host the signals and attributes for energy storage.
+#
+- Vehicle.Powertrain.EnergyStorage:
+  type: branch
+  description: Powertrain data for energy storage (combustion engines, electric motors, etc.)
+
+
+#
+# Internal combustion engine signals and attributes.
+#
+- Vehicle.Powertrain.PowerSource.CombustionEngine:
+  type: branch
+  description: Engine-specific data, stopping at the bell housing.
+
+# Include the engine.vspec file and attach all its signals and attributes under the engine
+# branch created above.
+#
+#include Powertrain/PowerSource/CombustionEngine.vspec Vehicle.Powertrain.PowerSource.CombustionEngine
+
+#
+# The transmission branch used to host the signals and attributes in transmission.vspec.
+#
+- Vehicle.Powertrain.Transmission:
+  type: branch
+  description: Transmission-specific data, stopping at the drive shafts.
+
+# Include the transmission.vspec file and attach all its signals and attributes under the
+# transmission branch created above.
+#
+#include Powertrain/Transmission.vspec Vehicle.Powertrain.Transmission
+
+
+#
+# The electric motor branch used to host the signals and attributes in ElectricMotor.vspec.
+#
+- Vehicle.Powertrain.PowerSource.ElectricMotor:
+  type: branch
+  description: Electric Motor specific data.
+
+# Include the electric motor vspec file and attach all its signals and attributes under the
+# electric motor branch created above.
+
+#include Powertrain/PowerSource/ElectricMotor.vspec Vehicle.Powertrain.PowerSource.ElectricMotor
+
+
+#
+# The battery signals and attributes used to host the signals in Battery.vspec.
+#
+- Vehicle.Powertrain.EnergyStorage.Battery:
+  type: branch
+  description: Battery Management data.
+
+# Include the battery management vspec file and attach all its signals and attributes under the
+# battery management branch created above.
+
+#include Powertrain/EnergyStorage/Battery.vspec Vehicle.Powertrain.EnergyStorage.Battery
+
+
+#
+# The fuels system signals and attributes used to host the signals in FuelSystem.vspec.
+#
+- Vehicle.Powertrain.EnergyStorage.FuelSystem:
+  type: branch
+  description: Fuel system data.
+
+# Include the fuel system vspec file and attach all its signals and attributes under the
+# fuels system branch created above.
+
+#include Powertrain/EnergyStorage/FuelSystem.vspec Vehicle.Powertrain.EnergyStorage.FuelSystem
+
+
+#
+# The fuel cell signals and attributes used to host the signals in FuelCell.vspec.
+#
+- Vehicle.Powertrain.EnergyStorage.FuelCell:
+  type: branch
+  description: Fuel Cell data.
+
+# Include the fuel cell vspec file and attach all its signals and attributes under the
+# fuel cell branch created above.
+
+#include Powertrain/EnergyStorage/FuelCell.vspec Vehicle.Powertrain.EnergyStorage.FuelCell
 
 
 #
