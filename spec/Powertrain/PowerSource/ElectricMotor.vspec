@@ -1,4 +1,5 @@
 #
+# (C) 2020 Robert Bosch GmbH
 # (C) 2016 Jaguar Land Rover
 #
 # All files and artifacts in this repository are licensed under the
@@ -8,5 +9,101 @@
 #
 # EV Motor signals and attributes
 #
+
+
+- MaxPower:
+  datatype:  uint16
+  type: attribute
+  default: 0
+  unit: kW
+  description: Peak power, in kilowatts, that motor(s) can generate.
+
+- MaxTorque:
+  datatype:  uint16
+  type: attribute
+  default: 0
+  unit: N.m
+  description: Peak power, in newton meter, that the motor(s) can generate.
+
+- MaxRegenPower:
+  datatype:  uint16
+  type: attribute
+  default: 0
+  unit: kW
+  description: Peak regen/brake power, in kilowatts, that motor(s) can generate.
+
+- MaxRegenTorque:
+  datatype:  uint16
+  type: attribute
+  default: 0
+  unit: N.m
+  description: Peak regen/brake torque, in newton meter, that the motor(s) can generate.
+
+
+#
+# Motor
+#
+- Motor:
+  type: branch
+  description: motor signals
+
+
+#
+# Motor rotations per minute
+#
+- Motor.Speed:
+  datatype: int16
+  type: sensor
+  unit: rpm
+  min: 0
+  max: 100000
+  description: Motor speed measured as rotations per minute. Negative values indicate reverse driving mode.
+
+
+#
+# Motor temperature
+#
+- Motor.Temperature:
+  datatype: int16
+  type: sensor
+  unit: celsius
+  min: -50
+  max: 200
+  description: Motor temperature.
+  
+  
+#
+# Motor coolant temperature (if applicable)
+#
+- Motor.CoolantTemperature:
+  datatype: int16
+  type: sensor
+  unit: celsius
+  min: -50
+  max: 200
+  description: Motor coolant temperature (if applicable).
+
+
+#
+# Current Power
+#
+- Motor.Power:
+  datatype: int16
+  type: sensor
+  unit: kW
+  min: 0
+  max: 2000
+  description: Current motor power output. Negative values indicate regen mode.
+
+#
+# Current Torque
+#
+- Motor.Torque:
+  datatype: int16
+  type: sensor
+  unit: N.m
+  min: 0
+  max: 5000
+  description: Current motor torque. Negative values indicate regen mode.
 
 
