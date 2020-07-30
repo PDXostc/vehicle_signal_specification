@@ -55,7 +55,7 @@
   datatype: int16
   type: sensor
   unit: rpm
-  min: 0
+  min: -100000
   max: 100000
   description: Motor speed measured as rotations per minute. Negative values indicate reverse driving mode.
 
@@ -91,7 +91,7 @@
   datatype: int16
   type: sensor
   unit: kW
-  min: 0
+  min: -2000
   max: 2000
   description: Current motor power output. Negative values indicate regen mode.
 
@@ -102,7 +102,7 @@
   datatype: int16
   type: sensor
   unit: N.m
-  min: 0
+  min: -5000
   max: 5000
   description: Current motor torque. Negative values indicate regen mode.
 
