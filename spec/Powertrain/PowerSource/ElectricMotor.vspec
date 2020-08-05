@@ -51,13 +51,13 @@
 #
 # Motor rotations per minute
 #
-- Motor.Speed:
+- Motor.Rpm
   datatype: int16
   type: sensor
   unit: rpm
   min: -100000
   max: 100000
-  description: Motor speed measured as rotations per minute. Negative values indicate reverse driving mode.
+  description: Motor rotational speed measured as rotations per minute. Negative values indicate reverse driving mode.
 
 
 #
