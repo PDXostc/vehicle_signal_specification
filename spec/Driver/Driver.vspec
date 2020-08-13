@@ -1,0 +1,46 @@
+#
+# (C) 2020 Robert Bosch GmbH
+#
+# All files and artifacts in this repository are licensed under the
+# provisions of the license provided by the LICENSE file in this repository.
+#
+#
+# Driver data
+#
+# All files and artifacts in this repository are licensed under the
+# provisions of the license provided by the LICENSE file in this repository.
+# 
+
+- Occupant:
+  type: branch
+  description: Occupant attributes within the Driver branch
+#include Occupant/Occupant.vspec Occupant
+
+- DistractionLevel:
+  datatype: float
+  type: sensor
+  unit: percent
+  description: Distraction Level of the driver.
+  
+- EyesOnRoad:
+  datatype: bool
+  type: sensor
+  description: Eyes On Road?
+  
+- AttentiveProbability:
+  datatype: float
+  type: sensor
+  unit: percent
+  description: Probability of attentivness of the driver.
+  
+- FatigueLevel:
+  datatype: float
+  type: sensor
+  unit: percent
+  description: Fatiguenesslevel of driver.
+  
+- HeartRate:
+  datatype: UInt16
+  type: sensor
+  description: Heart Rate of the driver.
+

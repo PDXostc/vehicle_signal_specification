@@ -1,0 +1,24 @@
+#
+# (C) 2020 Robert Bosch GmbH
+#
+# All files and artifacts in this repository are licensed under the
+# provisions of the license provided by the LICENSE file in this repository.
+#
+#
+# Occupant data
+#
+# All files and artifacts in this repository are licensed under the
+# provisions of the license provided by the LICENSE file in this repository.
+# alt path: ../Occupant/Identifier/
+
+- Role:
+  datatype: string
+  type: attribute
+  value: Driver
+  enum: ["Driver", "CoPilot", "Passenger"]
+  description: Role description of the occupant.
+
+- Identifier:
+  type: branch
+  description: Identifier attributes
+#include Identifier/Identifier.vspec Identifier

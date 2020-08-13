@@ -1,4 +1,5 @@
 #
+# (C) 2020 Robert Bosch GmbH
 # (C) 2018 Volvo Cars
 # (C) 2016 Jaguar Land Rover
 #
@@ -226,3 +227,27 @@
 # OBD branch created above.
 
 #include OBD/OBD.vspec Vehicle.OBD
+
+#
+# Occupant
+#
+- Vehicle.Occupant:
+  type: branch
+  description: Occupant data.
+
+# Include the Occupant/Occupant.vspec file and attach all its data under the
+# Occupant branch created above.
+
+#include Occupant/Occupant.vspec Vehicle.Occupant
+
+#
+# Driver
+#
+- Vehicle.Driver:
+  type: branch
+  description: Driver data.
+
+# Include the Driver/Driver.vspec file and attach all its data under the
+# Driver branch created above and will include Occupant attributes
+
+#include Driver/Driver.vspec Vehicle.Driver

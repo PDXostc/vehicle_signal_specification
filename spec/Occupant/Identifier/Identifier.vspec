@@ -1,0 +1,22 @@
+#
+# (C) 2020 Robert Bosch GmbH
+#
+# All files and artifacts in this repository are licensed under the
+# provisions of the license provided by the LICENSE file in this repository.
+#
+#
+# Identifier
+#
+# All files and artifacts in this repository are licensed under the
+# provisions of the license provided by the LICENSE file in this repository.
+#
+
+- Subject:
+  datatype: string
+  type: sensor
+  description: Subject for the authetification of the occupant.
+  
+- Issuer:
+  datatype: string
+  type: sensor
+  description: Issuer for the authetification of the occupant.
