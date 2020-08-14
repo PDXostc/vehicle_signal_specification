@@ -8,21 +8,19 @@
 # Driver data
 #
 
-- Occupant:
-  type: branch
-  description: Occupant attributes within the Driver branch
-#include Occupant/Occupant.vspec Occupant
+
+#include Occupant/Occupant.vspec
 
 - DistractionLevel:
   datatype: float
   type: sensor
   unit: percent
-  description: Distraction Level of the driver.
+  description: Distraction level of the driver.
   
 - EyesOnRoad:
   datatype: bool
   type: sensor
-  description: Eyes On Road?
+  description: Has driver the eyes on road
   
 - AttentiveProbability:
   datatype: float
@@ -36,8 +34,8 @@
   unit: percent
   description: Fatigueness level of driver.
   
-- Heartrate:
+- HeartRate:
   datatype: UInt16
   type: sensor
-  description: Heart Rate of the driver.
+  description: Heart rate of the driver.
 

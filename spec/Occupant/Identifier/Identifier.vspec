@@ -11,9 +11,9 @@
 - Subject:
   datatype: string
   type: sensor
-  description: Subject for the authetification of the occupant.
+  description: Subject for the authentification of the occupant.
   
 - Issuer:
   datatype: string
   type: sensor
-  description: Issuer for the authetification of the occupant.
+  description: Issuer for the authentification of the occupant.
