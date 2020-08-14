@@ -7,9 +7,6 @@
 #
 # Driver data
 #
-# All files and artifacts in this repository are licensed under the
-# provisions of the license provided by the LICENSE file in this repository.
-# 
 
 - Occupant:
   type: branch
@@ -37,9 +34,9 @@
   datatype: float
   type: sensor
   unit: percent
-  description: Fatiguenesslevel of driver.
+  description: Fatigueness level of driver.
   
-- HeartRate:
+- Heartrate:
   datatype: UInt16
   type: sensor
   description: Heart Rate of the driver.
