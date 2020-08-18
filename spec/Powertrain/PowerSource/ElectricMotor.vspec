@@ -51,8 +51,8 @@
 #
 # Motor rotations per minute
 #
-- Motor.Rpm
-  datatype: int16
+- Motor.Rpm:
+  datatype: Uint32
   type: sensor
   unit: rpm
   min: -100000
