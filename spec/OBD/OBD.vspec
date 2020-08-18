@@ -1,4 +1,5 @@
 #
+# (C) 2020 Robert Bosch GmbH
 # (C) 2018 Volvo Cars
 # (C) 2016 Jaguar Land Rover
 #
@@ -42,6 +43,11 @@
   type: sensor
   enum: [ "spark", "compression" ]
   description: Type of the ignition for ICE - spark = spark plug ignition, compression = self-igniting (Diesel engines)
+
+- DTCList:
+  datatype: string[]
+  type: sensor
+  description: List of cuurently active DTCs formatted according OBD II standard ([P|C|B|U]XXXXX )
 
 - FreezeDTC:
   datatype: string
