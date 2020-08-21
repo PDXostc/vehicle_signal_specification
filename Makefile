@@ -35,8 +35,8 @@ clean:
 
 install:
 	git submodule init
-	git submodule update
-	(cd ${TOOLSDIR}/; python3 setup.py install --install-scripts=${DESTDIR}/bin)
+	git submodule foreach git pull origin master
+	(cd ${TOOLSDIR}/; python3 setup.py install --install-scripts=${DESTDIR}/bin; pip install -r requirements.txt)
 	$(MAKE) DESTDIR=${DESTDIR} -C ${TOOLSDIR}/vspec2c install
 	install -d ${DESTDIR}/share/vss
 	(cd spec; cp -r * ${DESTDIR}/share/vss)
