@@ -12,7 +12,7 @@
 - Subject:
   datatype: string
   type: sensor
-  description: Subject for the authentification of the occupant. E.g. UserID: 7331677
+  description: Subject for the authentification of the occupant. E.g. UserID 7331677
   
 - Issuer:
   datatype: string
