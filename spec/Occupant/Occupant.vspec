@@ -13,9 +13,9 @@
   type: attribute
   value: Driver
   enum: ["Driver", "CoPilot", "Passenger"]
-  description: Role description of the occupant.
+  description: Role description of the occupant. Special roles are Driver, CoPilot or Passenger.
 
 - Identifier:
   type: branch
-  description: Identifier attributes
+  description: Identifier attributes based on OAuth 2.0.
 #include Identifier/Identifier.vspec Identifier
