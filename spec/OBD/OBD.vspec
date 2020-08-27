@@ -47,7 +47,7 @@
 - DTCList:
   datatype: string[]
   type: sensor
-  description: List of currently active DTCs formatted according OBD II standard ([P|C|B|U]XXXXX )
+  description: List of currently active DTCs formatted according OBD II (SAE-J2021DA) standard ([P|C|B|U]XXXXX )
 
 - FreezeDTC:
   datatype: string
