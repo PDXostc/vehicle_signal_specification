@@ -229,18 +229,6 @@
 #include OBD/OBD.vspec Vehicle.OBD
 
 #
-# Occupant
-#
-- Vehicle.Occupant:
-  type: branch
-  description: Occupant data.
-
-# Include the Occupant/Occupant.vspec file and attach all its data under the
-# Occupant branch created above.
-
-#include Occupant/Occupant.vspec Vehicle.Occupant
-
-#
 # Driver
 #
 - Vehicle.Driver:

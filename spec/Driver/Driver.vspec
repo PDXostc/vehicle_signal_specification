@@ -9,7 +9,7 @@
 #
 
 
-#include Occupant/Occupant.vspec
+#include Cabin/Occupant.vspec
 
 - DistractionLevel:
   datatype: float

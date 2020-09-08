@@ -15,6 +15,15 @@
   type: sensor
   description: Does the seat have a passenger in it.
 
+- Occupant:
+  type: branch
+  description: Occupant data.
+
+# Include the Cabin/Occupant.vspec file and attach all its data under the
+# Occupant branch created above.
+
+#include Occupant.vspec Occupant
+
 - IsBelted:
   datatype: boolean
   type: sensor
