@@ -10,51 +10,6 @@
 # Chassis signals and attributes
 #
 
-#
-# Vehicle Weight and Dimension attributes
-#
-- CurbWeight:
-  datatype: uint16
-  type: attribute
-  value: 0
-  unit: kg
-  description: Vehicle curb weight, in kg, including all liquids and full tank of fuel, but no cargo or passengers.
-
-- GrossWeight:
-  datatype: uint16
-  type: attribute
-  value: 0
-  unit: kg
-  description: Curb weight of vehicle, including all liquids and full tank of fuel and full load of cargo and passengers.
-
-- TowWeight:
-  datatype: uint16
-  type: attribute
-  value: 0
-  unit: kg
-  description: Maximum weight, in kilos, of trailer.
-
-- Length:
-  datatype: uint16
-  type: attribute
-  value: 0
-  unit: mm
-  description: Overall vehicle length, in mm.
-
-- Height:
-  datatype: uint16
-  type: attribute
-  value: 0
-  unit: mm
-  description: Overall vehicle height, in mm.
-
-- Width:
-  datatype: uint16
-  type: attribute
-  value: 0
-  unit: mm
-  description: Overall vehicle width, in mm.
-
 - Wheelbase:
   datatype: uint16
   type: attribute
@@ -197,7 +152,6 @@
   unit: percent
   description: Accelerator pedal position as percent. 0 = Not depressed. 100 = Fully depressed.
 
-
 #
 # Brake
 #
@@ -213,15 +167,3 @@
   unit: percent
   description: Brake pedal position as percent. 0 = Not depressed. 100 = Fully depressed.
 
-
-#
-# Trailer
-#
-- Trailer:
-  type: branch
-  description: Trailer signals
-
-- Trailer.Connected:
-  datatype: boolean
-  type: sensor
-  description: Signal indicating if trailer is connected or not.

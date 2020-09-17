@@ -92,56 +92,6 @@
   unit: degrees
   description: Longitude of destination
 
-- Navigation.CurrentLocation:
-  type: branch
-  aggregate: true
-  description: The current latitude and longitude of the vehicle.
-
-- Navigation.CurrentLocation.Latitude:
-  datatype: Double
-  type: sensor
-  min: -90
-  max: 90
-  unit: degrees
-  description: Current latitude of vehicle, as reported by GPS.
-
-- Navigation.CurrentLocation.Longitude:
-  datatype: Double
-  type: sensor
-  min: -180
-  max: 180
-  unit: degrees
-  description: Current longitude of vehicle, as reported by GPS.
-
-- Navigation.CurrentLocation.Heading:
-  datatype: Double
-  type: sensor
-  min: 0
-  max: 360
-  unit: degrees
-  description: Current magnetic compass heading, in degrees.
-
-- Navigation.CurrentLocation.Accuracy:
-  datatype: Double
-  type: sensor
-  unit: m
-  description: Accuracy level of the latitude and longitude coordinates in meters.
-
-- Navigation.CurrentLocation.Altitude:
-  datatype: Double
-  type: sensor
-  unit: m
-  description: Current elevation of the position in meters.
-
-- Navigation.CurrentLocation.Speed:
-  datatype: uint16
-  type: sensor
-  min: 0
-  max: 250
-  unit: km/h
-  description: Vehicle speed, as sensed by the GPS receiver.
-
-
 - HMI:
   type: branch
   description: HMI related signals
