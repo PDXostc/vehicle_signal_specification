@@ -25,6 +25,7 @@
   description: Information on the state of charge of the vehicle's high voltage battery.
 
 - Battery.StateOfCharge.Current:
+  type: sensor
   unit: percent
   datatype: Float
   min: 0
