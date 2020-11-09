@@ -25,17 +25,17 @@
   description: Alignment status. True = Is aligned. False = Is out of alignment.
 
 - Alignment.Caster:
-  type: Uint8
+  type: uint8
   unit: degrees
   description: Caster in degrees.  Positive = right caster, Negative = left caster
 
 - Alignment.Camber:
-  type: Uint8
+  type: uint8
   unit: degrees
   description: Camber in degrees.  Positive = right camber, Negative = left camber
 
 - Alignment.Toe:
-  type: Uint8
+  type: uint8
   unit: degrees
   description: Toe in degrees.  Positive = right toe, Negative = left toe
 

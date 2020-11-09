@@ -23,6 +23,6 @@
   description: Drive shaft condition.  True = good condition.  False = bad condition
 
 - DriveShaft.Angle:
-  type: Uint8
+  type: uint8
   uint: degrees
   description: Drive shaft angle in degrees.  This impacts trucks.
