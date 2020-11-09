@@ -77,7 +77,7 @@
   description: A navigation has been selected.
 
 - Navigation.DestinationSet.Latitude:
-  datatype: Double
+  datatype: double
   type: actuator
   min: -90
   max: 90
@@ -85,7 +85,7 @@
   description: Latitude of destination
 
 - Navigation.DestinationSet.Longitude:
-  datatype: Double
+  datatype: double
   type: actuator
   min: -180
   max: 180
@@ -98,7 +98,7 @@
   description: The current latitude and longitude of the vehicle.
 
 - Navigation.CurrentLocation.Latitude:
-  datatype: Double
+  datatype: double
   type: sensor
   min: -90
   max: 90
@@ -106,7 +106,7 @@
   description: Current latitude of vehicle, as reported by GPS.
 
 - Navigation.CurrentLocation.Longitude:
-  datatype: Double
+  datatype: double
   type: sensor
   min: -180
   max: 180
@@ -114,7 +114,7 @@
   description: Current longitude of vehicle, as reported by GPS.
 
 - Navigation.CurrentLocation.Heading:
-  datatype: Double
+  datatype: double
   type: sensor
   min: 0
   max: 360
@@ -122,13 +122,13 @@
   description: Current magnetic compass heading, in degrees.
 
 - Navigation.CurrentLocation.Accuracy:
-  datatype: Double
+  datatype: double
   type: sensor
   unit: m
   description: Accuracy level of the latitude and longitude coordinates in meters.
 
 - Navigation.CurrentLocation.Altitude:
-  datatype: Double
+  datatype: double
   type: sensor
   unit: m
   description: Current elevation of the position in meters.
