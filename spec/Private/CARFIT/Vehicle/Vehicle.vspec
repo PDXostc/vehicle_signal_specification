@@ -9,16 +9,16 @@
 #
 
 - StopAndGoTime:
-  type: Uint32
+  type: uint32
   unit: s
   description: Accumulated time spent under 10kph.
 
 - SurfaceStreetTime:
-  type: Uint32
+  type: uint32
   unit: s
   description: Accumulated time spent under and including 70kph.
 
 - HighwayTime:
-  type: Uint32
+  type: uint32
   unit: s
   description: Accumulated time spent over 70kph.
