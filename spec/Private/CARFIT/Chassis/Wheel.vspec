@@ -12,7 +12,7 @@
   description: Brake pad wear status. True = Worn. False = Not Worn.
 
 - Brake.RotorWear:
-  type: Uint16
+  type: uint16
   description: Brake rotor wear as a percent.  0 = No Wear.  100 = Replace.
 
 - Brake.RotorThin:
