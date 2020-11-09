@@ -35,6 +35,6 @@
   description: Fatigueness level of driver. Evaluated by multiple factors like trip time, behaviour of steering, eye status.
 
 - HeartRate:
-  datatype: UInt16
+  datatype: Uint16
   type: sensor
   description: Heart rate of the driver.

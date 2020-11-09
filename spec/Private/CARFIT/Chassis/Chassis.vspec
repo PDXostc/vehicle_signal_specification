@@ -8,7 +8,7 @@
 # Steering Wheel
 #
 - SteeringWheelBias.Angle:
-  type: Int16
+  type: int16
   unit: degrees
   description: Steering wheel bias angle (offset). Positive = degrees to the left. Negative = degrees to the right.
 

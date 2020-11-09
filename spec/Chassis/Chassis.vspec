@@ -154,7 +154,7 @@
   description: Steering wheel signals
 
 - SteeringWheel.Angle:
-  datatype: Int16
+  datatype: int16
   type: sensor
   unit: degrees
   description: Steering wheel angle. Positive = degrees to the left. Negative = degrees to the right.
