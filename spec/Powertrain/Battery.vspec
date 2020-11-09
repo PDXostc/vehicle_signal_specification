@@ -27,14 +27,14 @@
 - Battery.StateOfCharge.Current:
   type: sensor
   unit: percent
-  datatype: Float
+  datatype: float
   min: 0
   max: 100.00
   description: Physical state of charge of the high voltage battery. This is not necessarily the state of charge being displayed to the customer.
 
 - Battery.StateOfCharge.Displayed:
   type: sensor
-  datatype: Float
+  datatype: float
   unit: percent
   min: 0
   max: 100.00
