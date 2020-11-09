@@ -42,7 +42,7 @@
 
 - Battery.StateOfCharge.Target:
   type: actuator
-  datatype: UInt8
+  datatype: Uint8
   min: 0
   max: 100
   unit: percent

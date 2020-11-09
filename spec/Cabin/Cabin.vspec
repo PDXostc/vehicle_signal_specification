@@ -72,7 +72,7 @@
   description: Sun roof status.
 
 - Sunroof.Position:
-  datatype: Int8
+  datatype: int8
   type: sensor
   min: -100
   max: 100
