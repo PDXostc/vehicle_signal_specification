@@ -6,7 +6,7 @@ language: python3
 
 env:
   global:
-    - HUGO_VER=0.69.0
+    - HUGO_VER=0.78.1
     - DOCS_DIR='./docs-gen'
     - TOOLS_DIR='./vss-tools'
 
