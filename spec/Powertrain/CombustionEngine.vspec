@@ -106,7 +106,7 @@
 - Engine.MAP:
   datatype: int16
   type: sensor
-  unit: kpa
+  unit: kPa
   min: 0
   max: 1000
   description: Manifold air pressure possibly boosted using forced induction.
@@ -141,7 +141,7 @@
 - Engine.EOP:
   datatype: int16
   type: sensor
-  unit: kpa
+  unit: kPa
   min: 0
   max: 1000
   description: Engine oil pressure.

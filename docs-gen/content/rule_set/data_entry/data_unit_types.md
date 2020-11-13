@@ -13,8 +13,8 @@ km/h       | Speed         | Kilometers per hour
 m/s        | Speed         | Meters per second
 celsius    | Temperature   | Degrees Celsius
 mbar       | Pressure      | millibar
-pa         | Pressure      | Pascal
-kpa        | Pressure      | Kilo-Pascal
+Pa         | Pressure      | Pascal
+kPa        | Pressure      | Kilo-Pascal
 percent    | Relation      | Percent
 ratio      | Relation      | Ratio
 lat        | Position      | Decimal latitude

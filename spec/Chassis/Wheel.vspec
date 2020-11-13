@@ -45,7 +45,7 @@
 - Tire.Pressure:
   datatype: uint8
   type: sensor
-  unit: kpa
+  unit: kPa
   description: Tire pressure in kilo-Pascal
 
 - Tire.PressureLow:

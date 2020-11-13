@@ -108,14 +108,14 @@
 - FuelPressure:
   datatype: float
   type: sensor
-  unit: kpa
+  unit: kPa
   min: 0
   description: PID 0A - Fuel pressure
 
 - MAP:
   datatype: float
   type: sensor
-  unit: kpa
+  unit: kPa
   min: 0
   description: PID 0B - Intake manifold pressure
 
@@ -323,13 +323,13 @@
 - FuelRailPressureVac:
   datatype: float
   type: sensor
-  unit: kpa
+  unit: kPa
   description: PID 22 - Fuel rail pressure relative to vacuum
 
 - FuelRailPressureDirect:
   datatype: float
   type: sensor
-  unit: kpa
+  unit: kPa
   description: PID 23 - Fuel rail pressure direct inject
 
 - O2WR:
@@ -502,13 +502,13 @@
 - EVAPVaporPressure:
   datatype: float
   type: sensor
-  unit: pa
+  unit: Pa
   description: PID 32 - Evaporative purge (EVAP) system pressure
 
 - BarometricPressure:
   datatype: float
   type: sensor
-  unit: kpa
+  unit: kPa
   description: PID 33 - Barometric pressure
 
 - Catalyst:
@@ -670,13 +670,13 @@
 - EVAPVaporPressureAbsolute:
   datatype: float
   type: sensor
-  unit: kpa
+  unit: kPa
   description: PID 53 - Absolute evaporative purge (EVAP) system pressure
 
 - EVAPVaporPressureAlternate:
   datatype: float
   type: sensor
-  unit: pa
+  unit: Pa
   description: PID 54 - Alternate evaporative purge (EVAP) system pressure
 
 - ShortTermO2Trim1:
@@ -706,7 +706,7 @@
 - FuelRailPressureAbsolute:
   datatype: float
   type: sensor
-  unit: kpa
+  unit: kPa
   description: PID 59 - Absolute fuel rail pressure
 
 - RelativeAcceleratorPosition:
