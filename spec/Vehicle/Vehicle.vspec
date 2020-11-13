@@ -225,19 +225,19 @@
 - Acceleration.Longitudinal:
   datatype: int32
   type: sensor
-  unit: m/s2
+  unit: m/s^2
   description: Vehicle acceleration in X (longitudinal acceleration).
 
 - Acceleration.Lateral:
   datatype: int32
   type: sensor
-  unit: m/s2
+  unit: m/s^2
   description: Vehicle acceleration in Y (lateral acceleration).
 
 - Acceleration.Vertical:
   datatype: int32
   type: sensor
-  unit: m/s2
+  unit: m/s^2
   description: Vehicle acceleration in Z (vertical acceleration).
 
 

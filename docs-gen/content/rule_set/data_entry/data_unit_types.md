@@ -36,8 +36,8 @@ g          | Weight        | Grams
 kg         | Weight        | Kilograms
 g/s        | Flow          | Grams per second
 l/h        | Flow          | Liters per hour
-m/s2       | Acceleration  | Acceleration in meters per second squared
-cm/s2      | Acceleration  | Acceleration in centimeters per second squared
+m/s^2      | Acceleration  | Acceleration in meters per second squared
+cm/s^2     | Acceleration  | Acceleration in centimeters per second squared
 N          | Force         | Newton
 Nm         | Force         | Torque
 l          | Volume        | Liter
