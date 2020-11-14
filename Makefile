@@ -4,7 +4,7 @@
 
 .PHONY: clean all json franca c
 
-all: clean json franca csv c
+all: clean json franca csv binary c
 
 DESTDIR?=/usr/local
 TOOLSDIR?=./vss-tools
@@ -22,15 +22,16 @@ csv:
 	${TOOLSDIR}/vspec2csv.py -i:spec/VehicleSignalSpecification.id -I ./spec ./spec/VehicleSignalSpecification.vspec vss_rel_$$(cat VERSION).csv
 
 
-cnative:
-	${TOOLSDIR}/vspec2cnative.py -i:./spec/VehicleSignalSpecification.id ./spec/VehicleSignalSpecification.vspec vss_rel_$$(cat VERSION).cnative
+binary:
+	gcc -shared -o ${TOOLSDIR}/binary/binarytool.so -fPIC ${TOOLSDIR}/binary/binarytool.c
+	${TOOLSDIR}/vspec2binary.py -i:./spec/VehicleSignalSpecification.id ./spec/VehicleSignalSpecification.vspec vss_rel_$$(cat VERSION).binary
 
 c:
 	(cd ${TOOLSDIR}/vspec2c/; make )
 	${TOOLSDIR}/vspec2c.py -i:./spec/VehicleSignalSpecification.id -I ./spec ./spec/VehicleSignalSpecification.vspec vss_rel_$$(cat VERSION).h vss_rel_$$(cat VERSION)_macro.h
 
 clean:
-	rm -f vss_rel_$$(cat VERSION).json vss_rel_$$(cat VERSION).fidl vss_rel_$$(cat VERSION).csv vss_rel_$$(cat VERSION).h
+	rm -f vss_rel_$$(cat VERSION).json vss_rel_$$(cat VERSION).fidl vss_rel_$$(cat VERSION).binary vss_rel_$$(cat VERSION).csv vss_rel_$$(cat VERSION).h
 	(cd ${TOOLSDIR}/vspec2c/; make clean)
 
 install:
