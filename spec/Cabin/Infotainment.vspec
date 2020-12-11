@@ -96,6 +96,7 @@
   type: branch
   aggregate: true
   description: The current latitude and longitude of the vehicle.
+  deprecation: @2.1 moved to Vehicle.CurrentLocation
 
 - Navigation.CurrentLocation.Latitude:
   datatype: Double
@@ -104,6 +105,7 @@
   max: 90
   unit: degrees
   description: Current latitude of vehicle, as reported by GPS.
+  deprecation: @2.1 moved to Vehicle.CurrentLocation.Latitude
 
 - Navigation.CurrentLocation.Longitude:
   datatype: Double
@@ -112,6 +114,7 @@
   max: 180
   unit: degrees
   description: Current longitude of vehicle, as reported by GPS.
+  deprecation: @2.1 moved to Vehicle.CurrentLocation.Longitude
 
 - Navigation.CurrentLocation.Heading:
   datatype: Double
@@ -120,18 +123,21 @@
   max: 360
   unit: degrees
   description: Current magnetic compass heading, in degrees.
+  deprecation: @2.1 moved to Vehicle.CurrentLocation.Heading
 
 - Navigation.CurrentLocation.Accuracy:
   datatype: Double
   type: sensor
   unit: m
   description: Accuracy level of the latitude and longitude coordinates in meters.
+  deprecation: @2.1 moved to Vehicle.CurrentLocation.Accuracy
 
 - Navigation.CurrentLocation.Altitude:
   datatype: Double
   type: sensor
   unit: m
   description: Current elevation of the position in meters.
+  deprecation: @2.1 moved to Vehicle.CurrentLocation.Altitude
 
 - Navigation.CurrentLocation.Speed:
   datatype: uint16
@@ -140,7 +146,7 @@
   max: 250
   unit: km/h
   description: Vehicle speed, as sensed by the GPS receiver.
-
+  deprecation: @2.1 removed because doubled with Vehicle.Speed
 
 - HMI:
   type: branch

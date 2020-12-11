@@ -19,6 +19,7 @@
   default: 0
   unit: kg
   description: Vehicle curb weight, in kg, including all liquids and full tank of fuel, but no cargo or passengers.
+  deprecation: @2.1 moved to Vehicle.CurbWeight
 
 - GrossWeight:
   datatype: uint16
@@ -26,6 +27,7 @@
   default: 0
   unit: kg
   description: Curb weight of vehicle, including all liquids and full tank of fuel and full load of cargo and passengers.
+  deprecation: @2.1 moved to Vehicle.GrossWeight
 
 - TowWeight:
   datatype: uint16
@@ -33,6 +35,7 @@
   default: 0
   unit: kg
   description: Maximum weight, in kilos, of trailer.
+  deprecation: @2.1 moved to Vehicle.TowWeight
 
 - Length:
   datatype: uint16
@@ -40,6 +43,7 @@
   default: 0
   unit: mm
   description: Overall vehicle length, in mm.
+  deprecation: @2.1 moved to Vehicle.Length
 
 - Height:
   datatype: uint16
@@ -47,6 +51,7 @@
   default: 0
   unit: mm
   description: Overall vehicle height, in mm.
+  deprecation: @2.1 moved to Vehicle.Height
 
 - Width:
   datatype: uint16
@@ -54,6 +59,7 @@
   default: 0
   unit: mm
   description: Overall vehicle width, in mm.
+  deprecation: @2.1 moved to Vehicle.Width
 
 - Wheelbase:
   datatype: uint16
@@ -220,8 +226,10 @@
 - Trailer:
   type: branch
   description: Trailer signals
+  deprecation: @2.1 moved branch to Vehicle.Trailer
 
 - Trailer.Connected:
   datatype: boolean
   type: sensor
   description: Signal indicating if trailer is connected or not.
+  deprecation: @2.1 moved to Vehicle.Trailer.Width

@@ -295,3 +295,123 @@
   type: attribute
   description: The CO2 emissions in g/km.
   unit: g/km
+
+
+#
+# Vehicle Weight and Dimension attributes
+#
+
+- CurrentOverallWeight:
+  datatype: uint16
+  type: sensor
+  value: 0
+  unit: kg
+  description: Current overall Vehicle weight, in kg, including all liquids and full tank of fuel.
+
+- CurbWeight:
+  datatype: uint16
+  type: attribute
+  value: 0
+  unit: kg
+  description: Vehicle curb weight, in kg, including all liquids and full tank of fuel, but no cargo or passengers.
+
+- GrossWeight:
+  datatype: uint16
+  type: attribute
+  value: 0
+  unit: kg
+  description: Curb weight of vehicle, including all liquids and full tank of fuel and full load of cargo and passengers.
+
+- MaxTowWeight:
+  datatype: uint16
+  type: attribute
+  value: 0
+  unit: kg
+  description: Maximum weight, in kilos, of trailer.
+
+- MaxTowBallWeight:
+  datatype: uint16
+  type: attribute
+  value: 0
+  unit: kg
+  description: Maximum vertical weight on the tow ball, in kilos, of a trailer.
+
+- Length:
+  datatype: uint16
+  type: attribute
+  value: 0
+  unit: mm
+  description: Overall vehicle length, in mm.
+
+- Height:
+  datatype: uint16
+  type: attribute
+  value: 0
+  unit: mm
+  description: Overall vehicle height, in mm.
+
+- Width:
+  datatype: uint16
+  type: attribute
+  value: 0
+  unit: mm
+  description: Overall vehicle width, in mm.
+
+
+#
+# Trailer
+#
+- Trailer:
+  type: branch
+  description: Trailer signals
+
+- Trailer.Connected:
+  datatype: boolean
+  type: sensor
+  description: Signal indicating if trailer is connected or not.
+
+#
+# Location
+#
+
+- CurrentLocation:
+  type: branch
+  aggregate: true
+  description: The current latitude and longitude of the vehicle.
+
+- CurrentLocation.Latitude:
+  datatype: double
+  type: sensor
+  min: -90
+  max: 90
+  unit: degrees
+  description: Current latitude of vehicle, as reported by GPS.
+
+- CurrentLocation.Longitude:
+  datatype: double
+  type: sensor
+  min: -180
+  max: 180
+  unit: degrees
+  description: Current longitude of vehicle, as reported by GPS.
+
+- CurrentLocation.Heading:
+  datatype: double
+  type: sensor
+  min: 0
+  max: 360
+  unit: degrees
+  description: Current magnetic compass heading, in degrees.
+
+- CurrentLocation.Accuracy:
+  datatype: double
+  type: sensor
+  unit: m
+  description: Accuracy level of the latitude and longitude coordinates in meters.
+
+- CurrentLocation.Altitude:
+  datatype: double
+  type: sensor
+  unit: m
+  description: Current elevation of the position in meters.
+
