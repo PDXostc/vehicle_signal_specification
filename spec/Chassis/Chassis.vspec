@@ -226,10 +226,10 @@
 - Trailer:
   type: branch
   description: Trailer signals
-  deprecation: @2.1 moved branch to Vehicle.Trailer
+  deprecation: @2.1 moved to Vehicle.Trailer
 
 - Trailer.Connected:
   datatype: boolean
   type: sensor
   description: Signal indicating if trailer is connected or not.
-  deprecation: @2.1 moved to Vehicle.Trailer.Width
+  deprecation: @2.1 moved to Vehicle.Trailer.Connected
