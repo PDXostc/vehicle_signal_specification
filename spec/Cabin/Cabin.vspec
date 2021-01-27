@@ -28,32 +28,6 @@
   description: Climate control
 #include HVAC.vspec HVAC
 
-- HVAC.IsRecirculationActive:
-  datatype: boolean
-  type: actuator
-  description: Is recirculation active.
-
-- HVAC.IsFrontDefrosterActive:
-  datatype: boolean
-  type: actuator
-  description: Is front defroster active.
-
-- HVAC.IsRearDefrosterActive:
-  datatype: boolean
-  type: actuator
-  description: Is rear defroster active.
-
-- HVAC.IsAirConditioningActive:
-  datatype: boolean
-  type: actuator
-  description: Is Air conditioning active.
-
-- HVAC.AmbientAirTemperature:
-  datatype: float
-  type: sensor
-  unit: celsius
-  description: Ambient air temperature
-
 ##
 # Infotainment
 ##
