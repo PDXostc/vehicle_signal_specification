@@ -256,7 +256,7 @@
 - DieselParticulateFilter.DeltaPressure:
   datatype: float
   type: sensor
-  unit: pa
+  unit: Pa
   description: Delta Pressure of Diesel Particulate Filter.  
   
   
