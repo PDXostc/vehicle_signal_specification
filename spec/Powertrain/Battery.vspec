@@ -87,7 +87,7 @@
   description: Properties related to battery charging
   
 - Charging.ChargeLimit:
-  datatype: UInt8
+  datatype: uint8
   type: actuator
   min: 0
   max: 100
@@ -157,7 +157,7 @@
   description: Current charging rate, as in kilometers of range added per hour.
 
 - Charging.TimeToComplete:
-  datatype: UInt32
+  datatype: uint32
   type: sensor
   unit: s
   description: The time needed to complete the current charging process to the set charge limit. 0 if charging is complete, negative number if no charging process is active.
@@ -168,7 +168,7 @@
   description: Properties related to timing of battery charging sessions.
 
 - Charging.Timer.Time:
-  datatype: UInt32
+  datatype: uint32
   type: actuator
   unit: s
   description: Time value for next charging-related action (Unix timestamp, seconds).
