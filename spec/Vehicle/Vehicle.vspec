@@ -175,12 +175,10 @@
   description: Accumulated idle time in seconds.
 
 - Speed:
-  datatype: int32
+  datatype: float
   type: sensor
-  min: -250
-  max: 250
   unit: km/h
-  description: Vehicle speed, as sensed by the gearbox.
+  description: Vehicle speed
 
 - TravelledDistance:
   datatype: float
@@ -207,10 +205,8 @@
   description: Indicates whether the vehicle is stationary or moving
 
 - AverageSpeed:
-  datatype: int32
+  datatype: float
   type: sensor
-  min: -250
-  max: 250
   unit: km/h
   description: Average speed for the current trip
 
@@ -223,19 +219,19 @@
   description: Spatial acceleration
 
 - Acceleration.Longitudinal:
-  datatype: int32
+  datatype: float
   type: sensor
   unit: m/s^2
   description: Vehicle acceleration in X (longitudinal acceleration).
 
 - Acceleration.Lateral:
-  datatype: int32
+  datatype: float
   type: sensor
   unit: m/s^2
   description: Vehicle acceleration in Y (lateral acceleration).
 
 - Acceleration.Vertical:
-  datatype: int32
+  datatype: float
   type: sensor
   unit: m/s^2
   description: Vehicle acceleration in Z (vertical acceleration).
@@ -281,6 +277,7 @@
   type: attribute
   unit: s
   description: The time needed to accelerate the vehicle from a given start velocity to a given target velocity.
+  deprecation: V2.1 removed as ambiguous definition (start/stop-speed not defined)
 
 - cargoVolume:
   datatype: int16

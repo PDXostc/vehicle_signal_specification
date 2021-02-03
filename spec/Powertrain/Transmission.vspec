@@ -48,6 +48,7 @@
   max: 250
   unit: km/h
   description: Vehicle speed, as sensed by the gearbox.
+  deprecation: V2.1 removed because doubled with Vehicle.Speed
 
 
 #

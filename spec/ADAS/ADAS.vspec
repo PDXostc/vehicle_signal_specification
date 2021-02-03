@@ -34,7 +34,7 @@
 
 
 - CruiseControl.SpeedSet:
-  datatype: int32
+  datatype: float
   type: actuator
   unit: km/h
   description: Set cruise control speed in kilometers per hour
