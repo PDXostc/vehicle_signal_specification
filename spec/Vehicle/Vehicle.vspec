@@ -280,12 +280,11 @@
   deprecation: V2.1 removed as ambiguous definition (start/stop-speed not defined)
 
 - cargoVolume:
-  datatype: int16
+  datatype: float
   type: attribute
   unit: l
   description: The available volume for cargo or luggage. For automobiles, this is usually the trunk volume.
   min: 0
-  max: 100
 
 - emissionsCO2:
   datatype: int16

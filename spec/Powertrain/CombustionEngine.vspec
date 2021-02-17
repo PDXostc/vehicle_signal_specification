@@ -65,13 +65,13 @@
   unit: s
 
 - EngineOilCapacity:
-  datatype: uint16
+  datatype: float
   type: attribute
   description: Engine oil capacity in liters.
   unit: l
 
 - EngineCoolantCapacity:
-  datatype: uint16
+  datatype: float
   type: attribute
   description: Engine coolant capacity in liters.
   unit: l

@@ -25,9 +25,8 @@
   description: Defines the hybrid type of the vehicle
 
 - TankCapacity:
-  datatype: uint16
+  datatype: float
   type: attribute
-  default: 0
   unit: l
   description: Capacity of the fuel tank in liters
 
@@ -58,18 +57,21 @@
   unit: l/100km
   min: 0
   description: Average consumption in liters per 100 km.
+# The period used to calculate average consumption is OEM-specific
+# It may e.g. be average consumption since start of current trip,
+# since a user-initiated reset or during the lifetime of the vehicle.
 
 - ConsumptionSinceStart:
   datatype: float
   type: sensor
   unit: l
-  description: Fuel amount consumed since start in liters.
+  description: Fuel amount in liters consumed since start of current trip.
 
 - TimeSinceStart:
   datatype: uint32
   type: sensor
   unit: s
-  description: Time elapsed since start in seconds.
+  description: Time in seconds elapsed since start of current trip.
 
 - EngineStopStartEnabled:
   datatype: boolean
