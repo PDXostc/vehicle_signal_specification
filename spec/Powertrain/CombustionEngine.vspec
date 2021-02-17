@@ -24,16 +24,16 @@
   unit: cm^3
 
 - StrokeLength:
-  datatype: uint16
+  datatype: float
   type: attribute
-  description: Stroke length in centimetres.
-  unit: cm
+  description: Stroke length in millimetres.
+  unit: mm
 
 - Bore:
-  datatype: uint16
+  datatype: float
   type: attribute
-  description: Bore in centimetres.
-  unit: cm
+  description: Bore in millimetres.
+  unit: mm
 
 - Configuration:
   datatype: string
