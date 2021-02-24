@@ -59,6 +59,7 @@
   type: sensor
   unit: km
   description: Odometer reading
+  deprecation: V2.1 removed because doubled with Vehicle.TravelledDistance
 
 
 #
