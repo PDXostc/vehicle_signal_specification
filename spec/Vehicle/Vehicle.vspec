@@ -184,7 +184,7 @@
   datatype: float
   type: sensor
   unit: km
-  description: Odometer reading
+  description: Odometer reading, total distance travelled during the lifetime of the vehicle.
 
 - TripMeterReading:
   datatype: float

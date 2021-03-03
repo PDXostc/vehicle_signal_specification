@@ -52,13 +52,19 @@
 
 
 #
-# Current odometer reading
+# Current odometer reading for the transmission
+#
+# Note that this signal refers to the distance travelled by the transmission and not the vehicle.
+# This signal might differ from Vehicle.TravelledDistance if the transmission
+# has been replaced during the lifetime of the vehicle.
+# If the transmission is moved from one vehicle to another the signal shall also include
+# distance travelled in previous vehicles.
 #
 - TravelledDistance:
   datatype: float
   type: sensor
   unit: km
-  description: Odometer reading
+  description: Odometer reading, total distance travelled during the lifetime of the transmission.
 
 
 #
