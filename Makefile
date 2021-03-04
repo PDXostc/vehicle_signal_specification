@@ -4,7 +4,7 @@
 
 .PHONY: clean all json franca c
 
-all: clean json franca csv binary c
+all: clean json franca csv binary c tests
 
 DESTDIR?=/usr/local
 TOOLSDIR?=./vss-tools
@@ -21,6 +21,8 @@ franca:
 csv:
 	${TOOLSDIR}/vspec2csv.py -i:spec/VehicleSignalSpecification.id -I ./spec ./spec/VehicleSignalSpecification.vspec vss_rel_$$(cat VERSION).csv
 
+tests:
+	PYTHONPATH=${TOOLSDIR} pytest
 
 binary:
 	gcc -shared -o ${TOOLSDIR}/binary/binarytool.so -fPIC ${TOOLSDIR}/binary/binarytool.c
