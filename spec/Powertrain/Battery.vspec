@@ -81,6 +81,11 @@
   unit: kWh
   description: The accumulated energy leaving HV battery for propulsion and auxiliary loads over lifetime.
 
+- Range:
+  datatype: uint32
+  type: sensor
+  unit: m
+  description: Remaining range in meters using only battery.
 
 - Charging:
   type: branch

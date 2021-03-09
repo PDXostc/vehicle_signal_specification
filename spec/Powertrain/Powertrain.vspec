@@ -8,3 +8,9 @@
   type: sensor
   unit: kWh
   description: The accumulated energy from regenerative braking over lifetime.
+
+- Range:
+  datatype: uint32
+  type: sensor
+  unit: m
+  description: Remaining range in meters using all energy sources available in the vehicle.

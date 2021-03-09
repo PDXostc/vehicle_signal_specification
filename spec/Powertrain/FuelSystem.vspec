@@ -42,7 +42,7 @@
   datatype: uint32
   type: sensor
   unit: m
-  description: Range in meters.
+  description: Remaining range in meters using only liquid fuel.
 
 - InstantConsumption:
   datatype: float
