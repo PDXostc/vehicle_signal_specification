@@ -18,6 +18,19 @@
 # Some of these signals are also available through other nodes in the
 # VSS tree.
 #
+# OBD often use scaling and offset, and has specified limits for each PID
+# (see e.g. https://en.wikipedia.org/wiki/OBD-II_PIDs).
+# In VSS signals represent the real value, the actual encoding used by OBD is not considered.
+# Limits specified by OBD are not explicitly stated in VSS
+# i.e. a VSS OBD signal may theoretically have a value that can not be transferred by OBD.
+#
+# Example: Timing Advance (PID 0E) can in OBD support the range from -64 degrees to +63.5 degrees.
+#          In OBD the value is transmitted as a uint8, to get the real value one must take the
+#          uint8 value, divide by 2 and subtract 64.
+#          E.g. +4.5 degrees is in OBD transmitted as (4.5+64)*2 = 137.
+#
+#          In VSS the signal contains the actual value, i.e. +4.5 degrees is sent as +4.5.
+#
 
 - PidsA:
   datatype: uint32
@@ -34,7 +47,7 @@
   description: Malfunction Indicator Light (MIL) False = Off, True = On
 
 - Status.DTCCount:
-  datatype: uint32
+  datatype: uint8
   type: sensor
   description: Number of sensor Trouble Codes (DTC)
 
@@ -60,11 +73,9 @@
   description: PID 03 - Fuel status
 
 - EngineLoad:
-  datatype: uint8
+  datatype: float
   type: sensor
   unit: percent
-  min: 0
-  max: 100
   description: PID 04 - Engine load in percent - 0 = no load, 100 = full load
 
 - CoolantTemperature:
@@ -74,49 +85,39 @@
   description: PID 05 - Coolant temperature
 
 - ShortTermFuelTrim1:
-  datatype: int8
+  datatype: float
   type: sensor
   unit: percent
-  min: -100
-  max: 100
   description: PID 06 - Short Term (immediate) Fuel Trim - Bank 1 - negative percent leaner, positive percent richer
 
 - LongTermFuelTrim1:
-  datatype: int8
+  datatype: float
   type: sensor
   unit: percent
-  min: -100
-  max: 100
   description: PID 07 - Long Term (learned) Fuel Trim - Bank 1 - negative percent leaner, positive percent richer
 
 - ShortTermFuelTrim2:
-  datatype: int8
+  datatype: float
   type: sensor
   unit: percent
-  min: -100
-  max: 100
   description: PID 08 - Short Term (immediate) Fuel Trim - Bank 2 - negative percent leaner, positive percent richer
 
 - LongTermFuelTrim2:
-  datatype: int8
+  datatype: float
   type: sensor
   unit: percent
-  min: -100
-  max: 100
   description: PID 09 - Long Term (learned) Fuel Trim - Bank 2 - negative percent leaner, positive percent richer
 
 - FuelPressure:
   datatype: float
   type: sensor
   unit: kPa
-  min: 0
   description: PID 0A - Fuel pressure
 
 - MAP:
   datatype: float
   type: sensor
   unit: kPa
-  min: 0
   description: PID 0B - Intake manifold pressure
 
 - EngineSpeed:
@@ -144,17 +145,15 @@
   description: PID 0F - Intake temperature
 
 - MAF:
-  datatype: int16
+  datatype: float
   type: sensor
   unit: g/s
   description: PID 10 - Grams of air drawn into engine per second
 
 - ThrottlePosition:
-  datatype: uint8
+  datatype: float
   type: sensor
   unit: percent
-  min: 0
-  max: 100
   description: PID 11 - Throttle position - 0 = closed throttle, 100 = open throttle
 
 - AirStatus:
@@ -304,7 +303,7 @@
   description: PID 1E - Auxiliary input status (power take off)
 
 - RunTime:
-  datatype: uint32
+  datatype: float
   type: sensor
   unit: s
   description: PID 1F - Engine run time
@@ -315,7 +314,7 @@
   description: PID 20 - Bit array of the supported pids 21 to 40
 
 - DistanceWithMIL:
-  datatype: uint32
+  datatype: float
   type: sensor
   unit: km
   description: PID 21 - Distance traveled with MIL on
@@ -338,7 +337,7 @@
 
 - O2WR.Sensor1:
   type: branch
-  description: Wide range/band oxygen senor 1
+  description: Wide range/band oxygen sensor 1
 
 - O2WR.Sensor1.Voltage:
   datatype: float
@@ -354,7 +353,7 @@
 
 - O2WR.Sensor2:
   type: branch
-  description: Wide range/band oxygen senor 2
+  description: Wide range/band oxygen sensor 2
 
 - O2WR.Sensor2.Voltage:
   datatype: float
@@ -370,7 +369,7 @@
 
 - O2WR.Sensor3:
   type: branch
-  description: Wide range/band oxygen senor 3
+  description: Wide range/band oxygen sensor 3
 
 - O2WR.Sensor3.Voltage:
   datatype: float
@@ -386,7 +385,7 @@
 
 - O2WR.Sensor4:
   type: branch
-  description: Wide range/band oxygen senor 4
+  description: Wide range/band oxygen sensor 4
 
 - O2WR.Sensor4.Voltage:
   datatype: float
@@ -402,7 +401,7 @@
 
 - O2WR.Sensor5:
   type: branch
-  description: Wide range/band oxygen senor 5
+  description: Wide range/band oxygen sensor 5
 
 - O2WR.Sensor5.Voltage:
   datatype: float
@@ -418,7 +417,7 @@
 
 - O2WR.Sensor6:
   type: branch
-  description: Wide range/band oxygen senor 6
+  description: Wide range/band oxygen sensor 6
 
 - O2WR.Sensor6.Voltage:
   datatype: float
@@ -434,7 +433,7 @@
 
 - O2WR.Sensor7:
   type: branch
-  description: Wide range/band oxygen senor 7
+  description: Wide range/band oxygen sensor 7
 
 - O2WR.Sensor7.Voltage:
   datatype: float
@@ -450,7 +449,7 @@
 
 - O2WR.Sensor8:
   type: branch
-  description: Wide range/band oxygen senor 8
+  description: Wide range/band oxygen sensor 8
 
 - O2WR.Sensor8.Voltage:
   datatype: float
@@ -465,31 +464,31 @@
   description: PID 3B - Lambda current for wide range/band oxygen sensor 8
 
 - CommandedEGR:
-  datatype: uint8
+  datatype: float
   type: sensor
   unit: percent
   description: PID 2C - Commanded exhaust gas recirculation (EGR)
 
 - EGRError:
-  datatype: uint8
+  datatype: float
   type: sensor
   unit: percent
   description: PID 2D - Exhaust gas recirculation (EGR) error
 
 - CommandedEVAP:
-  datatype: uint8
+  datatype: float
   type: sensor
   unit: percent
   description: PID 2E - Commanded evaporative purge (EVAP) valve
 
 - FuelLevel:
-  datatype: uint8
+  datatype: float
   type: sensor
   unit: percent
   description: PID 2F - Fuel level in the fuel tank
 
 - WarmupsSinceDTCClear:
-  datatype: uint16
+  datatype: uint8
   type: sensor
   description: PID 30 - Number of warm-ups since codes cleared
 
@@ -562,7 +561,7 @@
   description: Malfunction Indicator Light (MIL) - False = Off, True = On
 
 - DriveCycleStatus.DTCCount:
-  datatype: uint32
+  datatype: uint8
   type: sensor
   description: Number of sensor Trouble Codes (DTC)
 
@@ -579,7 +578,7 @@
   description: PID 42 - Control module voltage
 
 - AbsoluteLoad:
-  datatype: uint8
+  datatype: float
   type: sensor
   unit: percent
   description: PID 43 - Absolute load value
@@ -591,7 +590,7 @@
   description: PID 44 - Commanded equivalence ratio
 
 - RelativeThrottlePosition:
-  datatype: uint8
+  datatype: float
   type: sensor
   unit: percent
   description: PID 45 - Relative throttle position
@@ -603,49 +602,49 @@
   description: PID 46 - Ambient air temperature
 
 - ThrottlePositionB:
-  datatype: uint8
+  datatype: float
   type: sensor
   unit: percent
   description: PID 47 - Absolute throttle position B
 
 - ThrottlePositionC:
-  datatype: uint8
+  datatype: float
   type: sensor
   unit: percent
   description: PID 48 - Absolute throttle position C
 
 - AcceleratorPositionD:
-  datatype: uint8
+  datatype: float
   type: sensor
   unit: percent
   description: PID 49 - Accelerator pedal position D
 
 - AcceleratorPositionE:
-  datatype: uint8
+  datatype: float
   type: sensor
   unit: percent
   description: PID 4A - Accelerator pedal position E
 
 - AcceleratorPositionF:
-  datatype: uint8
+  datatype: float
   type: sensor
   unit: percent
   description: PID 4B - Accelerator pedal position F
 
 - ThrottleActuator:
-  datatype: uint8
+  datatype: float
   type: sensor
   unit: percent
   description: PID 4C - Commanded throttle actuator
 
 - RunTimeMIL:
-  datatype: uint32
+  datatype: float
   type: sensor
   unit: min
   description: PID 4D - Run time with MIL on
 
 - TimeSinceDTCCleared:
-  datatype: uint32
+  datatype: float
   type: sensor
   unit: min
   description: PID 4E - Time since trouble codes cleared
@@ -662,7 +661,7 @@
   description: PID 51 - Fuel type
 
 - EthanolPercent:
-  datatype: uint8
+  datatype: float
   type: sensor
   unit: percent
   description: PID 52 - Percentage of ethanol in the fuel
@@ -680,25 +679,25 @@
   description: PID 54 - Alternate evaporative purge (EVAP) system pressure
 
 - ShortTermO2Trim1:
-  datatype: uint8
+  datatype: float
   type: sensor
   unit: percent
   description: PID 55 - Short term secondary O2 trim - Bank 1
 
 - LongTermO2Trim1:
-  datatype: uint8
+  datatype: float
   type: sensor
   unit: percent
   description: PID 56 - Long term secondary O2 trim - Bank 1
 
 - ShortTermO2Trim2:
-  datatype: uint8
+  datatype: float
   type: sensor
   unit: percent
   description: PID 57 - Short term secondary O2 trim - Bank 2
 
 - LongTermO2Trim2:
-  datatype: uint8
+  datatype: float
   type: sensor
   unit: percent
   description: PID 58 - Long term secondary O2 trim - Bank 2
@@ -710,25 +709,25 @@
   description: PID 59 - Absolute fuel rail pressure
 
 - RelativeAcceleratorPosition:
-  datatype: uint8
+  datatype: float
   type: sensor
   unit: percent
   description: PID 5A - Relative accelerator pedal position
 
 - HybridBatteryRemaining:
-  datatype: uint8
+  datatype: float
   type: sensor
   unit: percent
   description: PID 5B - Remaining life of hybrid battery
 
 - OilTemperature:
-  datatype: uint8
+  datatype: float
   type: sensor
   unit: celsius
   description: PID 5C - Engine oil temperature
 
 - FuelInjectionTiming:
-  datatype: int16
+  datatype: float
   type: sensor
   unit: degrees
   description: PID 5D - Fuel injection timing
