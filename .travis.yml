@@ -19,8 +19,7 @@ install:
   - cd ..
 
 script:
-  # NOTE: c not built -- fix later
-  - make clean json franca binary csv deploy
+  - make travis_targets
   - hugo -s ${DOCS_DIR}
 
 deploy:

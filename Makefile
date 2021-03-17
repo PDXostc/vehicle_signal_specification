@@ -2,9 +2,14 @@
 # Makefile to generate specifications
 #
 
-.PHONY: clean all json franca c
+.PHONY: clean all json franca csv binary c tests travis_targets
 
 all: clean json franca csv binary c tests
+
+# All targets that shall be built on each pull request for
+# vehicle-signal-specification or vss-tools
+# NOTE: c currently not built by travis - does not support latest vss
+travis_targets: clean json franca binary csv tests deploy
 
 DESTDIR?=/usr/local
 TOOLSDIR?=./vss-tools
@@ -33,7 +38,7 @@ c:
 	${TOOLSDIR}/vspec2c.py -i:./spec/VehicleSignalSpecification.id -I ./spec ./spec/VehicleSignalSpecification.vspec vss_rel_$$(cat VERSION).h vss_rel_$$(cat VERSION)_macro.h
 
 clean:
-	rm -f vss_rel_$$(cat VERSION).json vss_rel_$$(cat VERSION).fidl vss_rel_$$(cat VERSION).binary vss_rel_$$(cat VERSION).csv vss_rel_$$(cat VERSION).h
+	rm -f vss_rel_*
 	(cd ${TOOLSDIR}/vspec2c/; make clean)
 
 install:
