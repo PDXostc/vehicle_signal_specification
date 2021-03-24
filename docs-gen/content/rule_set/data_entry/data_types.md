@@ -34,16 +34,14 @@ By the optional keyword `arraysize` the size of the array can be specified.
 The following syntax shall be used to declare an array:
 
 ```YAML
-# Array of datatype UInt32, by default size of the array is undefined
-datatype: UInt32[]
+# Array of datatype uint32, by default size of the array is undefined
+datatype: uint32[]
 # Optional: specified number of elements in the array
 arraysize: 5
 ```
 
-Examples for the usage of `arrays` are status information about battery cells or a list of DTCs, which are present in a
-vehicle.
-
-
+An example for the usage of `arrays` is `Vehicle.OBD.DTCList` which contains a list
+of Diagnostic Trouble Codes (DTCs) present in a vehicle.
 
 ## Data Streams
 
