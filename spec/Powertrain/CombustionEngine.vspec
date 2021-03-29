@@ -58,10 +58,12 @@
   type: attribute
   description: Engine compression ratio.
 
+# In addition to this a signal a vehicle can report remaining time to service (including e.g. oil change)
+# by Vehicle.Service.TimeToService
 - OilLifeRemaining:
-  datatype: uint32
-  type: attribute
-  description: Remaining engine oil life in seconds.
+  datatype: int32
+  type: sensor
+  description: Remaining engine oil life in seconds. Negative values can be used to indicate that lifetime has been exceeded.
   unit: s
 
 - EngineOilCapacity:

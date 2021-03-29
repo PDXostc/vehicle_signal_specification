@@ -1,0 +1,52 @@
+#
+# (C) 2021 Robert Bosch GmbH
+#
+# All files and artifacts in this repository are licensed under the
+# provisions of the license provided by the LICENSE file in this repository.
+#
+#
+# Service data
+#
+# This file contains signals relevant for service/maintenance of the vehicle,
+# giving information on when service is needed.
+# As of now VSS does not make any assumptions on what is included in a "service".
+# A "service" is anything that needs to be done by a technician at a garage.
+# It can include e.g. inspection, lubrication as well as replacement of fluids or other parts.
+#
+# For TimeToService int32 and seconds are used, allowing service intervals of up to
+# 68 years to be represented.
+#
+# The signals support negative values, but use of negative values are optional.
+# Once a signal reach 0 (i.e. vehicle is due for service) the vehicle might
+# either stop decreasing the signal, or continue decreasing using negative values
+# to indicate overdue distance/time.
+#
+
+#
+# Service Due Indicator
+# Indicates that it is now or in the near future time to bring the vehicle to a garage for service (of any kind).
+# The criteria for setting "ServiceDue" is not specified by VSS.
+# It may, but do not need to, be based on DistanceToService and TimeToService.
+#
+- ServiceDue:
+  datatype: boolean
+  type: sensor
+  description: Indicates if vehicle needs service (of any kind). True = Service needed now or in the near future. False = No known need for service.
+
+#
+# Remaining distance to service (of any kind).
+#
+- DistanceToService:
+  datatype: float
+  type: sensor
+  unit: km
+  description: Remaining distance to service (of any kind). Negative values indicate service overdue.
+
+#
+# Remaining time to service (of any kind).
+#
+- TimeToService:
+  datatype: int32
+  type: sensor
+  unit: s
+  description: Remaining time to service (of any kind). Negative values indicate service overdue.
