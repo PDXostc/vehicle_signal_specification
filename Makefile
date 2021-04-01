@@ -6,10 +6,18 @@
 
 all: clean json franca csv binary tests protobuf
 
-# All targets that shall be built on each pull request for
+# All mandatory targets that shall be built and pass on each pull request for
 # vehicle-signal-specification or vss-tools
-# NOTE: c currently not built by travis - does not support latest vss
 travis_targets: clean json franca binary csv tests deploy
+
+
+# Additional targets that shall be built by travis, but where it is not mandatory
+# that the builds shall pass.
+# This is typically intended for less maintainted tools that are allowed to break
+# from time to time
+# Can be run from e.g. travis with "make -k travis_optional || true" to continue
+# even if errors occur and not do not halt travis build if errors occur
+travis_optional: clean c ocf protobuf
 
 DESTDIR?=/usr/local
 TOOLSDIR?=./vss-tools
@@ -37,15 +45,15 @@ protobuf:
 	${TOOLSDIR}/contrib/vspec2protobuf.py -i:spec/VehicleSignalSpecification.id -I ./spec ./spec/VehicleSignalSpecification.vspec vss_rel_$$(cat VERSION).proto
 
 ocf:
-	${TOOLSDIR}/contrib/ocf/vspec2ocf.py -i PREFIX:spec/VehicleSignalSpecification.id:1 -I ./spec ./spec/VehicleSignalSpecification.vspec vss_rel_$$(cat VERSION).ocf.json
+	${TOOLSDIR}/contrib/ocf/vspec2ocf.py -i:spec/VehicleSignalSpecification.id:1 -I ./spec ./spec/VehicleSignalSpecification.vspec vss_rel_$$(cat VERSION).ocf.json
 
 c:
-	(cd ${TOOLSDIR}/vspec2c/; make )
-	${TOOLSDIR}/vspec2c.py -i:./spec/VehicleSignalSpecification.id -I ./spec ./spec/VehicleSignalSpecification.vspec vss_rel_$$(cat VERSION).h vss_rel_$$(cat VERSION)_macro.h
+	(cd ${TOOLSDIR}/contrib/vspec2c/; make )
+	PYTHONPATH=${TOOLSDIR} ${TOOLSDIR}/contrib/vspec2c.py -i:./spec/VehicleSignalSpecification.id -I ./spec ./spec/VehicleSignalSpecification.vspec vss_rel_$$(cat VERSION).h vss_rel_$$(cat VERSION)_macro.h
 
 clean:
 	rm -f vss_rel_*
-	(cd ${TOOLSDIR}/vspec2c/; make clean)
+	(cd ${TOOLSDIR}/contrib/vspec2c/; make clean)
 
 install:
 	git submodule init
