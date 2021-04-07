@@ -45,7 +45,8 @@ c:
 
 clean:
 	rm -f vss_rel_*
-	(cd ${TOOLSDIR}/vspec2c/; make clean)
+# Temporary change to allow moving vspec2c without causing build errors
+# 	(cd ${TOOLSDIR}/vspec2c/; make clean)
 
 install:
 	git submodule init
