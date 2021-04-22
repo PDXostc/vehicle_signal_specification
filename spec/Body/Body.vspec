@@ -86,32 +86,28 @@
   instances: ["Front", "Rear"]
   description: Windshield signals
 
-#
-# Front windshield
-#
-
 - Windshield.Wiping:
   type: branch
-  description: Front windshield wiper signals
+  description: Windshield wiper signals
 
 - Windshield.Wiping.Status:
   datatype: string
   type: actuator
   enum: ["off", "slow", "medium", "fast", "interval", "rainsensor"]
-  description: Front wiper status
+  description: Wiper status
 
 - Windshield.Heating:
   type: branch
-  description: Front windshield heater signals
+  description: Windshield heater signals
 
 - Windshield.Heating.Status:
   datatype: boolean
   type: actuator
-  description: Front windshield heater status. 0 - off, 1 - on
+  description: Windshield heater status. 0 - off, 1 - on
 
 - Windshield.WasherFluid:
   type: branch
-  description: Front windshield washer fluid signals
+  description: Windshield washer fluid signals
 
 - Windshield.WasherFluid.LevelLow:
   datatype: boolean

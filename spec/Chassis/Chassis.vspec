@@ -97,19 +97,19 @@
 - Axle.WheelCount:
   datatype: uint8
   type: attribute
-  description: Number of wheels on the first axle
+  description: Number of wheels on the axle
 
 - Axle.WheelDiameter:
   datatype: uint8
   type: attribute
   unit: inch
-  description: Diameter of wheels (without tires), in inches, as per ETRO / TRA standard.
+  description: Diameter of wheels (without tires), in inches, as per ETRTO / TRA standard.
 
 - Axle.WheelWidth:
   datatype: uint8
   type: attribute
   unit: inch
-  description: Width of wheels (without tires), in inches, as per ETRO / TRA standard.
+  description: Width of wheels (without tires), in inches, as per ETRTO / TRA standard.
 
 
 #
@@ -120,13 +120,13 @@
   datatype: uint8
   type: attribute
   unit: inch
-  description: Diameter of tires, in inches, as per ETRO / TRA standard.
+  description: Diameter of tires, in inches, as per ETRTO / TRA standard.
 
 - Axle.TireWidth:
   datatype: uint8
   type: attribute
   unit: inch
-  description: Width of tires, in inches, as per ETRO / TRA standard.
+  description: Width of tires, in inches, as per ETRTO / TRA standard.
 
 
 #
@@ -135,7 +135,7 @@
 - Axle.Wheel:
   instances: ["Left","Right"]
   type: branch
-  description: Brake signals for first row
+  description: Wheel signals for axle
 
 #include Wheel.vspec Axle.Wheel
 
