@@ -58,6 +58,18 @@
   type: attribute
   description: Engine compression ratio.
 
+- EngineOilLevel:
+  datatype: string
+  type: attribute
+  enum: [ 
+    "critically_low",  # Critically low, immediate action required
+    "low",             # Level below recommended range, but not critical
+    "normal",          # Within normal range, no need for driver action
+    "high",            # Level above recommended range, but not critical
+    "critically_high"  # Critically high, immediate action required
+    ]
+  description: Vehicle oil level.
+
 # In addition to this a signal a vehicle can report remaining time to service (including e.g. oil change)
 # by Vehicle.Service.TimeToService
 - OilLifeRemaining:
