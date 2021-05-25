@@ -100,34 +100,44 @@
   description: Number of wheels on the axle
 
 - Axle.WheelDiameter:
-  datatype: uint8
+  datatype: float
   type: attribute
   unit: inch
-  description: Diameter of wheels (without tires), in inches, as per ETRTO / TRA standard.
+  description: Diameter of wheels (rims without tires), in inches, as per ETRTO / TRA standard.
 
 - Axle.WheelWidth:
-  datatype: uint8
+  datatype: float
   type: attribute
   unit: inch
-  description: Width of wheels (without tires), in inches, as per ETRTO / TRA standard.
+  description: Width of wheels (rims without tires), in inches, as per ETRTO / TRA standard.
 
 
 #
 # Tire attributes
 #
+# Tire size can be specified by different systems
+# The VSS signals are intended to support both ISO metric tire code and flotation/numeric sizes.
+# Note that tires typically specify either tire diameter or aspect ratio, but both are included in VSS
+# for convenience, and it is possible for a vehicle to present both attributes as they can be calculated from each other.
+# Axle.TireDiameter = Axle.WheelDiameter + ((2 * Axle.TireWidth * Axle.TireAspectRatio) /(100*25.4))
 
 - Axle.TireDiameter:
-  datatype: uint8
+  datatype: float
   type: attribute
   unit: inch
-  description: Diameter of tires, in inches, as per ETRTO / TRA standard.
+  description: Outer diameter of tires, in inches, as per ETRTO / TRA standard.
 
 - Axle.TireWidth:
+  datatype: uint16
+  type: attribute
+  unit: mm
+  description: Nominal section width of tires, in mm, as per ETRTO / TRA standard.
+
+- Axle.TireAspectRatio:
   datatype: uint8
   type: attribute
-  unit: inch
-  description: Width of tires, in inches, as per ETRTO / TRA standard.
-
+  unit: percent
+  description: Aspect ratio between tire section height and tire section width, as per ETRTO / TRA standard.
 
 #
 # Wheels on Axles
