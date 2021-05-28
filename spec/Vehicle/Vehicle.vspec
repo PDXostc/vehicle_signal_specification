@@ -130,7 +130,7 @@
 - VehicleIdentification.vehicleinteriorColor:
   datatype: string
   type: attribute
-  description: A short text indicating the configuration of the vehicle, e.g. '5dr hatchback ST 2.5 MT 225 hp' or 'limited edition'.
+  description: The color or color combination of the interior of the vehicle.
 
 - VehicleIdentification.vehicleinteriorType:
   datatype: string
