@@ -2,7 +2,7 @@
 # Makefile to generate specifications
 #
 
-.PHONY: clean all travis_targets json franca csv tests binary protobuf ocf c install deploy
+.PHONY: clean all travis_targets json franca csv tests binary protobuf ttl ocf c install deploy
 
 all: clean json franca csv binary tests protobuf
 
@@ -17,7 +17,7 @@ travis_targets: clean json franca binary csv tests deploy
 # from time to time
 # Can be run from e.g. travis with "make -k travis_optional || true" to continue
 # even if errors occur and not do not halt travis build if errors occur
-travis_optional: clean c ocf protobuf
+travis_optional: clean c ocf protobuf ttl
 
 DESTDIR?=/usr/local
 TOOLSDIR?=./vss-tools
@@ -25,31 +25,34 @@ DEPLOYDIR?=./docs-gen/static/releases/nightly
 
 
 json:
-	${TOOLSDIR}/vspec2json.py -i:spec/VehicleSignalSpecification.id -I ./spec ./spec/VehicleSignalSpecification.vspec vss_rel_$$(cat VERSION).json
+	${TOOLSDIR}/vspec2json.py -I ./spec ./spec/VehicleSignalSpecification.vspec vss_rel_$$(cat VERSION).json
 
 franca:
-	${TOOLSDIR}/vspec2franca.py -v $$(cat VERSION) -i:spec/VehicleSignalSpecification.id -I ./spec ./spec/VehicleSignalSpecification.vspec vss_rel_$$(cat VERSION).fidl
+	${TOOLSDIR}/vspec2franca.py -v $$(cat VERSION)  -I ./spec ./spec/VehicleSignalSpecification.vspec vss_rel_$$(cat VERSION).fidl
 
 
 csv:
-	${TOOLSDIR}/vspec2csv.py -i:spec/VehicleSignalSpecification.id -I ./spec ./spec/VehicleSignalSpecification.vspec vss_rel_$$(cat VERSION).csv
+	${TOOLSDIR}/vspec2csv.py -I ./spec ./spec/VehicleSignalSpecification.vspec vss_rel_$$(cat VERSION).csv
 
 tests:
 	PYTHONPATH=${TOOLSDIR} pytest
 
 binary:
 	gcc -shared -o ${TOOLSDIR}/binary/binarytool.so -fPIC ${TOOLSDIR}/binary/binarytool.c
-	${TOOLSDIR}/vspec2binary.py -i:./spec/VehicleSignalSpecification.id ./spec/VehicleSignalSpecification.vspec vss_rel_$$(cat VERSION).binary
+	${TOOLSDIR}/vspec2binary.py ./spec/VehicleSignalSpecification.vspec vss_rel_$$(cat VERSION).binary
 
 protobuf:
-	${TOOLSDIR}/contrib/vspec2protobuf.py -i:spec/VehicleSignalSpecification.id -I ./spec ./spec/VehicleSignalSpecification.vspec vss_rel_$$(cat VERSION).proto
+	${TOOLSDIR}/contrib/vspec2protobuf.py  -I ./spec ./spec/VehicleSignalSpecification.vspec vss_rel_$$(cat VERSION).proto
 
 ocf:
-	${TOOLSDIR}/contrib/ocf/vspec2ocf.py -i:spec/VehicleSignalSpecification.id:1 -I ./spec ./spec/VehicleSignalSpecification.vspec vss_rel_$$(cat VERSION).ocf.json
+	${TOOLSDIR}/contrib/ocf/vspec2ocf.py -I ./spec ./spec/VehicleSignalSpecification.vspec vss_rel_$$(cat VERSION).ocf.json
+
+ttl:
+	${TOOLSDIR}/contrib/vspec2ttl/vspec2ttl.py -I ./spec ./spec/VehicleSignalSpecification.vspec vss_rel_$$(cat VERSION).ttl
 
 c:
 	(cd ${TOOLSDIR}/contrib/vspec2c/; make )
-	PYTHONPATH=${TOOLSDIR} ${TOOLSDIR}/contrib/vspec2c.py -i:./spec/VehicleSignalSpecification.id -I ./spec ./spec/VehicleSignalSpecification.vspec vss_rel_$$(cat VERSION).h vss_rel_$$(cat VERSION)_macro.h
+	PYTHONPATH=${TOOLSDIR} ${TOOLSDIR}/contrib/vspec2c.py -I ./spec ./spec/VehicleSignalSpecification.vspec vss_rel_$$(cat VERSION).h vss_rel_$$(cat VERSION)_macro.h
 
 clean:
 	rm -f vss_rel_*
