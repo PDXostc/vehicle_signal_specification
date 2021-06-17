@@ -12,28 +12,28 @@
 
 
 MaxPower:
-  datatype:  uint16
+  datatype: uint16
   type: attribute
   default: 0
   unit: kW
   description: Peak power, in kilowatts, that motor(s) can generate.
 
 MaxTorque:
-  datatype:  uint16
+  datatype: uint16
   type: attribute
   default: 0
   unit: Nm
   description: Peak power, in newton meter, that the motor(s) can generate.
 
 MaxRegenPower:
-  datatype:  uint16
+  datatype: uint16
   type: attribute
   default: 0
   unit: kW
   description: Peak regen/brake power, in kilowatts, that motor(s) can generate.
 
 MaxRegenTorque:
-  datatype:  uint16
+  datatype: uint16
   type: attribute
   default: 0
   unit: Nm

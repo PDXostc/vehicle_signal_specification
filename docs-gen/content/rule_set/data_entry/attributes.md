@@ -7,17 +7,18 @@ weight: 5
 An attribute is a signal with a default value, specified by
 its ```default``` member.
 
-The value set for an attribute by a vspec file can be read by a
-consumer without the need of having the value sent out by a
-publisher. The attribute, in effect, is configuration data that
-can be specified when the vspec file is installed.
+Attribute values can also change, similar to sensor values.
+The latter can be useful for attribute values that are likely to change during the lifetime of the vehicle.
+However, attribute values should typically not change more than once per ignition cycle,
+or else it should be defined as a sensor instead.
 
 Below is an example of a complete attribute describing engine power
 
 ```YAML
 MaxPower:
+  datatype: uint16
   type: attribute
-  datatype:  uint16
   default: 0
+  unit: kW
   description: Peak power, in kilowatts, that engine can generate.
 ```
