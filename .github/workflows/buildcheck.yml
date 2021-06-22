@@ -1,0 +1,51 @@
+name: Standard Build Check
+
+on: [push, pull_request]
+
+jobs:
+  buildtest:
+    name: Build Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: Setup Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+
+      - name: Install python packages
+        run: |
+          python -V
+          cd vss-tools
+          pip install -r requirements.txt
+          python setup.py -q install
+
+      - name: Test mandatory targets
+        run: make travis_targets
+
+      - name: Test optional targets. NOTE - always succeeds
+        run: make -k travis_optional || true
+
+      - name: Install hugo
+        env:
+          HUGO_VER : 0.78.1
+        run: |
+          curl -LO https://github.com/gohugoio/hugo/releases/download/v${HUGO_VER}/hugo_${HUGO_VER}_Linux-64bit.deb
+          sudo dpkg -i hugo_${HUGO_VER}_Linux-64bit.deb
+
+      - name: Make docs
+        run: |
+          hugo -s ./docs-gen
+
+      - name: Deploy docs
+        # Only deploy docs if this was a push to master
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: docs # The folder the action should deploy.
+          commit-message: Auto-deploy docs built from commit ${{ github.sha }}
