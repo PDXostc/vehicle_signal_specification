@@ -1,8 +1,4 @@
----
-title: "VSS Documentation"
-date: 2019-08-04T13:21:34+02:00
-weight: 3
----
+# VSS Documentation
 
 The VSS documentation is realized with GitHub Pages. It is generated from
 the markdown files in the ```/docs-gen``` directory of this repository.
@@ -18,7 +14,7 @@ The static page is generated with:
 - [Learn Theme](https://themes.gohugo.io/hugo-theme-learn/)
 
 Please follow the [documentation](https://gohugo.io/documentation/) for
-installation and further questions around the framework.
+installation and further questions around the framework. Currently, the minimal tested HUGO version for the VSS documentation is `0.78.1`
 
 
 ### Run the documentation server locally

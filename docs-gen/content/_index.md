@@ -12,5 +12,4 @@ about what the specification is all about, what's in and out and how to quickly
 * [Rule Set](/vehicle_signal_specification/rule_set) </br> Get familiar with the rule set behind the
 specification, the structure, the format and concepts. Basic knowledge needed
 to write first extensions.
-* [Tools](/vehicle_signal_specification/tools) How to use the specification? Check out the existing
-serialization formats or write your own. Here's what you need to get started.
+* [Ecosystem](/vehicle_signal_specification/ecosystem) How to use the specification? Check out the existing tools and standards to transform or make use of VSS.
