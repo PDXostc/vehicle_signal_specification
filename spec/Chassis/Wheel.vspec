@@ -43,7 +43,7 @@ Tire:
   description: Tire signals for wheel
 
 Tire.Pressure:
-  datatype: uint8
+  datatype: uint16
   type: sensor
   unit: kPa
   description: Tire pressure in kilo-Pascal
