@@ -1,0 +1,5 @@
+#include Drivetrain/Engine.aperms Drivetrain.InternalCombustionEngine
+#include Transmission.aperms Drivetrain.Transmission
+#include FuelSystem.aperms Drivetrain.FuelSystem
+#include ADAS.aperms ADAS
+#include Vehicle.aperms Vehicle

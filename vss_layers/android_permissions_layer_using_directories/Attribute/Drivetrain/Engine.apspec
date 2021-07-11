@@ -1,0 +1,27 @@
+# FILE: Attribute.vspec
+# INCLUDES Drivetrain/Engine.vspec as "Drivetrain.InternalCombustionEngine"
+# and in file Engine.vspec:
+# ENTRY: InternalCombustionEngine.Configuration   --> Full path is Attribute.Drivetrain.InternalCombustionEngine.Configuration
+# ENTRY: InternalCombustionEngine.Displacement    --> Full path is Attribute.Drivetrain.InternalCombustionEngine.Displacement
+# ENTRY: InternalCombustionEngine.FuelType        --> Full path is Attribute.Drivetrain.InternalCombustionEngine.FuelType
+# ENTRY: InternalCombustionEngine.MaxPower        --> Full path is Attribute.Drivetrain.InternalCombustionEngine.MaxPower
+# ENTRY: InternalCombustionEngine.MaxTorque       --> Full path is Attribute.Drivetrain.InternalCombustionEngine.MaxTorque
+#
+# Similarly,
+# FILE: Attributes/Attribute.apersms
+# INCLUDES Drivetrain/Engine.aperms (this file) as "Drivetrain.InternalCombustionEngine"
+#
+# Therefore this file can use local signal names, and will refer to the *.Drivetrain.InternalCombustionEngine.* path
+
+
+#
+# START OF ANDROID PERMISSIONS METADATA
+# (VSS LAYER)
+# 
+
+# Matching all signals under Drivetrain.InternalCombustionEngine? ?
+.*:
+    AndroidPermission_Read:            android.car.permission.VEHICLESIGNALS_DRIVETRAININFORMATION   
+
+
+

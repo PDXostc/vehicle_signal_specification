@@ -1,0 +1,145 @@
+# FILE: Attribute/Attribute.vspec
+# INCLUDES FuelSystem.vspec as "Drivetrain.Fuelsystem"
+# and in file FuelSystem.vspec:
+# ENTRY: TankCapacity                  --> Full path is Attribute.Drivetrain.FuelSystem.TankCapacity
+
+# Similarly Attribute/Attribute.aperms
+# INCLUDES FuelSystem.aperms (this file) as "Drivetrain.Fuelsystem"
+# Therefore, this file can also use local (non fully qualified) paths to the signals when adding metadata.
+# and it will be referring to the *.Drivetrain.Fuelsystem.* tree
+
+- TankCapacity:   # refers to Attribute.Drivetrain.FuelSystem.TankCapacity
+    AndroidPermission_Read:            android.car.permission.VEHICLESIGNALS_DRIVETRAININFORMATION   
+
+# or:    Permission_Read:
+
+# 1. android.car.permission is a prefix that might be added by generator
+# 2. There is no generic access-control methodology for VSS but we could generalize the concept maybe
+# 3. Permissions need more metadata, like "dangerous" in the current android permissions
+
+# FILE: Signal/Signal.vspec
+# INCLUDES ADAS/ADAS.vspec as "ADAS"
+# and in file ADAS.vspec:
+# ENTRY: CruiseControl.IsActive:                  --> Full path is Signal.ADAS.CruiseControl.Error: 
+# ENTRY: CruiseControl.SpeedSet:                  --> Full path is Signal.ADAS.CruiseControl.IsActive:
+# ENTRY: CruiseControl.Error:                     --> Full path is Signal.ADAS.CruiseControl.SpeedSet:
+
+# Similarly, this file ADAS/ADAS.aperms was included by Signal.aperms in the hierarchy
+
+# Therefore, it can use local (not fully qualified) signal names when adding metadata to
+# the signals, and they will refer to the *.ADAS.* hierarchy
+
+
+#
+# START OF ANDROID PERMISSIONS METADATA
+# (VSS LAYER)
+# 
+
+CruiseControl.Error: 
+      AndroidPermission_Read:           android.car.permission.VEHICLESIGNALS_CRUISECONTROL_STATUS
+
+CruiseControl.IsActive: 
+      AndroidPermission_Read:           android.car.permission.VEHICLESIGNALS_CRUISECONTROL_STATUS
+
+#???  What is the meaning of not defining AndroidPermission_Write -- does it mean it is never allowed
+#???  Does WRITE permission automatically imply that you have READ permission.
+
+# Speed setting is security sensitive.  Probably NO application should have write access!
+# But for an example's sake, let's put it in and make it a unique permission!
+CruiseControl.SpeedSet:
+      AndroidPermission_Read:           android.car.permission.VEHICLESIGNALS_CRUISECONTROL_STATUS
+      AndroidPermission_Write:          android.car.permission.VEHICLESIGNALS_CRUISECONTROL_SPEED
+
+# should we allow arrays here?  [ android.car.permission.VEHICLESIGNALS_CRUISECONTROL_STATUS,
+#                                          android.car.permission.VEHICLESIGNALS_CRUISECONTROL_SPEED ]
+ 
+# FILE: Attribute.vspec
+# INCLUDES Transmission.vspec as "Drivetrain.Transmission"
+# and in file Transmission.vspec:
+# ENTRY: DriveType                   --> Full path is Attribute.Drivetrain.Transmission.DriveType
+# ENTRY: GearCount                   --> Full path is Attribute.Drivetrain.Transmission.GearCount
+# ENTRY: Type                        --> Full path is Attribute.Drivetrain.Transmission.Type
+
+# Similarly,
+# FILE: Attributes/Attribute.apersms
+# INCLUDES Transmission.aperms (this file) as "Dreivetrain.Transmission"
+#
+# Therefore this file can use local signal names, and will refer to the *.Drivetrain.Transmission.* path
+
+#
+# START OF ANDROID PERMISSIONS METADATA
+# (VSS LAYER)
+# 
+
+DriveType:
+    AndroidPermission_Read:            android.car.permission.VEHICLESIGNALS_DRIVETRAININFORMATION   
+
+GearCount:
+    AndroidPermission_Read:            android.car.permission.VEHICLESIGNALS_DRIVETRAININFORMATION   
+
+Type:
+    AndroidPermission_Read:            android.car.permission.VEHICLESIGNALS_DRIVETRAININFORMATION   
+
+
+# FILE: Attribute.vspec
+# INCLUDES Drivetrain/Engine.vspec as "Drivetrain.InternalCombustionEngine"
+# and in file Engine.vspec:
+# ENTRY: InternalCombustionEngine.Configuration   --> Full path is Attribute.Drivetrain.InternalCombustionEngine.Configuration
+# ENTRY: InternalCombustionEngine.Displacement    --> Full path is Attribute.Drivetrain.InternalCombustionEngine.Displacement
+# ENTRY: InternalCombustionEngine.FuelType        --> Full path is Attribute.Drivetrain.InternalCombustionEngine.FuelType
+# ENTRY: InternalCombustionEngine.MaxPower        --> Full path is Attribute.Drivetrain.InternalCombustionEngine.MaxPower
+# ENTRY: InternalCombustionEngine.MaxTorque       --> Full path is Attribute.Drivetrain.InternalCombustionEngine.MaxTorque
+#
+# Similarly,
+# FILE: Attributes/Attribute.apersms
+# INCLUDES Drivetrain/Engine.aperms (this file) as "Drivetrain.InternalCombustionEngine"
+#
+# Therefore this file can use local signal names, and will refer to the *.Drivetrain.InternalCombustionEngine.* path
+
+
+#
+# START OF ANDROID PERMISSIONS METADATA
+# (VSS LAYER)
+# 
+
+# Matching all signals under Drivetrain.InternalCombustionEngine? ?
+.*:
+    AndroidPermission_Read:            android.car.permission.VEHICLESIGNALS_DRIVETRAININFORMATION   
+
+
+
+#include Drivetrain/Engine.aperms Drivetrain.InternalCombustionEngine
+#include Transmission.aperms Drivetrain.Transmission
+#include FuelSystem.aperms Drivetrain.FuelSystem
+#include ADAS.aperms ADAS
+#include Vehicle.aperms Vehicle
+# FILE: Attribute/Attribute.vspec
+# INCLUDES Vehicle.vspec as "Vehicle"
+
+# and in file Vehicle.vspec:
+# ENTRY: VehicleIdentification.Model   -->  Full path is Attribute.Vehicle.VehicleIdentification.Model
+# ENTRY: VehicleIdentification.Year    -->  Full path is Attribute.Vehicle.VehicleIdentification.Year
+# ENTRY: VehicleIdentification.VIN     -->  Full path is Attribute.Vehicle.VehicleIdentification.VIN
+
+# Similarly Attribute/Attribute.aperms
+# INCLUDES Vehicle.aperms (this file) as "Vehicle"
+# Therefore, this file can also use local (non fully qualified) paths to the signals when adding metadata.
+# and it will be referring to the *.Vehicle.* tree
+
+#
+# START OF ANDROID PERMISSIONS METADATA
+# (VSS LAYER)
+#
+
+# The following 2 signals are included in the permission group android.permission.VEHICLESIGNALS_VEHICLEINFORMATION_VEHICLETYPE
+VehicleIdentification.Model:
+	AndroidPermission_Read: 	android.car.permission.VEHICLESIGNALS_VEHICLEINFORMATION_VEHICLETYPE
+
+VehicleIdentification.Year:
+	AndroidPermission_Read: 	android.car.permission.VEHICLESIGNALS_VEHICLEINFORMATION_VEHICLETYPE
+
+# VIN is however sensitive because it is a unique identifier of the vehicle:
+# So it should have its own permission
+VehicleIdentification.VIN:
+	AndroidPermission_Read: 	android.car.permission.VEHICLESIGNALS_VEHICLEINFORMATION_VIN
+

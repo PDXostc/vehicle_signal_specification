@@ -1,0 +1,122 @@
+
+# EXAMPLE ATTRIBUTES AND SIGNALS IN FOUR GROUPS
+
+# ------------------------------------------------------------------------------------------------------------
+# # Group 1:  Refuel position (Where on the car is the refueling located?)
+# FILE: Attribute/Body.vspec
+# ENTRY: RefuelPosition                --> Full path is Attribute.Body.RefuelPosition
+
+# ------------------------------------------------------------------------------------------------------------
+# # Group 2: Vehicle type & identity
+
+# FILE: Attribute/Vehicle.vspec
+# INCLUDES Vehicle.vspec as "Vehicle"
+# and in file Vehicle.vspec:
+# ENTRY: VehicleIdentification.Model   -->  Full path is Attribute.Vehicle.VehicleIdentification.Model
+# ENTRY: VehicleIdentification.Year    -->  Full path is Attribute.Vehicle.VehicleIdentification.Year
+# ENTRY: VehicleIdentification.VIN     -->  Full path is Attribute.Vehicle.VehicleIdentification.VIN
+
+# ------------------------------------------------------------------------------------------------------------
+# # Group 3: Information about engine
+
+# FILE: Attribute.vspec
+# INCLUDES Drivetrain/Engine.vspec as "Drivetrain.InternalCombustionEngine"
+# and in file Engine.vspec:
+# ENTRY: InternalCombustionEngine.Configuration   --> Full path is Attribute.Drivetrain.InternalCombustionEngine.Configuration
+# ENTRY: InternalCombustionEngine.Displacement    --> Full path is Attribute.Drivetrain.InternalCombustionEngine.Displacement
+# ENTRY: InternalCombustionEngine.FuelType        --> Full path is Attribute.Drivetrain.InternalCombustionEngine.FuelType
+# ENTRY: InternalCombustionEngine.MaxPower        --> Full path is Attribute.Drivetrain.InternalCombustionEngine.MaxPower
+# ENTRY: InternalCombustionEngine.MaxTorque       --> Full path is Attribute.Drivetrain.InternalCombustionEngine.MaxTorque
+#
+# INCLUDES FuelSystem.vspec as "Drivetrain.FuelSystem"
+# and in file FuelSystem.vspec:
+# ENTRY: TankCapacity                  --> Full path is Attribute.Drivetrain.FuelSystem.TankCapacity
+#
+# INCLUDES Transmission.vspec as "Drivetrain.Transmission"
+# and in file Transmission.vspec:
+# ENTRY: DriveType                   --> Full path is Attribute.Drivetrain.Transmission.DriveType
+# ENTRY: GearCount                   --> Full path is Attribute.Drivetrain.Transmission.GearCount
+# ENTRY: Type                        --> Full path is Attribute.Drivetrain.Transmission.Type
+
+# ------------------------------------------------------------------------------------------------------------
+# # Group 4: Cruise Control signals
+
+# FILE: Signal/Signal.vspec
+# INCLUDES ADAS/ADAS.vspec as "ADAS"
+# and in file ADAS.vspec:
+# ENTRY: CruiseControl.IsActive:                  --> Full path is Signal.ADAS.CruiseControl.Error: 941
+# ENTRY: CruiseControl.SpeedSet:                  --> Full path is Signal.ADAS.CruiseControl.IsActive: 939
+# ENTRY: CruiseControl.Error:                     --> Full path is Signal.ADAS.CruiseControl.SpeedSet: 940
+
+
+
+#
+# START OF ANDROID PERMISSIONS METADATA
+# (VSS LAYER)
+# 
+
+
+# EXAMPLE - TOP LEVEL FILE AT ROOT, USING FULL PATH DEFINITIONS
+#
+# e.g. /vss_rel0.aperms contains:
+
+Attribute.Body.RefuelPosition:
+	Permission_Read: 	vss.permission.BODYINFORMATION
+# (NOTE: a write permission makes no sense for for attributes because they are constants)
+
+# The following 2 signals are included in the permission group vss.permission.vehicleinformation.vehicletype
+
+Attribute.Vehicle.VehicleIdentification.Model:
+	Permission_Read: 	vss.permission.VEHICLEINFORMATION_VEHICLETYPE
+
+Attribute.Vehicle.VehicleIdentification.Year:
+	Permission_Read: 	vss.permission.VEHICLEINFORMATION_VEHICLETYPE
+
+# VIN is however sensitive because it is a unique identifier of the vehicle:
+# So it should have its own permission
+Attribute.Vehicle.VehicleIdentification.VIN:
+	Permission_Read: 	vss.permission.VEHICLEINFORMATION_VIN
+
+# Information about Cruisecontrol (varying, i.e. it is a signal)
+Signal.ADAS.CruiseControl.Error: 
+      Permission_Read:           vss.permission.ADASSTATUS
+
+Signal.ADAS.CruiseControl.IsActive: 
+      Permission_Read:           vss.permission.ADASSTATUS
+
+# Speed setting is security sensitive.  Probably NO application should have write access!
+# But for an example's sake, let's put it in and make it a unique permission!
+Signal.ADAS.CruiseControl.SpeedSet:
+      Permission_Read:           vss.permission.ADASSTATUS
+      Permission_Write:          vss.permission.ADAS_SPEED
+
+
+# Let's also put all of the drivetrain *AND* Fuel attributes in one common
+# permission group: 
+#
+# Attribute.Drivetrain.FuelSystem.TankCapacity
+# Attribute.Drivetrain.InternalCombustionEngine.Configuration
+# Attribute.Drivetrain.InternalCombustionEngine.Displacement
+# Attribute.Drivetrain.InternalCombustionEngine.FuelType
+# Attribute.Drivetrain.InternalCombustionEngine.MaxPower
+# Attribute.Drivetrain.InternalCombustionEngine.MaxTorque
+# Attribute.Drivetrain.Transmission.DriveType
+# Attribute.Drivetrain.Transmission.GearCount
+# Attribute.Drivetrain.Transmission.Type
+#
+Attribute.Drivetrain.FuelSystem.TankCapacity:
+    Permission_Read:            vss.permission.DRIVETRAININFORMATION   
+
+# We can use some wildcards:
+Attribute.Drivetrain.InternalCombustionEngine.*:
+    Permission_Read:            vss.permission.DRIVETRAININFORMATION   
+
+# or alternatively (if addressing a branch is equal to wildcard)
+# Attribute.Drivetrain.InternalCombustionEngine:  # (branch name)
+#     Permission_Read:            vss.permission.drivetraininformation   
+
+Attribute.Drivetrain.Transmission.*:
+    Permission_Read:            vss.permission.DRIVETRAININFORMATION   
+
+
+

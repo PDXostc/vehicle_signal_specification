@@ -1,0 +1,37 @@
+
+# FILE: Signal/Signal.vspec
+# INCLUDES ADAS/ADAS.vspec as "ADAS"
+# and in file ADAS.vspec:
+# ENTRY: CruiseControl.IsActive:                  --> Full path is Signal.ADAS.CruiseControl.Error: 
+# ENTRY: CruiseControl.SpeedSet:                  --> Full path is Signal.ADAS.CruiseControl.IsActive:
+# ENTRY: CruiseControl.Error:                     --> Full path is Signal.ADAS.CruiseControl.SpeedSet:
+
+# Similarly, this file ADAS/ADAS.aperms was included by Signal.aperms in the hierarchy
+
+# Therefore, it can use local (not fully qualified) signal names when adding metadata to
+# the signals, and they will refer to the *.ADAS.* hierarchy
+
+
+#
+# START OF ANDROID PERMISSIONS METADATA
+# (VSS LAYER)
+# 
+
+CruiseControl.Error: 
+      AndroidPermission_Read:           android.car.permission.VEHICLESIGNALS_CRUISECONTROL_STATUS
+
+CruiseControl.IsActive: 
+      AndroidPermission_Read:           android.car.permission.VEHICLESIGNALS_CRUISECONTROL_STATUS
+
+#???  What is the meaning of not defining AndroidPermission_Write -- does it mean it is never allowed
+#???  Does WRITE permission automatically imply that you have READ permission.
+
+# Speed setting is security sensitive.  Probably NO application should have write access!
+# But for an example's sake, let's put it in and make it a unique permission!
+CruiseControl.SpeedSet:
+      AndroidPermission_Read:           android.car.permission.VEHICLESIGNALS_CRUISECONTROL_STATUS
+      AndroidPermission_Write:          android.car.permission.VEHICLESIGNALS_CRUISECONTROL_SPEED
+
+# should we allow arrays here?  [ android.car.permission.VEHICLESIGNALS_CRUISECONTROL_STATUS,
+#                                          android.car.permission.VEHICLESIGNALS_CRUISECONTROL_SPEED ]
+ 

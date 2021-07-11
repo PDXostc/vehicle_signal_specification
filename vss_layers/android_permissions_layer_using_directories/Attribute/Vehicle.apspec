@@ -1,0 +1,30 @@
+# FILE: Attribute/Attribute.vspec
+# INCLUDES Vehicle.vspec as "Vehicle"
+
+# and in file Vehicle.vspec:
+# ENTRY: VehicleIdentification.Model   -->  Full path is Attribute.Vehicle.VehicleIdentification.Model
+# ENTRY: VehicleIdentification.Year    -->  Full path is Attribute.Vehicle.VehicleIdentification.Year
+# ENTRY: VehicleIdentification.VIN     -->  Full path is Attribute.Vehicle.VehicleIdentification.VIN
+
+# Similarly Attribute/Attribute.aperms
+# INCLUDES Vehicle.aperms (this file) as "Vehicle"
+# Therefore, this file can also use local (non fully qualified) paths to the signals when adding metadata.
+# and it will be referring to the *.Vehicle.* tree
+
+#
+# START OF ANDROID PERMISSIONS METADATA
+# (VSS LAYER)
+#
+
+# The following 2 signals are included in the permission group android.permission.VEHICLESIGNALS_VEHICLEINFORMATION_VEHICLETYPE
+VehicleIdentification.Model:
+	AndroidPermission_Read: 	android.car.permission.VEHICLESIGNALS_VEHICLEINFORMATION_VEHICLETYPE
+
+VehicleIdentification.Year:
+	AndroidPermission_Read: 	android.car.permission.VEHICLESIGNALS_VEHICLEINFORMATION_VEHICLETYPE
+
+# VIN is however sensitive because it is a unique identifier of the vehicle:
+# So it should have its own permission
+VehicleIdentification.VIN:
+	AndroidPermission_Read: 	android.car.permission.VEHICLESIGNALS_VEHICLEINFORMATION_VIN
+

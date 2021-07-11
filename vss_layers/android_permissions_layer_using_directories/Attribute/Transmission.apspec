@@ -1,0 +1,28 @@
+# FILE: Attribute.vspec
+# INCLUDES Transmission.vspec as "Drivetrain.Transmission"
+# and in file Transmission.vspec:
+# ENTRY: DriveType                   --> Full path is Attribute.Drivetrain.Transmission.DriveType
+# ENTRY: GearCount                   --> Full path is Attribute.Drivetrain.Transmission.GearCount
+# ENTRY: Type                        --> Full path is Attribute.Drivetrain.Transmission.Type
+
+# Similarly,
+# FILE: Attributes/Attribute.apersms
+# INCLUDES Transmission.aperms (this file) as "Dreivetrain.Transmission"
+#
+# Therefore this file can use local signal names, and will refer to the *.Drivetrain.Transmission.* path
+
+#
+# START OF ANDROID PERMISSIONS METADATA
+# (VSS LAYER)
+# 
+
+DriveType:
+    AndroidPermission_Read:            android.car.permission.VEHICLESIGNALS_DRIVETRAININFORMATION   
+
+GearCount:
+    AndroidPermission_Read:            android.car.permission.VEHICLESIGNALS_DRIVETRAININFORMATION   
+
+Type:
+    AndroidPermission_Read:            android.car.permission.VEHICLESIGNALS_DRIVETRAININFORMATION   
+
+

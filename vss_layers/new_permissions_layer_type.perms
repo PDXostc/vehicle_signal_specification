@@ -1,0 +1,76 @@
+
+# EXAMPLE OF NEW ENTITY DEFINED AS A VSS LAYER
+# 
+# An "entity" is a new subject.  (In addition to signals that vspec defines)
+#
+# It can, like signals, be instantiated with entries on the YAML file top level
+#
+# Each entry can have metadata.
+#
+# Comparison, the original VSS has "Attributes" and "Signals" as entities, and in those fiules
+# each attribute/signal is named, and then its attributes (metadata) is mapped below
+
+# In this file, the entity being instantiated is:  Named Permission groups (roles)
+# Android app permissions, for example, act like this.
+ 
+# NOTICE:  This file "flips" the definition mapping compared to .apspec files,
+# by naming the permission first, then (as metadata below) define which signals
+# are included in each permission This makes signals group together in one
+# place.  It also makes it easier to include signals in more than one
+# permission.
+
+# Structure:
+# PermissionName:
+#     read_permission:  <list of signals that can be READ if this permission is held>
+#     write_permission:  <list of signals that can be WRITTEN if this permission is held>
+#     protection_level:  Mirroring protection level in Android
+
+vss.permission.VEHICLESIGNALS_BODYINFORMATION:
+   read_permission:  [ Attribute.Body.RefuelPosition ]
+   protection_level:  'dangerous'
+
+vss.permission.VEHICLESIGNALS_VEHICLEINFORMATION_VEHICLETYPE:
+   read_permission: [ Attribute.Vehicle.VehicleIdentification.Model,
+                      Attribute.Vehicle.VehicleIdentification.Year ]
+   protection_level:  '...'
+
+vss.permission.VEHICLESIGNALS_VEHICLEINFORMATION_VIN:
+   read_permission: [ Attribute.Vehicle.VehicleIdentification.VIN ]
+   protection_level:  '...'
+
+vss.permission.VEHICLESIGNALS_ADASSTATUS:
+   read_permission:  [ Signal.ADAS.CruiseControl.Error,
+                       Signal.ADAS.CruiseControl.IsActive,
+                       Signal.ADAS.CruiseControl.SpeedSet ]
+   protection_level:  '...'
+   
+vss.permission.VEHICLESIGNALS_DRIVETRAININFORMATION:
+   read_permission:  [ Attribute.Drivetrain.FuelSystem.TankCapacity,
+                       Attribute.Drivetrain.InternalCombustionEngine.*, # Note the wildcards
+                       Attribute.Drivetrain.Transmission.* ]
+   protection_level:  '...'
+
+# or alternatively (if addressing a branch is equal to wildcard)
+# Attribute.Drivetrain.InternalCombustionEngine:  # (branch name)
+#     AndroidPermission_Read:            vss.signalpermission.drivetraininformation   
+# vss.signalpermission.drivetraininformation   
+#   read_permission:  [ Attribute.Drivetrain.FuelSystem.TankCapacity,
+#                       Attribute.Drivetrain.InternalCombustionEngine,
+#                       Attribute.Drivetrain.Transmission ]
+
+
+vss.permission.VEHICLESIGNALS_ADAS_SPEED:
+   read_permission:  [ Signal.ADAS.CruiseControl.SpeedSet ]
+   protection_level:  '...'
+
+# WRITE PERMISSION EXAMPLE
+vss.permission.VEHICLESIGNALS_ADAS_SPEED:
+   write_permission:   [ Signal.ADAS.CruiseControl.SpeedSet ]
+   protection_level:  '...'
+
+# For some permission models (e.g. Android) each  permission group is unique,
+# thus the example vss.permission.VEHICLESIGNALS_ADAS_SPEED cannot deal with
+# read and write differently.  you would need to generate two actual versions
+# in that case: vss.permission.VEHICLESIGNALS_ADAS_SPEED_READ:
+# vss.permission.VEHICLESIGNALS_ADAS_SPEED_WRITE:
+
