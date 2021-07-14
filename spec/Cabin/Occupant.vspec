@@ -11,4 +11,4 @@
 Identifier:
   type: branch
   description: Identifier attributes based on OAuth 2.0.
-#include Identifier/Identifier.vspec Identifier
+#include ../Identifier/Identifier.vspec Identifier
