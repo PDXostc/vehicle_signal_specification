@@ -48,7 +48,7 @@ they are included.
 An example is given in Fig 7 where a generic door signal specification is
 included four times to describe all doors in the vehicle.
 
-![Include directrive](/vehicle_signal_specification/images/spec_file_reuse.png)<br>
+![Include directive](/vehicle_signal_specification/images/spec_file_reuse.png)<br>
 *Fig 7. Reusing signal trees*
 
 The ```door.vspec``` file is included four times by the master ```root.vspec``` file.

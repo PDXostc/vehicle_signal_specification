@@ -13,8 +13,11 @@ taxonomies can be seen as second step.
 
 ## Components of a domain taxonomy
 A domain taxonomy, like VSS, consists of three important components, which will be
-discussed in detail in this documentation:\\
-**1. Rule Set**, as definition on how to describe the data definition syntactically. \\
-**2. Data Definition**, as description of the domain as a simple graph. \\
+discussed in detail in this documentation:
+
+**1. Rule Set**, as definition on how to describe the data definition syntactically.
+
+**2. Data Definition**, as description of the domain as a simple graph.
+
 **3. Tools and Serialization**, generates the serialization out of the data Definition
    for further usage.

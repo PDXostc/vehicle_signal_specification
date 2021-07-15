@@ -4,7 +4,7 @@ date: 2019-08-04T11:11:48+02:00
 weight: 1
 ---
 
-Each [data entry](/vehicle_signal_specification/rule_set/data_entry) specifies a ```datatype``` from the following set (from FrancaIDL). Datatypes shall not be used in [branch entry](/vehicle_signal_specification/rule_set/branches)
+Each [data entry](/vehicle_signal_specification/rule_set/data_entry) specifies a ```datatype``` from the following set (from Franca IDL). Datatypes shall not be used in [branch entry](/vehicle_signal_specification/rule_set/branches)
 
 ## Supported datatypes
 
