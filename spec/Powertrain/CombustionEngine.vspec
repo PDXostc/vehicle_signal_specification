@@ -91,14 +91,14 @@ EngineCoolantCapacity:
   unit: l
 
 MaxPower:
-  datatype:  uint16
+  datatype: uint16
   type: attribute
   default: 0
   unit: kW
   description: Peak power, in kilowatts, that engine can generate.
 
 MaxTorque:
-  datatype:  uint16
+  datatype: uint16
   type: attribute
   default: 0
   unit: Nm
